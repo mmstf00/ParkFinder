@@ -1,0 +1,67 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--&lt;!&ndash;<img src="${image}" alt="Map image">&ndash;&gt;-->
+<!--<iframe-->
+<!--        width="800"-->
+<!--        height="800"-->
+<!--        style="border:0"-->
+<!--        loading="lazy"-->
+<!--        allowfullscreen-->
+<!--        referrerpolicy="no-referrer-when-downgrade"-->
+<!--        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI-->
+<!--    &q=Space+Needle,Seattle+WA">-->
+<!--</iframe>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Map</title>
+    <style>
+        #map {
+            height: 800px;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    function initMap() {
+        // Create the map
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 18,
+            center: {lat: 37.422601, lng: -122.085286}
+        });
+
+        var coordinates = [
+            {lat: 37.422601, lng: -122.085286},
+            {lat: 37.422401, lng: -122.085386},
+            {lat: 37.422311, lng: -122.085436},
+            {lat: 37.422221, lng: -122.085486},
+            {lat: 37.422131, lng: -122.085536}
+        ];
+
+        var polyline = new google.maps.Polyline({
+            path: coordinates,
+            geodesic: true,
+            strokeColor: '#00FF00',
+            strokeOpacity: 1.0,
+            strokeWeight: 4
+        });
+
+        polyline.setMap(map);
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap"
+        async defer></script>
+</body>
+</html>
