@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Advanced Marker Simple HTML</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <script type="text/javascript" th:src="@{/js/mapLoader.js}"></script>
+
+</head>
+<body>
+<div id="map"></div>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=marker&v=beta"
+    defer
+></script>
+</body>
+</html>

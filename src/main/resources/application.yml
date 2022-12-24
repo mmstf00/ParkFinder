@@ -9,7 +9,7 @@ spring:
     serialization:
       fail-on-empty-beans: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/hospital
+    url: jdbc:postgresql://localhost:5432/parkfinder
     username: postgres
     password: 1234
   jpa:

@@ -19,6 +19,6 @@ public class HomeController {
 //
 //        model.addAttribute("image", image);
 
-        return "map";
+        return "index";
     }
 }
