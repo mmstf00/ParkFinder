@@ -1,0 +1,133 @@
+@media only screen and (max-width: 1400px) {
+    #map {
+        width: 60%;
+        height: 100%;
+        margin-top: 58px;
+        float: left;
+    }
+
+    #parks-list {
+        width: 40%;
+        height: 100%;
+        margin-top: 58px;
+        float: right;
+    }
+}
+
+/* TODO: Remove Login/Register buttons here, and move them to another menu tab. */
+@media only screen and (max-width: 991px) {
+    #map {
+        width: 60%;
+        height: 100%;
+        margin-top: 163px;
+        float: left;
+    }
+
+    #parks-list {
+        width: 40%;
+        height: 100%;
+        margin-top: 163px;
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 837px) {
+    #map {
+        width: 60%;
+        height: 100%;
+        margin-top: 162px;
+        float: left;
+    }
+
+    #parks-list {
+        width: 40%;
+        height: 100%;
+        margin-top: 162px;
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 766px) {
+    #map {
+        width: 60%;
+        height: 100%;
+        margin-top: 178px;
+        float: left;
+    }
+
+    #parks-list {
+        width: 40%;
+        height: 100%;
+        margin-top: 178px;
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 746px) {
+    #map {
+        width: 60%;
+        height: 100%;
+        margin-top: 176px;
+        float: left;
+    }
+
+    #parks-list {
+        width: 40%;
+        height: 100%;
+        margin-top: 176px;
+        float: right;
+    }
+}
+
+/* TODO: Add new mobile menu tab for the list of parkings. */
+@media only screen and (max-width: 534px) {
+    #map {
+        width: 100%;
+        height: 100%;
+        margin-top: 220px;
+        float: left;
+    }
+
+    #parks-list {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 468px) {
+    #map {
+        width: 100%;
+        height: 100%;
+        margin-top: 218px;
+        float: left;
+    }
+
+    #parks-list {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 333px) {
+    #map {
+        width: 100%;
+        height: 100%;
+        margin-top: 263px;
+        float: left;
+    }
+
+    #parks-list {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 255px) {
+    #map {
+        width: 100%;
+        height: 100%;
+        margin-top: 306px;
+        float: left;
+    }
+
+    #parks-list {
+        display: none;
+    }
+}
