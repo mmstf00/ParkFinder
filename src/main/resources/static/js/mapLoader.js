@@ -4,8 +4,10 @@ function initMap() {
         zoom: 14,
         mapId: "4504f8b37365c3d0",
     });
-    const priceTag = document.createElement("div");
+    // Allows to scroll without pressing CTRL button.
+    map.setOptions({scrollwheel: true});
 
+    const priceTag = document.createElement("div");
     priceTag.className = "price-tag";
     priceTag.textContent = "$2.5M";
 

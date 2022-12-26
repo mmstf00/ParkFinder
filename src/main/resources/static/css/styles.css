@@ -1,19 +1,44 @@
+:root {
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
 /*
  * Always set the map height explicitly to define the size of the div element
  * that contains the map. 
  */
 #map {
+    width: 70%;
     height: 100%;
+    margin-top: 58px;
+    float: left;
+}
+
+#list {
+    width: 30%;
+    height: 100%;
+    margin-top: 58px;
+    float: right;
 }
 
 /* 
  * Optional: Makes the sample page fill the window. 
  */
-html,
-body {
+html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
+}
+
+header {
+    display: block;
+    height: 58px; /* It should be same as #map.margin-top */
+    font-family: var(--bs-font-sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* HTML marker styles */
