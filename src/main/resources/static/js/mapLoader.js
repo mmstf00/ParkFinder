@@ -9,7 +9,7 @@ function initMap() {
 
     const priceTag = document.createElement("div");
     priceTag.className = "price-tag";
-    priceTag.textContent = "$2.5M";
+    priceTag.textContent = "$2.5";
 
     const markerView = new google.maps.marker.AdvancedMarkerView({
         map,

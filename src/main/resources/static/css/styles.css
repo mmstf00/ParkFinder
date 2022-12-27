@@ -3,21 +3,21 @@
     "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/*
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
+.container {
+    max-width: 1920px;
+}
+
 #map {
     width: 70%;
     height: 100%;
-    margin-top: 58px;
+    margin-top: 63px;
     float: left;
 }
 
 #parks-list {
     width: 30%;
     height: 100%;
-    margin-top: 58px;
+    margin-top: 63px;
     float: right;
 }
 
@@ -66,4 +66,43 @@ header {
 
 [class$=api-load-alpha-banner] {
     display: none;
+}
+
+#search-input {
+    width: 30%;
+    float: left;
+}
+
+#date-and-time {
+    width: 40%;
+    float: left;
+    font-size: 17px;
+    margin-bottom: 0;
+    margin-top: 0;
+    position: static;
+    z-index: auto;
+    padding-left: 10px;
+}
+
+#time-from {
+    margin-left: -10px;
+}
+
+#submit-button {
+    width: 10%;
+    float: left;
+    margin-left: 18px;
+}
+
+#login-register {
+    width: 20%;
+    float: right;
+}
+
+#second-header {
+    padding-top: 5px;
+}
+
+.form-control {
+    font-weight: bold;
 }

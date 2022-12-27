@@ -10,6 +10,7 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" th:href="@{/css/responsive-design.css}"/>
     <script type="text/javascript" th:src="@{/js/mapLoader.js}"></script>
@@ -47,7 +48,7 @@
                             <svg class="bi d-block mx-auto mb-1" width="1" height="1">
                                 <use xlink:href="#table"></use>
                             </svg>
-                            Orders
+                            Parkings
                         </a>
                     </li>
                     <li>
@@ -55,7 +56,7 @@
                             <svg class="bi d-block mx-auto mb-1" width="1" height="1">
                                 <use xlink:href="#grid"></use>
                             </svg>
-                            Products
+                            Billing
                         </a>
                     </li>
                     <li>
@@ -63,19 +64,42 @@
                             <svg class="bi d-block mx-auto mb-1" width="1" height="1">
                                 <use xlink:href="#people-circle"></use>
                             </svg>
-                            Customers
+                            Account
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="px-3 py-2 border-bottom mb-3">
-        <div class="container d-flex flex-wrap justify-content-center">
-            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
-                <input type="search" class="form-control" placeholder="Search..."
-                       aria-label="Search" wfd-id="id9">
+    <div id="asd" class="px-3 py-2 border-bottom mb-3">
+        <div id="second-header" class="container d-flex flex-wrap justify-content-center">
+            <form action="" id="search-input" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+                <div class="search-input-container">
+                    <input id="input" type="search" class="form-control"
+                           placeholder="Where do you want to park ?"
+                           aria-label="Search" wfd-id="id9">
+                </div>
             </form>
+            <div id="date-and-time" class="row">
+                <div id="date-from" class="form-group col-md-6">
+                    <div class="input-group date" id="datePicker">
+                        <input class="form-control" type="datetime-local"
+                               placeholder="Parking from">
+                    </div>
+                </div>
+                <div id="time-from" class="form-group col-md-6">
+                    <div class="input-group date" id="timePicker">
+                        <input class="form-control" type="datetime-local"
+                               placeholder="Parking until">
+                    </div>
+                </div>
+            </div>
+
+            <!-- TODO: Add action to this button -->
+            <button id="submit-button" class="btn btn-success"
+                    type="submit">
+                Submit
+            </button>
 
             <div id="login-register" class="text-end">
                 <button type="button" class="btn btn-light text-dark me-2">Login</button>
@@ -94,10 +118,13 @@
     </ul>
 </div>
 
-
+<!-- Google Maps API -->
 <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker&v=beta"
-        async defer
-></script>
+        async defer>
+</script>
+<!-- FlatPickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script type="text/javascript" th:src="@{/js/dateTimePicker.js}"></script>
 </body>
 </html>
