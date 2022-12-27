@@ -30,7 +30,7 @@ html, body {
 
 header {
     display: block;
-    height: 58px; /* It should be same as #map.margin-top */
+    height: 59px;
     font-family: var(--bs-font-sans-serif);
     font-size: 1rem;
     font-weight: 400;
@@ -39,6 +39,10 @@ header {
     background-color: #fff;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+}
+
+li {
+    font-size: 17px;
 }
 
 /* HTML marker styles */
@@ -69,12 +73,12 @@ header {
 }
 
 #search-input {
-    width: 30%;
+    width: 60%;
     float: left;
 }
 
 #date-and-time {
-    width: 40%;
+    width: 30%;
     float: left;
     font-size: 17px;
     margin-bottom: 0;
@@ -84,7 +88,7 @@ header {
     padding-left: 10px;
 }
 
-#time-from {
+#date-to {
     margin-left: -10px;
 }
 
@@ -94,15 +98,18 @@ header {
     margin-left: 18px;
 }
 
-#login-register {
-    width: 20%;
-    float: right;
-}
-
 #second-header {
     padding-top: 5px;
 }
 
 .form-control {
     font-weight: bold;
+}
+
+/* Removes outline of input tag */
+.form-control:focus,
+.form-control:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
 }

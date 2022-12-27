@@ -1,81 +1,122 @@
 @media only screen and (max-width: 1400px) {
     #map {
-        width: 60%;
-        height: 100%;
+        width: 65%;
         margin-top: 63px;
-        float: left;
     }
 
     #parks-list {
-        width: 40%;
-        height: 100%;
+        width: 35%;
         margin-top: 63px;
-        float: right;
     }
 }
 
-/* TODO: Remove Login/Register buttons here, and move them to another menu tab. */
 @media only screen and (max-width: 991px) {
     #map {
         width: 60%;
-        height: 100%;
-        margin-top: 168px;
-        float: left;
+        margin-top: 131px;
     }
 
     #parks-list {
         width: 40%;
-        height: 100%;
-        margin-top: 168px;
-        float: right;
+        margin-top: 131px;
+    }
+
+    #submit-button {
+        height: 37.8px;
+    }
+}
+
+@media only screen and (max-width: 884px) {
+    #map {
+        margin-top: 130px;
+    }
+
+    #parks-list {
+        margin-top: 130px;
     }
 }
 
 @media only screen and (max-width: 837px) {
     #map {
-        width: 60%;
-        height: 100%;
-        margin-top: 167px;
-        float: left;
+        margin-top: 130px;
     }
 
     #parks-list {
-        width: 40%;
-        height: 100%;
-        margin-top: 167px;
-        float: right;
+        margin-top: 130px;
     }
 }
 
-@media only screen and (max-width: 766px) {
+@media only screen and (max-width: 837px) {
     #map {
-        width: 60%;
-        height: 100%;
-        margin-top: 183px;
-        float: left;
+        margin-top: 129px;
     }
 
     #parks-list {
-        width: 40%;
-        height: 100%;
-        margin-top: 183px;
-        float: right;
+        margin-top: 129px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #map {
+        margin-top: 182px;
+    }
+
+    #parks-list {
+        margin-top: 182px;
+    }
+
+    #search-input {
+        order: 1;
+        width: 70%;
+    }
+
+    #submit-button {
+        order: 2;
+    }
+
+    #date-and-time {
+        order: 3;
+        clear: both;
+        display: block;
+        width: 100%;
+    }
+
+    #date-from {
+        position: absolute;
+        width: 43%;
+    }
+
+    #date-to {
+        position: relative;
+        margin-left: 53%;
+        width: 47%;
+    }
+
+    #submit-button {
+        width: auto;
+        height: 37.8px;
     }
 }
 
 @media only screen and (max-width: 746px) {
     #map {
         width: 60%;
-        height: 100%;
-        margin-top: 181px;
-        float: left;
+        margin-top: 182px;
     }
 
     #parks-list {
         width: 40%;
-        height: 100%;
+        margin-top: 182px;
+    }
+}
+
+@media only screen and (max-width: 608px) {
+    #map {
         margin-top: 181px;
-        float: right;
+    }
+
+    #parks-list {
+        margin-top: 181px;
     }
 }
 
@@ -83,51 +124,50 @@
 @media only screen and (max-width: 534px) {
     #map {
         width: 100%;
-        height: 100%;
-        margin-top: 225px;
-        float: left;
+        margin-top: 180px;
     }
 
     #parks-list {
         display: none;
+    }
+
+    #date-from {
+        width: 45%;
+    }
+
+    #date-to {
+        width: 55%;
+        margin-left: 50%;
     }
 }
 
-@media only screen and (max-width: 468px) {
-    #map {
-        width: 100%;
-        height: 100%;
-        margin-top: 223px;
-        float: left;
+/* Additional settings for devices with narrower screens */
+@media only screen and (max-width: 511px) {
+    #search-input {
+        width: 60%;
     }
+}
 
-    #parks-list {
-        display: none;
+@media only screen and (max-width: 421px) {
+    #map {
+        margin-top: 179px;
+    }
+}
+
+@media only screen and (max-width: 394px) {
+    #search-input {
+        width: 50%;
     }
 }
 
 @media only screen and (max-width: 333px) {
     #map {
-        width: 100%;
-        height: 100%;
-        margin-top: 268px;
-        float: left;
-    }
-
-    #parks-list {
-        display: none;
+        margin-top: 179px;
     }
 }
 
 @media only screen and (max-width: 255px) {
     #map {
-        width: 100%;
-        height: 100%;
         margin-top: 311px;
-        float: left;
-    }
-
-    #parks-list {
-        display: none;
     }
 }
