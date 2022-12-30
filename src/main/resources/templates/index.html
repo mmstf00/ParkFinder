@@ -90,11 +90,14 @@
 <body>
 <div id="map"></div>
 <div id="parks-list">
-    <ul>
-        <li>Test Parking 1</li>
-        <li>Test Parking 2</li>
-        <li>Test Parking 3</li>
-    </ul>
+    <!--    <ul>-->
+    <!--        <li>Test Parking 1</li>-->
+    <!--        <li>Test Parking 2</li>-->
+    <!--        <li>Test Parking 3</li>-->
+    <!--    </ul>-->
+    <div th:each="marker : ${markers}" th:with="itemId=${marker.id}">
+        <div th:block="${itemId}" th:text="${marker.priceTag}"></div>
+    </div>
 </div>
 
 <!-- Google Maps API -->
