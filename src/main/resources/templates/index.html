@@ -55,46 +55,41 @@
             </div>
         </div>
     </div>
-    <div id="asd" class="px-3 py-2 border-bottom mb-3">
-        <div id="second-header" class="container d-flex flex-wrap justify-content-center">
-            <form action="" id="search-input" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+    <div class="px-3 py-2 border-bottom mb-3">
+        <form action="">
+            <div id="second-header" class="container d-flex flex-wrap justify-content-center">
                 <div class="search-input-container">
                     <input id="input" type="search" class="form-control"
                            placeholder="Where do you want to park ?"
                            aria-label="Search" wfd-id="id9">
                 </div>
-            </form>
-            <div id="date-and-time" class="row">
-                <div id="date-from" class="form-group col-md-6">
-                    <div class="input-group date" id="datePicker">
-                        <input class="form-control" type="datetime-local"
-                               placeholder="Parking from">
+                <div id="date-and-time" class="row">
+                    <div id="date-from" class="form-group col-md-6">
+                        <div class="input-group date" id="datePicker">
+                            <input class="form-control" type="datetime-local"
+                                   placeholder="Parking from">
+                        </div>
+                    </div>
+                    <div id="date-to" class="form-group col-md-6">
+                        <div class="input-group date" id="timePicker">
+                            <input class="form-control" type="datetime-local"
+                                   placeholder="Parking until">
+                        </div>
                     </div>
                 </div>
-                <div id="date-to" class="form-group col-md-6">
-                    <div class="input-group date" id="timePicker">
-                        <input class="form-control" type="datetime-local"
-                               placeholder="Parking until">
-                    </div>
-                </div>
-            </div>
 
-            <!-- TODO: Add action to this button -->
-            <button id="submit-button" class="btn btn-success"
-                    type="submit">
-                Submit
-            </button>
-        </div>
+                <!-- TODO: Add action to this button -->
+                <button id="submit-button" class="btn btn-success"
+                        type="submit">
+                    Submit
+                </button>
+            </div>
+        </form>
     </div>
 </header>
 <body>
 <div id="map"></div>
 <div id="parks-list">
-    <!--    <ul>-->
-    <!--        <li>Test Parking 1</li>-->
-    <!--        <li>Test Parking 2</li>-->
-    <!--        <li>Test Parking 3</li>-->
-    <!--    </ul>-->
     <div th:each="marker : ${markers}" th:with="itemId=${marker.id}">
         <div th:block="${itemId}" th:text="${marker.priceTag}"></div>
     </div>

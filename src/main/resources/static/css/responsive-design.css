@@ -13,12 +13,12 @@
 @media only screen and (max-width: 991px) {
     #map {
         width: 60%;
-        margin-top: 131px;
+        margin-top: 123px;
     }
 
     #parks-list {
         width: 40%;
-        margin-top: 131px;
+        margin-top: 123px;
     }
 
     #submit-button {
@@ -28,31 +28,21 @@
 
 @media only screen and (max-width: 884px) {
     #map {
-        margin-top: 130px;
+        margin-top: 122px;
     }
 
     #parks-list {
-        margin-top: 130px;
+        margin-top: 122px;
     }
 }
 
 @media only screen and (max-width: 837px) {
     #map {
-        margin-top: 130px;
+        margin-top: 121px;
     }
 
     #parks-list {
-        margin-top: 130px;
-    }
-}
-
-@media only screen and (max-width: 837px) {
-    #map {
-        margin-top: 129px;
-    }
-
-    #parks-list {
-        margin-top: 129px;
+        margin-top: 121px;
     }
 }
 
@@ -84,12 +74,14 @@
     #date-from {
         position: absolute;
         width: 43%;
+        padding-top: 8px;
     }
 
     #date-to {
         position: relative;
         margin-left: 53%;
         width: 47%;
+        padding-top: 8px;
     }
 
     #submit-button {

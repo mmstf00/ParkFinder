@@ -72,7 +72,7 @@ li {
     display: none;
 }
 
-#search-input {
+.search-input-container {
     width: 60%;
     float: left;
 }
