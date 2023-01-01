@@ -14,23 +14,34 @@ function initMap() {
     // Allows to scroll without pressing CTRL button.
     map.setOptions({scrollwheel: true});
 
-    for (const property of properties) {
-        new google.maps.marker.AdvancedMarkerView({
-            map,
-            content: markerPrice(property.price),
-            position: property.position,
-        });
+    for (let marker of markers) {
+        addMarker(map, marker);
     }
 }
 
-function markerPrice(price) {
+function addMarker(map, marker) {
+    let advancedMarker = new google.maps.marker.AdvancedMarkerView({
+        map,
+        content: setMarkerPrice(marker.price),
+        position: marker.position,
+    });
+
+    // Adding zoom event to the marker.
+    advancedMarker.addListener('click', function () {
+        // Pan to the marker's position and set the zoom level
+        map.panTo(advancedMarker.position);
+        map.setZoom(14); // TODO: Calculate Map zoom and marker zoom for smooth zoom result.
+    });
+}
+
+function setMarkerPrice(price) {
     const priceTag = document.createElement("div");
     priceTag.className = "price-tag";
     priceTag.textContent = price;
     return priceTag;
 }
 
-const properties = [
+const markers = [
     {
         address: "215 Emily St, MountainView, CA",
         price: "$3.80",
