@@ -1,10 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Marker Configuration Page</title>
-</head>
-<body>
+    <title>ParkFinder</title>
+    <link rel="icon" th:href="@{/images/Icon.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/configurable-map.css}"/>
+    <link rel="stylesheet" th:href="@{/css/configurable-map-responsive-design.css}"/>
+    <script type="text/javascript" th:src="@{/js/configurableMapLoader.js}"></script>
+
+</head>
+<header>
+    <div class="px-3 py-2 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/"
+                   class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                    <h2 id="logo">
+                        ParkFinder
+                    </h2>
+                </a>
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                    <li>
+                        <a href="#" class="nav-link text-white">
+                            <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                <use xlink:href="#table"></use>
+                            </svg>
+                            Help
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link text-white">
+                            <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                <use xlink:href="#grid"></use>
+                            </svg>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<body>
+<div id="map"></div>
+
+<div id="marker-adder-container">
+    <div id="marker-form">
+        <form action="/markers/addMarker">
+            <div class="form-outline mb-4">
+                <input type="text" id="form2Example1" class="form-control"/>
+                <label class="form-label" for="form2Example1">Latitude</label>
+            </div>
+            <div class="form-outline mb-4">
+                <input type="text" id="form2Example2" class="form-control"/>
+                <label class="form-label" for="form2Example2">Longitude</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Add Park Location</button>
+        </form>
+    </div>
+</div>
+
+<!-- Google Maps API -->
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker&v=beta"
+        async defer>
+</script>
 </body>
 </html>

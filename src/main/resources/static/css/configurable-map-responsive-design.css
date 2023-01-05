@@ -1,0 +1,103 @@
+@media only screen and (max-width: 1400px) {
+    #map {
+        width: 65%;
+    }
+
+    #marker-adder-container {
+        width: 35%;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    #map {
+        width: 60%;
+        margin-top: 62px;
+    }
+
+    #marker-adder-container {
+        width: 40%;
+        margin-top: 62px;
+    }
+}
+
+@media only screen and (max-width: 884px) {
+    #map {
+        margin-top: 61px;
+    }
+
+    #marker-adder-container {
+        margin-top: 61px;
+    }
+}
+
+@media only screen and (max-width: 837px) {
+    #map {
+        margin-top: 60px;
+    }
+
+    #marker-adder-container {
+        margin-top: 60px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #map {
+        margin-top: 76px;
+    }
+
+    #marker-adder-container {
+        margin-top: 76px;
+    }
+}
+
+@media only screen and (max-width: 746px) {
+    #map {
+        width: 60%;
+        margin-top: 75px;
+    }
+
+    #marker-adder-container {
+        width: 40%;
+        margin-top: 75px;
+    }
+}
+
+@media only screen and (max-width: 608px) {
+    #map {
+        margin-top: 74px;
+    }
+
+    #marker-adder-container {
+        margin-top: 74px;
+    }
+}
+
+/* TODO: Add new mobile menu tab to add marker. */
+@media only screen and (max-width: 534px) {
+    #map {
+        width: 100%;
+        margin-top: 73px;
+    }
+
+    #marker-adder-container {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 421px) {
+    #map {
+        margin-top: 72px;
+    }
+}
+
+@media only screen and (max-width: 333px) {
+    #map {
+        margin-top: 71px;
+    }
+}
+
+@media only screen and (max-width: 255px) {
+    #map {
+        margin-top: 70px;
+    }
+}

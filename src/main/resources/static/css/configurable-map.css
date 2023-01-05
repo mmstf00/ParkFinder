@@ -1,0 +1,94 @@
+:root {
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* =================================================
+                          Header
+   ================================================= */
+
+.container {
+    max-width: 1920px;
+}
+
+html, body {
+    height: 100%;
+}
+
+header {
+    display: block;
+    height: 59px;
+    font-family: var(--bs-font-sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.form-control {
+    font-weight: bold;
+}
+
+/* Removes outline of input tag */
+.form-control:focus,
+.form-control:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+/* =================================================
+                          Body
+   ================================================= */
+
+#map {
+    width: 75%;
+    height: 100%;
+    float: left;
+    margin-top: 3px;
+}
+
+/*             Custom advanced marker styles
+   ============================================= */
+.price-tag {
+    background-color: #4285F4;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.price-tag::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, 0);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #4285F4;
+}
+
+[class$=api-load-alpha-banner] {
+    display: none;
+}
+
+/*                Marker adder
+   ============================================= */
+
+#marker-adder-container {
+    width: 25%;
+    height: 100%;
+    float: right;
+}
+
+#marker-form{
+    margin: 30px;
+}
+

@@ -1,9 +1,13 @@
 package com.parkfinder.controller;
 
+import com.parkfinder.entity.Marker;
 import com.parkfinder.model.MarkerDTO;
 import com.parkfinder.service.MarkerService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/markers")
@@ -23,8 +27,9 @@ public class MarkerController {
     }
 
     @GetMapping("/getAll")
-    public String getMarkers() {
-        markerService.getMarkers();
+    public String getMarkers(Model model) {
+        List<Marker> allMarkersList = markerService.getMarkers();
+        model.addAttribute("allMarkers", allMarkersList);
         return MARKER_CONFIGURATION_PAGE;
     }
 
