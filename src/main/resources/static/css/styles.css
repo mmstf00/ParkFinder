@@ -3,27 +3,14 @@
     "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* =================================================
+                          Header
+   ================================================= */
+
 .container {
     max-width: 1920px;
 }
 
-#map {
-    width: 70%;
-    height: 100%;
-    margin-top: 63px;
-    float: left;
-}
-
-#parks-list {
-    width: 30%;
-    height: 100%;
-    margin-top: 63px;
-    float: right;
-}
-
-/* 
- * Optional: Makes the sample page fill the window. 
- */
 html, body {
     height: 100%;
 }
@@ -43,33 +30,6 @@ header {
 
 li {
     font-size: 17px;
-}
-
-/* HTML marker styles */
-.price-tag {
-    background-color: #4285F4;
-    border-radius: 8px;
-    color: #FFFFFF;
-    font-size: 14px;
-    padding: 10px 15px;
-    position: relative;
-}
-
-.price-tag::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    transform: translate(-50%, 0);
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid #4285F4;
-}
-
-[class$=api-load-alpha-banner] {
-    display: none;
 }
 
 .search-input-container {
@@ -112,4 +72,60 @@ li {
     outline: none;
     box-shadow: none;
     border: none;
+}
+
+/* =================================================
+                          Body
+   ================================================= */
+
+#map {
+    width: 75%;
+    height: 100%;
+    margin-top: 63px;
+    float: left;
+}
+
+/*             Custom advanced marker styles
+   ============================================= */
+.price-tag {
+    background-color: #4285F4;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.price-tag::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, 0);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #4285F4;
+}
+
+[class$=api-load-alpha-banner] {
+    display: none;
+}
+
+/*             Parkings list styles
+   ============================================= */
+
+#parks-list {
+    width: 25%;
+    height: 100%;
+    margin-top: 63px;
+    float: right;
+}
+
+#parking-space {
+    width: 100%;
+    height: 15%;
+    border: 1px solid black;
+    margin: 10px;
 }

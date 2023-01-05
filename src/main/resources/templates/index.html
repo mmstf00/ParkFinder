@@ -90,8 +90,9 @@
 <body>
 <div id="map"></div>
 <div id="parks-list">
-    <div th:each="marker : ${markers}" th:with="itemId=${marker.id}">
+    <div id="parking-space" th:each="marker : ${markers}" th:with="itemId=${marker.id}">
         <div th:block="${itemId}" th:text="${marker.priceTag}"></div>
+        <!-- TODO: Add the other details for parking space -->
     </div>
 </div>
 
