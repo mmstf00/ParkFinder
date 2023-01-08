@@ -12,6 +12,7 @@
           crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/configurable-map.css}"/>
     <link rel="stylesheet" th:href="@{/css/configurable-map-responsive-design.css}"/>
+    <script type="text/javascript" th:src="@{/js/indexPageMapLoader.js}"></script>
     <script type="text/javascript" th:src="@{/js/configurableMapLoader.js}"></script>
 
 </head>
@@ -71,8 +72,7 @@
 </div>
 
 <!-- Google Maps API -->
-<script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker&v=beta"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker&v=beta"
         async defer>
 </script>
 </body>
