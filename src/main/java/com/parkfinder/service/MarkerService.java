@@ -47,6 +47,7 @@ public class MarkerService {
 
     public Marker mapMarkerDTOToEntity(MarkerDTO markerDTO) {
         Marker marker = new Marker();
+        marker.setAddress(markerDTO.getAddress());
         marker.setPriceTag(markerDTO.getPriceTag());
         marker.setLatitude(markerDTO.getLatitude());
         marker.setLongitude(markerDTO.getLongitude());

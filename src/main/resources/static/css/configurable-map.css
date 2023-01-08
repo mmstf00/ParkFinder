@@ -1,5 +1,11 @@
 @import "styles.css";
 
+/* Creates outline of input field */
+.form-control:focus,
+.form-control:active {
+    outline: 2px solid gray;
+}
+
 /* =================================================
                           Body
    ================================================= */
@@ -20,7 +26,7 @@
     float: right;
 }
 
-#marker-form{
+#marker-form {
     margin: 30px;
 }
 

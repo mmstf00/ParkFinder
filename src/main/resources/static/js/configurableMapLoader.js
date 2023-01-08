@@ -18,7 +18,8 @@ function initMap() {
         addMarker(map, marker);
     }
 
-
+    // Code to be extracted and rest of the code should be reused
+    // --------------------------------------------------------------
     // Create the initial InfoWindow.
     let infoWindow = new google.maps.InfoWindow({
         content: "Click the map to get Lat/Lng!",
@@ -37,8 +38,29 @@ function initMap() {
         infoWindow.setContent(
             JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
         );
+        // Sets the lat and lng of input form
+        setFormData(mapsMouseEvent);
         infoWindow.open(map);
     });
+    // --------------------------------------------------------------
+}
+
+function setFormData(mapsMouseEvent) {
+
+    let lat = mapsMouseEvent.latLng.lat();
+    let lng = mapsMouseEvent.latLng.lng();
+
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI`)
+        .then(response => response.json())
+        .then(data => {
+            let address = data.results[0].formatted_address;
+            document.getElementById('address-input').value = address;
+        });
+
+
+    //document.getElementById('address-input').value = address;
+    document.getElementById("lat-input").value = lat;
+    document.getElementById("lng-input").value = lng;
 }
 
 function addMarker(map, marker) {

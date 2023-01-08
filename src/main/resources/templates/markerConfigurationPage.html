@@ -54,12 +54,16 @@
     <div id="marker-form">
         <form action="/markers/addMarker">
             <div class="form-outline mb-4">
-                <input type="text" id="form2Example1" class="form-control"/>
-                <label class="form-label" for="form2Example1">Latitude</label>
+                <label class="form-label" for="address-input">Address</label>
+                <input type="text" id="address-input" class="form-control"/>
             </div>
             <div class="form-outline mb-4">
-                <input type="text" id="form2Example2" class="form-control"/>
-                <label class="form-label" for="form2Example2">Longitude</label>
+                <label class="form-label" for="lat-input">Latitude</label>
+                <input type="text" id="lat-input" class="form-control"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="lng-input">Longitude</label>
+                <input type="text" id="lng-input" class="form-control"/>
             </div>
             <button type="submit" class="btn btn-primary btn-block mb-4">Add Park Location</button>
         </form>

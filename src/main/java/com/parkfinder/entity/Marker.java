@@ -15,7 +15,7 @@ public class Marker {
     @Id
     @GeneratedValue
     private Long id;
-    // Location Name ?
+    private String address;
     private String priceTag;
     private Long latitude;
     private Long longitude;
