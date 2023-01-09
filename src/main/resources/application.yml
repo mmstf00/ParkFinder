@@ -24,3 +24,6 @@ spring:
           sharedCache:
             mode: UNSPECIFIED
     open-in-view: off
+server:
+  error:
+    include-stacktrace: always
