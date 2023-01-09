@@ -22,17 +22,7 @@ public class MarkerService {
     }
 
     public List<Marker> getMarkers() {
-        Marker marker = new Marker();
-        marker.setPriceTag("$1.40");
-        Marker marker1 = new Marker();
-        marker1.setPriceTag("$1.50");
-        Marker marker2 = new Marker();
-        marker2.setPriceTag("$1.70");
-        Marker marker3 = new Marker();
-        marker3.setPriceTag("$1.10");
-
-        // return markerRepository.findAll();
-        return List.of(marker, marker1, marker2, marker3);
+        return markerRepository.findAll();
     }
 
     public Marker updateMarker(MarkerDTO markerDTO) {

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class MarkerDTO {
     private String address;
-    private String priceTag;
-    private Long latitude;
-    private Long longitude;
+    private double priceTag;
+    private double latitude;
+    private double longitude;
 }

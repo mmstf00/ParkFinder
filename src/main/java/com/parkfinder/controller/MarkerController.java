@@ -20,27 +20,32 @@ public class MarkerController {
         this.markerService = markerService;
     }
 
+    @GetMapping("/configurationPage")
+    public String getMarkerConfigurationPage(@ModelAttribute("marker") MarkerDTO markerDTO) {
+        return MARKER_CONFIGURATION_PAGE;
+    }
+
     @PostMapping("/addMarker")
-    public String addMarker(MarkerDTO markerDTO) {
+    public String addMarker(@ModelAttribute("marker") MarkerDTO markerDTO) {
         markerService.addMarker(markerDTO);
         return MARKER_CONFIGURATION_PAGE;
     }
 
     @GetMapping("/getAll")
-    public String getMarkers(Model model) {
+    public String getMarkers(Model model, @ModelAttribute("marker") MarkerDTO markerDTO) {
         List<Marker> allMarkersList = markerService.getMarkers();
         model.addAttribute("allMarkers", allMarkersList);
         return MARKER_CONFIGURATION_PAGE;
     }
 
     @PutMapping("/updateMarker")
-    public String updateMarker(MarkerDTO markerDTO) {
+    public String updateMarker(@ModelAttribute("marker") MarkerDTO markerDTO) {
         markerService.updateMarker(markerDTO);
         return MARKER_CONFIGURATION_PAGE;
     }
 
     @DeleteMapping("/deleteMarker")
-    public String deleteMarker(MarkerDTO markerDTO) {
+    public String deleteMarker(@ModelAttribute("marker") MarkerDTO markerDTO) {
         markerService.deleteMarker(markerDTO);
         return MARKER_CONFIGURATION_PAGE;
     }
