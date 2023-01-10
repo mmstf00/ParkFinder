@@ -53,7 +53,7 @@
 
 <div id="marker-adder-container">
     <div id="marker-form">
-        <form th:action="@{/markers/addMarker}" th:object="${marker}" method="post">
+        <form th:action="@{/markers}" th:object="${marker}" method="post">
             <div class="form-outline mb-4">
                 <label class="form-label" for="address-input">Address</label>
                 <input th:field="*{address}" type="text" id="address-input" class="form-control"/>

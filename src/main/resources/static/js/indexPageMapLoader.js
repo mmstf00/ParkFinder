@@ -124,4 +124,9 @@ const markers = [
     },
 ];
 
+// Fixes form submitting on page reload.
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
+
 window.initMap = initMap;
