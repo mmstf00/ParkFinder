@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
 <head>
     <title>ParkFinder</title>
     <link rel="icon" th:href="@{/images/Icon.png}">
@@ -58,20 +58,20 @@
                 <label class="form-label" for="address-input">Address</label>
                 <input th:field="*{address}" type="text" id="address-input" class="form-control"/>
             </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="lat-input">Latitude</label>
-                <input th:field="*{latitude}" type="text" id="lat-input" class="form-control"/>
-            </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="lng-input">Longitude</label>
-                <input th:field="*{longitude}" type="text" id="lng-input" class="form-control"/>
-            </div>
+            <input th:field="*{latitude}" type="hidden" id="lat-input" class="form-control"/>
+            <input th:field="*{longitude}" type="hidden" id="lng-input" class="form-control"/>
             <div class="form-outline mb-4">
                 <label class="form-label" for="price-input">Price</label>
                 <input th:field="*{priceTag}" type="text" id="price-input" class="form-control"/>
+                <div class="error-messages" th:if="${errors}">
+                    <p th:each="error : ${errors}" th:text="${error}"></p>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block mb-4">Add Park Location</button>
         </form>
+        <div th:if="${duplicateError}" class="alert alert-danger">
+            <p th:text="${duplicateError}"></p>
+        </div>
     </div>
 </div>
 

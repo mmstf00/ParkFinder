@@ -43,4 +43,8 @@ public class MarkerService {
         marker.setLongitude(markerDTO.getLongitude());
         return marker;
     }
+
+    public boolean isDuplicateEntry(MarkerDTO marker) {
+        return markerRepository.findByLatitudeAndLongitude(marker.getLatitude(), marker.getLongitude()) != null;
+    }
 }

@@ -3,11 +3,14 @@ package com.parkfinder.controller;
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.MarkerDTO;
 import com.parkfinder.service.MarkerService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/markers")
@@ -21,7 +24,15 @@ public class MarkerController {
     }
 
     @PostMapping
-    public String addMarker(@ModelAttribute("marker") MarkerDTO markerDTO) {
+    public String addMarker(Model model, @Valid @ModelAttribute("marker") MarkerDTO markerDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            model.addAttribute("errors", Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
+            return MARKER_CONFIGURATION_PAGE;
+        }
+        if (markerService.isDuplicateEntry(markerDTO)) {
+            model.addAttribute("duplicateError", "Park location already exists");
+            return MARKER_CONFIGURATION_PAGE;
+        }
         markerService.addMarker(markerDTO);
         return MARKER_CONFIGURATION_PAGE;
     }
