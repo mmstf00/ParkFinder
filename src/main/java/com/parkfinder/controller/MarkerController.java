@@ -26,7 +26,6 @@ public class MarkerController {
     @PostMapping
     public String addMarker(Model model, @Valid @ModelAttribute("marker") MarkerDTO markerDTO, BindingResult result) {
         if (result.hasErrors()) {
-            model.addAttribute("errors", Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
             return MARKER_CONFIGURATION_PAGE;
         }
         if (markerService.isDuplicateEntry(markerDTO)) {

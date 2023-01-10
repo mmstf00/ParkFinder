@@ -63,9 +63,7 @@
             <div class="form-outline mb-4">
                 <label class="form-label" for="price-input">Price</label>
                 <input th:field="*{priceTag}" type="text" id="price-input" class="form-control"/>
-                <div class="error-messages" th:if="${errors}">
-                    <p th:each="error : ${errors}" th:text="${error}"></p>
-                </div>
+                <span th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></span>
             </div>
             <button type="submit" class="btn btn-primary btn-block mb-4">Add Park Location</button>
         </form>
