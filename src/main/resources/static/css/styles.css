@@ -126,12 +126,29 @@ li {
     float: right;
     top: 0;
     overflow: scroll;
+    overflow-x: hidden;
     position: relative;
 }
 
 #parking-space {
-    width: 100%;
+    width: 95%;
     height: 15%;
     border: 1px solid black;
     margin: 10px;
+}
+
+/*          Parkings list scrollbar style
+   ============================================= */
+
+/* change the color of the scrollbar */
+::-webkit-scrollbar {
+    width: 7px;
+    background-color: #F5F5F5;
+}
+
+/* change the color of the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, 0.2);
 }
