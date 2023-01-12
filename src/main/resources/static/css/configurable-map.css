@@ -7,14 +7,22 @@
 }
 
 /* =================================================
+                          Header
+   ================================================= */
+
+#configurable-page-header {
+    position: relative;
+}
+
+/* =================================================
                           Body
    ================================================= */
 
 #map {
     width: 75%;
     height: 100%;
-    float: left;
-    margin-top: 4px;
+    left: 0;
+    position: absolute;
 }
 
 /*                Marker adder
@@ -24,6 +32,7 @@
     width: 25%;
     height: 100%;
     float: right;
+    position: relative;
 }
 
 #marker-form {

@@ -1,24 +1,20 @@
 @media only screen and (max-width: 1400px) {
     #map {
         width: 65%;
-        margin-top: 63px;
     }
 
     #parks-list {
         width: 35%;
-        margin-top: 63px;
     }
 }
 
 @media only screen and (max-width: 991px) {
     #map {
         width: 60%;
-        margin-top: 123px;
     }
 
     #parks-list {
         width: 40%;
-        margin-top: 123px;
     }
 
     #submit-button {
@@ -26,34 +22,7 @@
     }
 }
 
-@media only screen and (max-width: 884px) {
-    #map {
-        margin-top: 122px;
-    }
-
-    #parks-list {
-        margin-top: 122px;
-    }
-}
-
-@media only screen and (max-width: 837px) {
-    #map {
-        margin-top: 121px;
-    }
-
-    #parks-list {
-        margin-top: 121px;
-    }
-}
-
 @media only screen and (max-width: 767px) {
-    #map {
-        margin-top: 182px;
-    }
-
-    #parks-list {
-        margin-top: 182px;
-    }
 
     #search-input {
         order: 1;
@@ -93,22 +62,10 @@
 @media only screen and (max-width: 746px) {
     #map {
         width: 60%;
-        margin-top: 182px;
     }
 
     #parks-list {
         width: 40%;
-        margin-top: 182px;
-    }
-}
-
-@media only screen and (max-width: 608px) {
-    #map {
-        margin-top: 181px;
-    }
-
-    #parks-list {
-        margin-top: 181px;
     }
 }
 
@@ -116,7 +73,6 @@
 @media only screen and (max-width: 534px) {
     #map {
         width: 100%;
-        margin-top: 180px;
     }
 
     #parks-list {
@@ -140,26 +96,8 @@
     }
 }
 
-@media only screen and (max-width: 421px) {
-    #map {
-        margin-top: 179px;
-    }
-}
-
 @media only screen and (max-width: 394px) {
     #search-input {
         width: 50%;
-    }
-}
-
-@media only screen and (max-width: 333px) {
-    #map {
-        margin-top: 179px;
-    }
-}
-
-@media only screen and (max-width: 255px) {
-    #map {
-        margin-top: 311px;
     }
 }

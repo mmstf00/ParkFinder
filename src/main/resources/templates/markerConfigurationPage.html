@@ -17,33 +17,35 @@
 
 </head>
 <header>
-    <div class="px-3 py-2 bg-dark text-white">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/"
-                   class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                    <h2 id="logo">
-                        ParkFinder
-                    </h2>
-                </a>
-                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-                    <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="1" height="1">
-                                <use xlink:href="#table"></use>
-                            </svg>
-                            Help
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="1" height="1">
-                                <use xlink:href="#grid"></use>
-                            </svg>
-                            Logout
-                        </a>
-                    </li>
-                </ul>
+    <div id="configurable-page-header">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/"
+                       class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <h2 id="logo">
+                            ParkFinder
+                        </h2>
+                    </a>
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#table"></use>
+                                </svg>
+                                Help
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#grid"></use>
+                                </svg>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -53,7 +55,7 @@
 
 <div id="marker-adder-container">
     <div id="marker-form">
-        <form th:action="@{/markers}" th:object="${marker}" method="post">
+        <form th:action="@{/configureMarkers}" th:object="${marker}" method="post">
             <div class="form-outline mb-4">
                 <label class="form-label" for="address-input">Address</label>
                 <input th:field="*{address}" type="text" id="address-input" class="form-control"/>
@@ -72,6 +74,8 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" th:src="@{/js/responsiveContentConfigurablePage.js}"></script>
 
 <!-- Google Maps API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker&v=beta"

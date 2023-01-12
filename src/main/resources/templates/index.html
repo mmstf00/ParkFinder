@@ -17,74 +17,76 @@
 
 </head>
 <header>
-    <div class="px-3 py-2 bg-dark text-white">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/"
-                   class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                    <h2 id="logo">
-                        ParkFinder
-                    </h2>
-                </a>
-                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-                    <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="1" height="1">
-                                <use xlink:href="#table"></use>
-                            </svg>
-                            Help
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="1" height="1">
-                                <use xlink:href="#grid"></use>
-                            </svg>
-                            Login
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="1" height="1">
-                                <use xlink:href="#people-circle"></use>
-                            </svg>
-                            Register
-                        </a>
-                    </li>
-                </ul>
+    <div id="main-header-div">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/"
+                       class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <h2 id="logo">
+                            ParkFinder
+                        </h2>
+                    </a>
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#table"></use>
+                                </svg>
+                                Help
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#grid"></use>
+                                </svg>
+                                Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#people-circle"></use>
+                                </svg>
+                                Register
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="px-3 py-2 border-bottom mb-3">
-        <form action="">
-            <div id="second-header" class="container d-flex flex-wrap justify-content-center">
-                <div class="search-input-container">
-                    <input id="input" type="search" class="form-control"
-                           placeholder="Where do you want to park ?"
-                           aria-label="Search" wfd-id="id9">
-                </div>
-                <div id="date-and-time" class="row">
-                    <div id="date-from" class="form-group col-md-6">
-                        <div class="input-group date" id="datePicker">
-                            <input class="form-control" type="datetime-local"
-                                   placeholder="Parking from">
+        <div class="px-3 py-2 border-bottom mb-3">
+            <form action="">
+                <div id="second-header" class="container d-flex flex-wrap justify-content-center">
+                    <div class="search-input-container">
+                        <input id="input" type="search" class="form-control"
+                               placeholder="Where do you want to park ?"
+                               aria-label="Search" wfd-id="id9">
+                    </div>
+                    <div id="date-and-time" class="row">
+                        <div id="date-from" class="form-group col-md-6">
+                            <div class="input-group date" id="datePicker">
+                                <input class="form-control" type="datetime-local"
+                                       placeholder="Parking from">
+                            </div>
+                        </div>
+                        <div id="date-to" class="form-group col-md-6">
+                            <div class="input-group date" id="timePicker">
+                                <input class="form-control" type="datetime-local"
+                                       placeholder="Parking until">
+                            </div>
                         </div>
                     </div>
-                    <div id="date-to" class="form-group col-md-6">
-                        <div class="input-group date" id="timePicker">
-                            <input class="form-control" type="datetime-local"
-                                   placeholder="Parking until">
-                        </div>
-                    </div>
-                </div>
 
-                <!-- TODO: Add action to this button -->
-                <button id="submit-button" class="btn btn-success"
-                        type="submit">
-                    Submit
-                </button>
-            </div>
-        </form>
+                    <!-- TODO: Add action to this button -->
+                    <button id="submit-button" class="btn btn-success"
+                            type="submit">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </header>
 <body>
@@ -96,6 +98,8 @@
         <!-- TODO: Add the other details for parking space -->
     </div>
 </div>
+
+<script type="text/javascript" th:src="@{/js/responsiveContentMainPage.js}"></script>
 
 <!-- Google Maps API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker&v=beta"

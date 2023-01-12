@@ -11,76 +11,30 @@
 @media only screen and (max-width: 991px) {
     #map {
         width: 60%;
-        margin-top: 64px;
     }
 
     #marker-adder-container {
         width: 40%;
-        margin-top: 64px;
     }
 }
 
 @media only screen and (max-width: 974px) {
     #map {
         width: 60%;
-        margin-top: 63px;
     }
 
     #marker-adder-container {
         width: 40%;
-        margin-top: 63px;
-    }
-}
-
-@media only screen and (max-width: 884px) {
-    #map {
-        margin-top: 62px;
-    }
-
-    #marker-adder-container {
-        margin-top: 62px;
-    }
-}
-
-@media only screen and (max-width: 792px) {
-    #map {
-        margin-top: 61px;
-    }
-
-    #marker-adder-container {
-        margin-top: 61px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    #map {
-        margin-top: 77px;
-    }
-
-    #marker-adder-container {
-        margin-top: 77px;
     }
 }
 
 @media only screen and (max-width: 699px) {
     #map {
         width: 60%;
-        margin-top: 76px;
     }
 
     #marker-adder-container {
         width: 40%;
-        margin-top: 76px;
-    }
-}
-
-@media only screen and (max-width: 608px) {
-    #map {
-        margin-top: 75px;
-    }
-
-    #marker-adder-container {
-        margin-top: 75px;
     }
 }
 
@@ -88,28 +42,9 @@
 @media only screen and (max-width: 534px) {
     #map {
         width: 100%;
-        margin-top: 73px;
     }
 
     #marker-adder-container {
         display: none;
-    }
-}
-
-@media only screen and (max-width: 421px) {
-    #map {
-        margin-top: 72px;
-    }
-}
-
-@media only screen and (max-width: 333px) {
-    #map {
-        margin-top: 71px;
-    }
-}
-
-@media only screen and (max-width: 255px) {
-    #map {
-        margin-top: 70px;
     }
 }

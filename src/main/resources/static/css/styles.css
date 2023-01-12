@@ -8,7 +8,7 @@
    ================================================= */
 
 .container {
-    max-width: 1920px;
+    max-width: 100%;
 }
 
 html, body {
@@ -26,6 +26,10 @@ header {
     background-color: #fff;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+}
+
+#main-header-div {
+    position: relative;
 }
 
 li {
@@ -81,8 +85,8 @@ li {
 #map {
     width: 75%;
     height: 100%;
-    margin-top: 63px;
-    float: left;
+    left: 0;
+    position: absolute;
 }
 
 /*             Custom advanced marker styles
@@ -119,8 +123,10 @@ li {
 #parks-list {
     width: 25%;
     height: 100%;
-    margin-top: 63px;
     float: right;
+    top: 0;
+    overflow: scroll;
+    position: relative;
 }
 
 #parking-space {
