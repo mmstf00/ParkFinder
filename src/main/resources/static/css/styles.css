@@ -91,13 +91,23 @@ li {
 
 /*             Custom advanced marker styles
    ============================================= */
+
 .price-tag {
-    background-color: #4285F4;
-    border-radius: 8px;
-    color: #FFFFFF;
-    font-size: 14px;
-    padding: 10px 15px;
+    background: #fff;
+    border-radius: 16px;
+    -webkit-box-shadow: 0 2px 6px rgb(86 78 117 / 50%);
+    box-shadow: 0 2px 6px rgb(86 78 117 / 50%);
+    cursor: pointer;
+    margin-bottom: 4px;
+    padding: 6px 8px;
     position: relative;
+    -webkit-transition: background .25s ease-in-out, color .25s ease-in-out;
+    transition: background .25s ease-in-out, color .25s ease-in-out;
+    width: -moz-fit-content;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: Nunito, Avenir, sans-serif;
 }
 
 .price-tag::after {
@@ -108,13 +118,19 @@ li {
     transform: translate(-50%, 0);
     width: 0;
     height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid #4285F4;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000229;
 }
 
-[class$=api-load-alpha-banner] {
-    display: none;
+.price-tag:hover {
+    background-color: #000229;
+    color: #fff;
+}
+
+.price-tag-clicked {
+    background-color: #1fa637;
+    color: #fff;
 }
 
 /*             Parkings list styles
@@ -128,13 +144,17 @@ li {
     overflow: scroll;
     overflow-x: hidden;
     position: relative;
+    background-color: #efefef;
 }
 
 #parking-space {
     width: 95%;
     height: 15%;
-    border: 1px solid black;
     margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #e3e3e3;;
+    border-radius: 8px;
 }
 
 /*          Parkings list scrollbar style
