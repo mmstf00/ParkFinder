@@ -1,10 +1,10 @@
 # ParkFinder
  
 ## Demo Design Images
-![1](https://user-images.githubusercontent.com/65444856/212200780-24983e8a-9f37-45c5-ade6-529ec7346bb4.png)
+![1](https://user-images.githubusercontent.com/65444856/212482284-aaff5fb9-a879-4c1c-a126-da75cb0781d6.png)
 ## Selecting Date
-![2](https://user-images.githubusercontent.com/65444856/210885841-60a35172-ffee-44f8-bcdb-68854c97bb55.png)
+![2](https://user-images.githubusercontent.com/65444856/212482297-7d6c5e32-77af-4db8-87d0-1ac6e3790427.png)
 ## Parking Configuration Page
-![3](https://user-images.githubusercontent.com/65444856/212200846-961ff8da-afa6-4f14-a3de-052026e85c95.png)
+![3](https://user-images.githubusercontent.com/65444856/212482306-e957d92c-90e0-4969-a4c3-3919e6068c05.png)
 ## Mobile Design
-![4](https://user-images.githubusercontent.com/65444856/210885846-32737b4d-369d-46da-a89e-3444d8b544b2.png)
+![4](https://user-images.githubusercontent.com/65444856/212482310-f57035a2-12df-4709-bb4d-336b174dbe59.png)
