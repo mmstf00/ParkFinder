@@ -3,6 +3,7 @@ let map = document.getElementById("map");
 let markerAdderContainer = document.getElementById("marker-adder-container");
 let headerHeight = header.offsetHeight;
 
+// Margin from top as much as the header length
 map.style.top = headerHeight + "px";
 markerAdderContainer.style.top = headerHeight - 60 + "px";
 
@@ -12,8 +13,10 @@ let valueInPixels = (100 * viewportHeight) / 100 - headerHeight;
 map.style.height = valueInPixels + "px";
 markerAdderContainer.style.height = valueInPixels + "px";
 
+// When screen is resized, resize elements also as above
 window.onresize = function () {
-    let headerHeight = header.offsetHeight;
+    headerHeight = header.offsetHeight;
+
     map.style.top = headerHeight + "px";
     markerAdderContainer.style.top = headerHeight - 60 + "px";
 

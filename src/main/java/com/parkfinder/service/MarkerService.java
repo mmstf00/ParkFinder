@@ -3,6 +3,7 @@ package com.parkfinder.service;
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.MarkerDTO;
 import com.parkfinder.repository.MarkerRepository;
+import com.parkfinder.util.DtoToEntityConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,12 +37,7 @@ public class MarkerService {
     }
 
     public Marker mapMarkerDTOToEntity(MarkerDTO markerDTO) {
-        Marker marker = new Marker();
-        marker.setAddress(markerDTO.getAddress());
-        marker.setPriceTag(markerDTO.getPriceTag());
-        marker.setLatitude(markerDTO.getLatitude());
-        marker.setLongitude(markerDTO.getLongitude());
-        return marker;
+        return DtoToEntityConverter.getMarkerEntity(markerDTO);
     }
 
     public boolean isDuplicateEntry(MarkerDTO marker) {
