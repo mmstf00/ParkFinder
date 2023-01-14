@@ -4,7 +4,7 @@ let markerAdderContainer = document.getElementById("marker-adder-container");
 let headerHeight = header.offsetHeight;
 
 // Margin from top as much as the header length
-map.style.top = headerHeight + "px";
+map.style.top = headerHeight - 59 + "px";
 markerAdderContainer.style.top = headerHeight - 60 + "px";
 
 // Fixing map and park list size to be exactly fullscreen
@@ -17,7 +17,7 @@ markerAdderContainer.style.height = valueInPixels + "px";
 window.onresize = function () {
     headerHeight = header.offsetHeight;
 
-    map.style.top = headerHeight + "px";
+    map.style.top = headerHeight - 59 + "px";
     markerAdderContainer.style.top = headerHeight - 60 + "px";
 
     viewportHeight = window.innerHeight;

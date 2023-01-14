@@ -1,22 +1,4 @@
-@media only screen and (max-width: 1400px) {
-    #map {
-        width: 65%;
-    }
-
-    #parks-list {
-        width: 35%;
-    }
-}
-
 @media only screen and (max-width: 991px) {
-    #map {
-        width: 60%;
-    }
-
-    #parks-list {
-        width: 40%;
-    }
-
     #submit-button {
         height: 37.8px;
     }
@@ -59,18 +41,8 @@
     }
 }
 
-@media only screen and (max-width: 746px) {
-    #map {
-        width: 60%;
-    }
-
-    #parks-list {
-        width: 40%;
-    }
-}
-
 /* TODO: Add new mobile menu tab for the list of parkings. */
-@media only screen and (max-width: 534px) {
+@media only screen and (max-width: 639px) {
     #map {
         width: 100%;
     }

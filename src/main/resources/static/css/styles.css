@@ -82,11 +82,13 @@ li {
                           Body
    ================================================= */
 
+#body-container {
+    display: flex;
+}
+
 #map {
-    width: 75%;
-    height: 100%;
-    left: 0;
-    position: absolute;
+    flex: 1;
+    min-width: 200px;
 }
 
 /*             Custom advanced marker styles
@@ -137,8 +139,7 @@ li {
    ============================================= */
 
 #parks-list {
-    width: 25%;
-    height: 100%;
+    width: 400px;
     float: right;
     top: 0;
     overflow: scroll;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>ParkFinder</title>
     <link rel="icon" th:href="@{/images/Icon.png}">
@@ -51,26 +51,30 @@
     </div>
 </header>
 <body>
-<div id="map"></div>
-
-<div id="marker-adder-container">
-    <div id="marker-form">
-        <form th:action="@{/configureMarkers}" th:object="${marker}" method="post">
-            <div class="form-outline mb-4">
-                <label class="form-label" for="address-input">Address</label>
-                <input th:field="*{address}" type="text" id="address-input" class="form-control"/>
+<div id="body-container">
+    <div id="map"></div>
+    <div id="marker-adder-container">
+        <div id="marker-form">
+            <form th:action="@{/configureMarkers}" th:object="${marker}" method="post">
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="address-input">Address</label>
+                    <input th:field="*{address}" type="text" id="address-input"
+                           class="form-control"/>
+                </div>
+                <input th:field="*{latitude}" type="hidden" id="lat-input" class="form-control"/>
+                <input th:field="*{longitude}" type="hidden" id="lng-input" class="form-control"/>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="price-input">Price</label>
+                    <input th:field="*{priceTag}" type="text" id="price-input"
+                           class="form-control"/>
+                    <span th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4">Add Park Location
+                </button>
+            </form>
+            <div th:if="${duplicateError}" class="alert alert-danger">
+                <p th:text="${duplicateError}"></p>
             </div>
-            <input th:field="*{latitude}" type="hidden" id="lat-input" class="form-control"/>
-            <input th:field="*{longitude}" type="hidden" id="lng-input" class="form-control"/>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="price-input">Price</label>
-                <input th:field="*{priceTag}" type="text" id="price-input" class="form-control"/>
-                <span th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></span>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block mb-4">Add Park Location</button>
-        </form>
-        <div th:if="${duplicateError}" class="alert alert-danger">
-            <p th:text="${duplicateError}"></p>
         </div>
     </div>
 </div>

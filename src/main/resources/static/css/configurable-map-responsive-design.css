@@ -1,45 +1,5 @@
-@media only screen and (max-width: 1400px) {
-    #map {
-        width: 65%;
-    }
-
-    #marker-adder-container {
-        width: 35%;
-    }
-}
-
-@media only screen and (max-width: 991px) {
-    #map {
-        width: 60%;
-    }
-
-    #marker-adder-container {
-        width: 40%;
-    }
-}
-
-@media only screen and (max-width: 974px) {
-    #map {
-        width: 60%;
-    }
-
-    #marker-adder-container {
-        width: 40%;
-    }
-}
-
-@media only screen and (max-width: 699px) {
-    #map {
-        width: 60%;
-    }
-
-    #marker-adder-container {
-        width: 40%;
-    }
-}
-
 /* TODO: Add new mobile menu tab to add marker. */
-@media only screen and (max-width: 534px) {
+@media only screen and (max-width: 639px) {
     #map {
         width: 100%;
     }
