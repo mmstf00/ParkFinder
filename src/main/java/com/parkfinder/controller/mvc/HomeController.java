@@ -1,4 +1,4 @@
-package com.parkfinder.controller;
+package com.parkfinder.controller.mvc;
 
 import com.parkfinder.service.MarkerService;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.parkfinder.controller;
+package com.parkfinder.controller.mvc;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.MarkerDTO;
