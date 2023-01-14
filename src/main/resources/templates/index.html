@@ -59,7 +59,7 @@
         <div class="px-3 py-2 border-bottom mb-3">
             <form action="">
                 <div id="second-header" class="container d-flex flex-wrap justify-content-center">
-                    <div class="search-input-container">
+                    <div id="search-input" class="search-input-container">
                         <input id="input" type="search" class="form-control"
                                placeholder="Where do you want to park ?"
                                aria-label="Search" wfd-id="id9">
@@ -103,7 +103,7 @@
 <script type="text/javascript" th:src="@{/js/responsiveContentMainPage.js}"></script>
 
 <!-- Google Maps API -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker&v=beta"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker,places&v=beta"
         async defer>
 </script>
 <!-- FlatPickr -->

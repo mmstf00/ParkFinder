@@ -15,31 +15,30 @@ function initConfigurableMap() {
     // Method is called from indexPageMapLoader.js
     initMarkers(configurableMap);
 
-    // Create the initial InfoWindow.
-    let infoWindow = new google.maps.InfoWindow({
-        content: "Click the map to select park location.", position: center,
+    let marker = new google.maps.Marker({
+        position: {lat: 37.7749, lng: -122.4194},
+        map: configurableMap
     });
 
-    infoWindow.open(configurableMap);
+    marker.setIcon({
+        url: "/images/park-icon.png",
+        scaledSize: new google.maps.Size(40, 43),
+    });
+
     // Configure the click listener.
     configurableMap.addListener("click", (mapsMouseEvent) => {
-        // Close the current InfoWindow.
-        infoWindow.close();
-        // Create a new InfoWindow.
-        infoWindow = new google.maps.InfoWindow({
-            position: mapsMouseEvent.latLng,
-        });
+
+        marker.setVisible(false);
 
         let lat = mapsMouseEvent.latLng.lat();
         let lng = mapsMouseEvent.latLng.lng();
-        getAddressData(lat, lng).then(data => {
-            // Sets the address to info window.
-            infoWindow.setContent(data.results[0].formatted_address);
-        });
+        let position = new google.maps.LatLng(lat, lng);
+        marker.setPosition(position);
+
+        marker.setVisible(true);
 
         // Sets the lat and lng of input form
         setFormData(mapsMouseEvent);
-        infoWindow.open(configurableMap);
     });
 }
 
