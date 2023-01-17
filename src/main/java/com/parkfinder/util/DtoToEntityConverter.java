@@ -13,6 +13,8 @@ public class DtoToEntityConverter {
         Marker marker = new Marker();
         marker.setAddress(markerDTO.getAddress());
         marker.setPriceTag(markerDTO.getPriceTag());
+        marker.setDateFrom(markerDTO.getDateFrom());
+        marker.setDateTo(markerDTO.getDateTo());
         marker.setLatitude(markerDTO.getLatitude());
         marker.setLongitude(markerDTO.getLongitude());
         return marker;

@@ -10,6 +10,7 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" th:href="@{/css/configurable-map.css}"/>
     <link rel="stylesheet" th:href="@{/css/configurable-map-responsive-design.css}"/>
     <script type="text/javascript" th:src="@{/js/indexPageMapLoader.js}"></script>
@@ -59,18 +60,32 @@
                 <div class="form-outline mb-4">
                     <label class="form-label" for="address-input">Address</label>
                     <input th:field="*{address}" type="text" id="address-input"
-                           class="form-control"/>
+                           class="form-control" readonly/>
                 </div>
-                <input th:field="*{latitude}" type="hidden" id="lat-input" class="form-control"/>
-                <input th:field="*{longitude}" type="hidden" id="lng-input" class="form-control"/>
+                <div class="form-outline mb-4">
+                    <div class="input-group date">
+                        <input th:field="*{dateFrom}" class="form-control" type="datetime-local"
+                               id="config-date-from" placeholder="Set parking time from">
+                    </div>
+                    <p th:if="${#fields.hasErrors('dateFrom')}" th:errors="*{dateFrom}"></p>
+                </div>
+                <div class="form-outline mb-4">
+                    <div class="input-group date">
+                        <input th:field="*{dateTo}" class="form-control" type="datetime-local"
+                               id="config-date-to" placeholder="Set parking time to">
+                    </div>
+                    <p th:if="${#fields.hasErrors('dateTo')}" th:errors="*{dateTo}"></p>
+                </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="price-input">Price</label>
                     <input th:field="*{priceTag}" type="text" id="price-input"
                            class="form-control"/>
-                    <span th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></span>
+                    <p th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></p>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block mb-4">Add Park Location
+                <button type="submit" class="btn btn-success btn-block mb-4">Add Park Location
                 </button>
+                <input th:field="*{latitude}" type="hidden" id="lat-input" class="form-control"/>
+                <input th:field="*{longitude}" type="hidden" id="lng-input" class="form-control"/>
             </form>
             <div th:if="${duplicateError}" class="alert alert-danger">
                 <p th:text="${duplicateError}"></p>
@@ -82,8 +97,11 @@
 <script type="text/javascript" th:src="@{/js/responsiveContentConfigurablePage.js}"></script>
 
 <!-- Google Maps API -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker&v=beta"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker,places&v=beta"
         async defer>
 </script>
+<!-- FlatPickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script type="text/javascript" th:src="@{/js/configurationPagedateTimePicker.js}"></script>
 </body>
 </html>

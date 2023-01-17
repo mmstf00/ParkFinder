@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 public class Marker {
@@ -14,6 +16,10 @@ public class Marker {
     private Long id;
     private String address;
     private double priceTag;
+    @Column(columnDefinition = "TIMESTAMP(0)")
+    private LocalDateTime dateFrom;
+    @Column(columnDefinition = "TIMESTAMP(0)")
+    private LocalDateTime dateTo;
     @Column(unique = true)
     private double latitude;
     @Column(unique = true)
