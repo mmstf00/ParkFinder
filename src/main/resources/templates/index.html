@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>ParkFinder</title>
     <link rel="icon" th:href="@{/images/Icon.png}">
@@ -36,21 +37,47 @@
                                 Help
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link text-white">
+                        <li sec:authorize="isAuthenticated()">
+                            <div sec:authorize="hasAuthority('ADMIN')">
+                                <a href="/configureMarkers" class="nav-link text-white">
+                                    <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                        <use xlink:href="#grid"></use>
+                                    </svg>
+                                    Admin Page
+                                </a>
+                            </div>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <a href="/logout" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#grid"></use>
+                                </svg>
+                                Logout
+                            </a>
+                        </li>
+                        <li sec:authorize="isAnonymous()">
+                            <a href="/login" class="nav-link text-white">
                                 <svg class="bi d-block mx-auto mb-1" width="1" height="1">
                                     <use xlink:href="#grid"></use>
                                 </svg>
                                 Login
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link text-white">
+                        <li sec:authorize="isAnonymous()">
+                            <a href="/register" class="nav-link text-white">
                                 <svg class="bi d-block mx-auto mb-1" width="1" height="1">
                                     <use xlink:href="#people-circle"></use>
                                 </svg>
                                 Register
                             </a>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <div class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#people-circle"></use>
+                                </svg>
+                                Welcome, <span sec:authentication="name"></span>
+                            </div>
                         </li>
                     </ul>
                 </div>

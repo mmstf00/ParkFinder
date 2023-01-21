@@ -3,10 +3,11 @@ package com.parkfinder.service;
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.MarkerDTO;
 import com.parkfinder.repository.MarkerRepository;
-import com.parkfinder.util.DtoToEntityConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.parkfinder.util.DtoToEntityConverter.getMarkerEntity;
 
 @Service
 public class MarkerService {
@@ -18,7 +19,7 @@ public class MarkerService {
     }
 
     public void addMarker(MarkerDTO markerDTO) {
-        Marker marker = mapMarkerDTOToEntity(markerDTO);
+        Marker marker = getMarkerEntity(markerDTO);
         markerRepository.save(marker);
     }
 
@@ -26,18 +27,14 @@ public class MarkerService {
         return markerRepository.findAll();
     }
 
-    public Marker updateMarker(MarkerDTO markerDTO) {
-        Marker updatedMarker = mapMarkerDTOToEntity(markerDTO);
-        return markerRepository.save(updatedMarker);
+    public void updateMarker(MarkerDTO markerDTO) {
+        Marker updatedMarker = getMarkerEntity(markerDTO);
+        markerRepository.save(updatedMarker);
     }
 
     public void deleteMarker(MarkerDTO markerDTO) {
-        Marker markerToBeDeleted = mapMarkerDTOToEntity(markerDTO);
+        Marker markerToBeDeleted = getMarkerEntity(markerDTO);
         markerRepository.delete(markerToBeDeleted);
-    }
-
-    public Marker mapMarkerDTOToEntity(MarkerDTO markerDTO) {
-        return DtoToEntityConverter.getMarkerEntity(markerDTO);
     }
 
     public boolean isDuplicateEntry(MarkerDTO marker) {
