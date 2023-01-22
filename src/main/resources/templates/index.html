@@ -123,9 +123,25 @@
     <div id="map"></div>
     <div id="parks-list">
         <div id="parking-space" th:each="marker : ${markers}" th:with="itemId=${marker.id}">
-            <div th:block="${itemId}" th:text="${'$' + marker.priceTag}"></div>
-            <div th:block="${itemId}" th:text="${marker.address}"></div>
-            <!-- TODO: Add the other details for parking space -->
+            <div id="parking-details">
+                <div id="parking-address" th:block="${itemId}" th:text="${marker.address}"></div>
+                <!--TODO: Add logic if it is RESERVABLE or not-->
+                <div id="parking-reservable"><span>RESERVABLE</span></div>
+                <div id="parking-details-row">
+                    <div id="price-wrapper">
+                        <div id="parking-price" th:block="${itemId}"
+                             th:text="${'$' + marker.priceTag}"></div>
+                        <div id="parking-fee">parking fee</div>
+                    </div>
+                    <div id="parking-distance">
+                        <div id="distance-wrapper">
+                            <img th:src="@{/images/walk-icon.png}" height="20" width="20"/>
+                            <span>13 mins</span>
+                        </div>
+                        <div id="to-destination">to destination</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

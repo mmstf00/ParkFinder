@@ -58,9 +58,12 @@
         <div id="marker-form">
             <form th:action="@{/configureMarkers}" th:object="${marker}" method="post">
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="address-input">Address</label>
-                    <input th:field="*{address}" type="text" id="address-input"
-                           class="form-control" readonly/>
+                    <div>
+                        <label class="form-label" for="address-input">Address</label>
+                        <input th:field="*{address}" type="text" id="address-input"
+                               class="form-control" maxlength="40"/>
+                    </div>
+                    <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
                 </div>
                 <div class="form-outline mb-4">
                     <div class="input-group date">

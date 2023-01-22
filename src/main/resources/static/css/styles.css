@@ -30,6 +30,7 @@ header {
 
 #main-header-div {
     position: relative;
+    background-color: #f7f7f7;
 }
 
 li {
@@ -39,6 +40,11 @@ li {
 .search-input-container {
     width: 60%;
     float: left;
+}
+
+#input {
+    background-color: #f7f7f7;
+    border: 1px solid #d8d8d8;
 }
 
 #date-and-time {
@@ -156,6 +162,54 @@ li {
     background-color: white;
     border: 1px solid #e3e3e3;;
     border-radius: 8px;
+}
+
+#parking-space:hover {
+    box-shadow: 0 3px 4px 0 rgb(151 151 151 / 30%);
+    cursor: pointer;
+}
+
+#parking-details {
+    margin-left: 5px;
+}
+
+#parking-address {
+    font-family: Nunito, Avenir, sans-serif;
+    font-size: 14px;
+    font-weight: 550;
+    color: #212121;
+}
+
+#parking-reservable {
+    color: #1fa637;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+#parking-details-row {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    white-space: normal;
+    margin-top: 5px;
+}
+
+#parking-distance, #price-wrapper {
+    color: #293038;
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 15px;
+    position: relative;
+    white-space: nowrap;
+}
+
+#to-destination, #parking-fee {
+    color: gray;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 /*          Parkings list scrollbar style
