@@ -24,4 +24,5 @@ public class Marker {
     private double latitude;
     @Column(unique = true)
     private double longitude;
+    private boolean isReservable = true;
 }

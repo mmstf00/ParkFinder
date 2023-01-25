@@ -19,6 +19,7 @@ public class DtoToEntityConverter {
         marker.setDateTo(markerDTO.getDateTo());
         marker.setLatitude(markerDTO.getLatitude());
         marker.setLongitude(markerDTO.getLongitude());
+        marker.setReservable(markerDTO.isReservable());
         return marker;
     }
 

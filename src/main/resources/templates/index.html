@@ -122,30 +122,87 @@
 <div id="body-container">
     <div id="map"></div>
     <div id="parks-list">
-        <div id="parking-space" th:each="marker : ${markers}" th:with="itemId=${marker.id}">
-            <div id="parking-details">
-                <div id="parking-address" th:block="${itemId}" th:text="${marker.address}"></div>
-                <!--TODO: Add logic if it is RESERVABLE or not-->
-                <div id="parking-reservable"><span>RESERVABLE</span></div>
+        <div class="parking-space-class" id="parking-space" th:each="marker : ${markers}"
+             th:with="itemId=${marker.id}">
+            <div class="parking-details">
+                <div class="parking-address" th:block="${itemId}"
+                     th:text="${marker.address}"></div>
+                <div class="parking-reservable">
+                    <span th:if="${marker.isReservable()}" class="span-reservable"
+                          style="color: green">RESERVABLE</span>
+                    <span th:unless="${marker.isReservable()}" class="span-reserved"
+                          style="color: red">RESERVED</span>
+                </div>
                 <div id="parking-details-row">
                     <div id="price-wrapper">
-                        <div id="parking-price" th:block="${itemId}"
+                        <div class="parking-price" th:block="${itemId}"
                              th:text="${'$' + marker.priceTag}"></div>
-                        <div id="parking-fee">parking fee</div>
+                        <div class="parking-fee">parking fee</div>
                     </div>
                     <div id="parking-distance">
-                        <div id="distance-wrapper">
+                        <div class="distance-wrapper">
                             <img th:src="@{/images/walk-icon.png}" height="20" width="20"/>
                             <span>13 mins</span>
                         </div>
-                        <div id="to-destination">to destination</div>
+                        <div class="to-destination">to destination</div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="detailed-park-information" th:each="marker : ${markers}"
+             th:with="itemId=${marker.id}">
+            <div class="parking-details-close"></div>
+            <div class="location-details">
+                <div class="parking-address" th:block="${itemId}"
+                     th:text="${marker.address}"></div>
+                <div class="parking-reservable">
+                    <span th:if="${marker.isReservable()}" class="span-reservable"
+                          style="color: green">RESERVABLE</span>
+                    <span th:unless="${marker.isReservable()}" class="span-reserved"
+                          style="color: red">RESERVED</span>
+                </div>
+            </div>
+            <div class="standout-details">
+                <div class="standout-details-element">
+                    <div id="standout-duration">
+                        4d 19h
+                    </div>
+                    <div class="total-duration"> Total duration</div>
+                </div>
+                <div class="standout-details-element">
+                    <div id="standout-price" class="parking-price" th:block="${itemId}"
+                         th:text="${'$' + marker.priceTag}">
+                    </div>
+                    <div class="parking-fee">parking fee</div>
+                </div>
+                <div class="standout-details-element">
+                    <div id="standout-to-destination">
+                        <img th:src="@{/images/walk-icon.png}" height="20" width="20"/>
+                        <span>13 mins</span>
+                    </div>
+                    <div class="to-destination">to destination</div>
+                </div>
+            </div>
+            <div class="location-details-menu">
+                Information, Reviews, How to park
+            </div>
+            <div id="reservation-button-id" class="reservation-button-class">
+                <button id="reservation-button" class="btn btn-success"
+                        th:if="${marker.isReservable()}">
+                    Reserve for
+                    <span th:block="${itemId}" th:text="${'$' + marker.priceTag}"></span>
+                </button>
+                <button id="reserved-button" class="btn btn-danger"
+                        th:unless="${marker.isReservable()}">
+                    RESERVED
+                </button>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript" th:src="@{/js/responsiveContentMainPage.js}"></script>
+<script type="text/javascript" th:src="@{/js/parkItemClickEvent.js}"></script>
 
 <!-- Google Maps API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI&callback=initMap&libraries=marker,places&v=beta"

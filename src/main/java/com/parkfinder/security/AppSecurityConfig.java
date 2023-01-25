@@ -73,8 +73,8 @@ public class AppSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.csrf().csrfTokenRepository(csrfTokenRepository())
-                .and().authorizeHttpRequests().requestMatchers("/configureMarkers/**").hasAuthority("ADMIN")
+        return http.cors().and().csrf().disable() // Disabling CSRF fixes 403 error
+                .authorizeHttpRequests().requestMatchers("/configureMarkers/**").hasAuthority("ADMIN")
                 .and().authorizeHttpRequests().requestMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated()
                 .and().headers().cacheControl().disable() // Potential fix for MIME, above it's fixed already.
                 .and().formLogin()

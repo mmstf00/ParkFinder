@@ -160,7 +160,7 @@ li {
     margin: 10px;
     padding: 10px;
     background-color: white;
-    border: 1px solid #e3e3e3;;
+    border: 1px solid #e3e3e3;
     border-radius: 8px;
 }
 
@@ -169,18 +169,18 @@ li {
     cursor: pointer;
 }
 
-#parking-details {
+.parking-details {
     margin-left: 5px;
 }
 
-#parking-address {
+.parking-address {
     font-family: Nunito, Avenir, sans-serif;
     font-size: 14px;
     font-weight: 550;
     color: #212121;
 }
 
-#parking-reservable {
+.parking-reservable {
     color: #1fa637;
     font-weight: 500;
     font-size: 14px;
@@ -206,10 +206,89 @@ li {
     white-space: nowrap;
 }
 
-#to-destination, #parking-fee {
+.to-destination, .parking-fee, .total-duration {
     color: gray;
     font-size: 13px;
     font-weight: 500;
+}
+
+/*            Details for parking space
+   ============================================= */
+
+.detailed-park-information {
+    width: 97%;
+    height: 97%;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #e3e3e3;
+    border-radius: 8px;
+    position: relative;
+    /*display: none;*/
+}
+
+.parking-details-close {
+    background: url(https://svgshare.com/i/pob.svg) 50% 50% no-repeat;
+    background-size: 40%;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 14px;
+    padding: 15px;
+    pointer-events: all;
+    position: absolute;
+    right: 14px;
+    width: 14px;
+    z-index: 999;
+}
+
+.location-details {
+    width: 100%;
+    height: 100px;
+    margin-top: 25px;
+}
+
+.standout-details {
+    display: flex;
+    background-color: #f9f9f9;
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.standout-details-element {
+    display: inline-block;
+    width: 33.33%;
+    margin: 5px;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+    border-radius: 8px;
+}
+
+#standout-duration, #standout-price, #standout-to-destination {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.reservation-button-class {
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#reservation-button, #reserved-button {
+    width: 90%;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    box-shadow: none;
 }
 
 /*          Parkings list scrollbar style

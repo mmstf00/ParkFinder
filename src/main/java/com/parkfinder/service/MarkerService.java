@@ -3,6 +3,7 @@ package com.parkfinder.service;
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.MarkerDTO;
 import com.parkfinder.repository.MarkerRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 import static com.parkfinder.util.DtoToEntityConverter.getMarkerEntity;
 
 @Service
+@Transactional // Fix for 403 error.
 public class MarkerService {
 
     private final MarkerRepository markerRepository;
@@ -29,6 +31,12 @@ public class MarkerService {
 
     public void updateMarker(MarkerDTO markerDTO) {
         Marker updatedMarker = getMarkerEntity(markerDTO);
+        markerRepository.save(updatedMarker);
+    }
+
+    public void updateMarkerReservationById(Long id, boolean reservation) {
+        Marker updatedMarker = markerRepository.getReferenceById(id);
+        updatedMarker.setReservable(reservation);
         markerRepository.save(updatedMarker);
     }
 
