@@ -224,7 +224,7 @@ li {
     border: 1px solid #e3e3e3;
     border-radius: 8px;
     position: relative;
-    /*display: none;*/
+    display: none;
 }
 
 .parking-details-close {
