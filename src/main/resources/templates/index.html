@@ -174,7 +174,7 @@
                     <div id="standout-price" class="parking-price" th:block="${itemId}"
                          th:text="${'$' + marker.priceTag}">
                     </div>
-                    <div class="parking-fee">parking fee</div>
+                    <div id="parking-fee-id" class="parking-fee">parking fee</div>
                 </div>
                 <div class="standout-details-element">
                     <div id="standout-to-destination">
@@ -184,8 +184,21 @@
                     <div class="to-destination">to destination</div>
                 </div>
             </div>
-            <div class="location-details-menu">
-                Information, Reviews, How to park
+            <div class="location-information-menu">
+                <div class="info-navigation-element">
+                    <div class="information">
+                        Information
+                    </div>
+                </div>
+            </div>
+            <div id="location-information">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since the
+                1500s,
+                when an unknown printer took a galley of type and scrambled
+                it to make a type specimen book. It has survived not only five centuries,
+                but also the leap into electronic typesetting, remaining essentially
+                unchanged.
             </div>
             <div id="reservation-button-id" class="reservation-button-class">
                 <button id="reservation-button" class="btn btn-success"

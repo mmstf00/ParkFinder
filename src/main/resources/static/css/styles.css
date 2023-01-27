@@ -260,14 +260,41 @@ li {
     width: 33.33%;
     margin: 5px;
     text-align: center;
-    border: 1px solid #e3e3e3;
-    border-radius: 8px;
+}
+
+#standout-price, #parking-fee-id {
+    border-right: 1px solid #cdd3db;
+    border-left: 1px solid #cdd3db;
 }
 
 #standout-duration, #standout-price, #standout-to-destination {
     margin-top: 15px;
     font-size: 20px;
     font-weight: 600;
+}
+
+.location-information-menu {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.info-navigation-element {
+    display: inline-block;
+    width: 33.33%;
+    margin: 5px;
+    text-align: center;
+    font-size: 22px;
+    color: #999;
+}
+
+#location-information {
+    margin-top: 20px;
+    color: black;
+    font-size: 18px;
 }
 
 .reservation-button-class {

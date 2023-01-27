@@ -58,7 +58,6 @@ function animateDivFromBottomToTop(parkingDetail) {
     }
 }
 
-
 function animateDivFromTopToBottom(parkingDetail) {
     let pos = -50;
     let animateSpeed = 4;
