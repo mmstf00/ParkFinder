@@ -9,5 +9,5 @@
 ## Mobile Design
 ![4](https://user-images.githubusercontent.com/65444856/212482310-f57035a2-12df-4709-bb4d-336b174dbe59.png)
 ## Making reservation
-![list](https://user-images.githubusercontent.com/65444856/214706610-798ec6fc-ad24-4801-b3b2-082e03fc2495.png)ø
-![reserved](https://user-images.githubusercontent.com/65444856/214977805-1ec9e185-b568-470e-ba38-a032d16dd83c.png)
+![list](https://user-images.githubusercontent.com/65444856/214706610-798ec6fc-ad24-4801-b3b2-082e03fc2495.png)
+![menu](https://user-images.githubusercontent.com/65444856/215202484-183e43c6-b0d6-460b-8d76-80080d931b7d.png)
