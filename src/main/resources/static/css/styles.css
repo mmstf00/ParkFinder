@@ -287,14 +287,19 @@ li {
     width: 33.33%;
     margin: 5px;
     text-align: center;
-    font-size: 22px;
+    font-size: 19px;
     color: #999;
+    cursor: pointer;
 }
 
 #location-information {
     margin-top: 20px;
     color: black;
     font-size: 18px;
+}
+
+#reservation-details, #how-to-park-details {
+    display: none;
 }
 
 .reservation-button-class {

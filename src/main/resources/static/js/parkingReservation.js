@@ -15,6 +15,7 @@ for (let i = 0; i < parkingListItems.length; i++) {
     closeButton.addEventListener("click", function () {
         closeDetailsMenu(parkingDetail);
     })
+    listenForOpenSubMenu(parkingDetail);
 }
 
 function openDetailsMenu(parkingDetail) {
@@ -75,6 +76,33 @@ function animateDivFromTopToBottom(parkingDetail) {
     }
 }
 
+// Logic to open location details sub-menu
+function listenForOpenSubMenu(parkingDetail) {
+    let elements = parkingDetail
+        .getElementsByClassName("c-location-information").item(0)
+        .getElementsByClassName("detail-element");
+    let informationDetails = elements.namedItem("information-details");
+    let reservationDetails = elements.namedItem("reservation-details");
+    let howToParkDetails = elements.namedItem("how-to-park-details");
+
+    parkingDetail.onclick = e => {
+        if (e.target.id === "information") {
+            informationDetails.style.display = "block";
+            reservationDetails.style.display = "none";
+            howToParkDetails.style.display = "none";
+        }
+        if (e.target.id === "reviews") {
+            informationDetails.style.display = "none";
+            reservationDetails.style.display = "block";
+            howToParkDetails.style.display = "none";
+        }
+        if (e.target.id === "how-to-park") {
+            informationDetails.style.display = "none";
+            reservationDetails.style.display = "none";
+            howToParkDetails.style.display = "block";
+        }
+    }
+}
 
 // Logic to make reservation when button is pressed.
 for (let i = 0; i < parkingDetails.length; i++) {
