@@ -6,6 +6,7 @@ import com.parkfinder.repository.MarkerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.parkfinder.util.DtoToEntityConverter.getMarkerEntity;
@@ -43,6 +44,10 @@ public class MarkerService {
     public void deleteMarker(MarkerDTO markerDTO) {
         Marker markerToBeDeleted = getMarkerEntity(markerDTO);
         markerRepository.delete(markerToBeDeleted);
+    }
+
+    public List<Marker> getAllBySelectedDateRange(LocalDateTime dateFrom, LocalDateTime dateTo) {
+        return markerRepository.findByDateBetween(dateFrom, dateTo);
     }
 
     public boolean isDuplicateEntry(MarkerDTO marker) {

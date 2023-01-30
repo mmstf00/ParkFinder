@@ -13,7 +13,7 @@ function initConfigurableMap() {
     configurableMap.setOptions({scrollwheel: true});
 
     // Method is called from indexPageMapLoader.js
-    initMarkers(configurableMap);
+    displayAllMarkers(configurableMap);
 
     let marker = new google.maps.Marker({
         position: {lat: 37.7749, lng: -122.4194},

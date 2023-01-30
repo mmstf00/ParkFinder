@@ -84,33 +84,37 @@
             </div>
         </div>
         <div class="px-3 py-2 border-bottom mb-3">
-            <form action="">
+            <form id="search-form" th:action="@{/search}" method="get">
                 <div id="second-header" class="container d-flex flex-wrap justify-content-center">
                     <div id="search-input" class="search-input-container">
-                        <input id="input" type="search" class="form-control"
+                        <input id="input" type="search"
+                               class="form-control"
+                               name="address"
                                placeholder="Where do you want to park ?"
                                aria-label="Search" wfd-id="id9">
                     </div>
                     <div id="date-and-time" class="row">
                         <div id="date-from" class="form-group col-md-6">
                             <div class="input-group date">
-                                <input id="from-date-picker" class="form-control"
+                                <input id="from-date-picker"
+                                       class="form-control"
+                                       name="dateFrom"
                                        type="datetime-local"
                                        placeholder="Parking from">
                             </div>
                         </div>
                         <div id="date-to" class="form-group col-md-6">
                             <div class="input-group date">
-                                <input id="to-date-picker" class="form-control"
+                                <input id="to-date-picker"
+                                       class="form-control"
+                                       name="dateTo"
                                        type="datetime-local"
                                        placeholder="Parking until">
                             </div>
                         </div>
                     </div>
 
-                    <!-- TODO: Add action to this button -->
-                    <button id="submit-button" class="btn btn-success"
-                            type="submit">
+                    <button id="submit-button" class="btn btn-success" type="submit">
                         Search
                     </button>
                 </div>

@@ -85,7 +85,8 @@
                            class="form-control"/>
                     <p th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></p>
                 </div>
-                <button type="submit" class="btn btn-success btn-block mb-4">Add Park Location
+                <button type="submit" class="btn btn-success btn-block mb-4">
+                    Add Park Location
                 </button>
                 <input th:field="*{latitude}" type="hidden" id="lat-input" class="form-control"/>
                 <input th:field="*{longitude}" type="hidden" id="lng-input" class="form-control"/>
