@@ -1,7 +1,7 @@
 function initMap() {
 
-    // TODO: Change center when place is searched
-    const center = {
+    // Default center if search is not performed.
+    let center = {
         lat: 37.43238031167444, lng: -122.16795397128632,
     };
 
@@ -14,54 +14,199 @@ function initMap() {
     map.setOptions({scrollwheel: true});
 
     setSearchLogic(map);
-    // If there is no markers in session, display all(10km),
-    // this prevents to show all data when page is refreshed while searching.
-    // TODO: fix all markers are shown after 2nd refresh of root page.
-    if (!sessionStorage.getItem('markers') || window.location.pathname === '/') {
-        displayAllMarkers(map);
-    }
-    displaySearchedMakers(map);
+    populateAllMarkers(map);
+    updateMarkersOnSearch(map);
 }
 
-// Searched markers are fetched from different endpoint.
-function displaySearchedMakers(map) {
-    const form = document.getElementById("search-form");
-    form.addEventListener("submit", () => {
+// Getting all data from certain endpoint.
+function populateAllMarkers(map) {
+    let endpoint = "api/v1";
+    populateMarkersFromEndpointIntoMap(map, endpoint);
+    loadParkListItems(endpoint);
+}
+
+// Updating markers when search is performed.
+function updateMarkersOnSearch(map) {
+    document.getElementById("search-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const form = event.target;
         const dateFrom = form.elements.dateFrom.value;
         const dateTo = form.elements.dateTo.value;
         const endpoint = `api/v1/search?dateFrom=${dateFrom}&dateTo=${dateTo}`;
-        fetchMarkers(map, endpoint);
+        clearMap();
+        populateMarkersFromEndpointIntoMap(map, endpoint);
+        loadParkListItems(endpoint);
     });
-    populateMarkersFromSessionStorage(map);
 }
 
-// Temporary logic to show all markers, it will be replaced with nearest in 10km.
-function displayAllMarkers(map) {
-    fetchMarkers(map, `api/v1`);
-    populateMarkersFromSessionStorage(map);
+function clearMap() {
+    let divsToRemove = document.querySelectorAll(".yNHHyP-marker-view");
+    for (let i = 0; i < divsToRemove.length; i++) {
+        divsToRemove[i].style.display = "none";
+    }
 }
 
-// Fetches markers data from endpoint and saves them in session storage.
-function fetchMarkers(map, endpoint) {
+function loadParkListItems(endpoint) {
     fetch(endpoint)
         .then(response => response.json())
-        .then(markers => {
-            // Saving markers in session storage to update them after.
-            sessionStorage.setItem('markers', JSON.stringify(markers));
+        .then(data => {
+            // Getting the reference to the parent element where we will add the new elements.
+            let parksList = document.querySelector('#parks-list');
+            if (parksList) {
+                parksList.innerHTML = ""; // Clearing older elements.
+            }
+
+            data.forEach(marker => {
+
+                let isReservable = marker.reservable;
+                let reservableClass = isReservable ? 'span-reservable' : 'span-reserved';
+                let reservableStyle = isReservable ? 'color: green' : 'color: red';
+                let reservableText = isReservable ? 'RESERVABLE' : 'RESERVED';
+
+                // Create the parking HTML element
+                let parkingSpace = document.createElement('div');
+                parkingSpace.classList.add('parking-space-class');
+                parkingSpace.id = 'parking-space';
+                parkingSpace.innerHTML = `
+                    <div class="parking-details" id="${marker.id}">
+                      <div class="parking-address">${marker.address}</div>
+                      <div class="parking-reservable">
+                        <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
+                      </div>
+                      <div id="parking-details-row">
+                        <div id="price-wrapper">
+                          <div class="parking-price">$${marker.priceTag.toFixed(2)}</div>
+                          <div class="parking-fee">parking fee</div>
+                        </div>
+                        <div id="parking-distance">
+                          <div class="distance-wrapper">
+                            <img src="/images/walk-icon.png" height="20" width="20"/>
+                            <span>13 mins</span>
+                          </div>
+                          <div class="to-destination">to destination</div>
+                        </div>
+                      </div>
+                    </div>
+                `;
+
+
+                let reservationButtonClass = isReservable ? 'btn btn-success' : 'btn btn-danger';
+                let reservationButtonId = isReservable ? 'reservation-button' : 'reserved-button';
+                let reservationButtonText = isReservable ? 'Reserve for' : 'RESERVED';
+                let reservationButtonStyle = isReservable ? 'background-color: green' : 'background-color: red';
+
+                let reservationButtonSpanStyle = isReservable ? 'display: inline' : 'display: none';
+
+                // Create the parking details HTML element
+                let parkingSpaceInformation = document.createElement('div');
+                parkingSpaceInformation.classList.add('detailed-park-information');
+                parkingSpaceInformation.innerHTML = `
+                    <div class="parking-details-close"></div>
+                    <div class="location-details">
+                        <div class="parking-address" id="${marker.id}">${marker.address}</div>
+                        <div class="parking-reservable">
+                            <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
+                        </div>
+                    </div>
+                    <div class="standout-details">
+                        <div class="standout-details-element">
+                            <div id="standout-duration">
+                                4d 19h
+                            </div>
+                            <div class="total-duration"> Total duration</div>
+                        </div>
+                        <div class="standout-details-element">
+                            <div id="standout-price" class="parking-price">
+                                $${marker.priceTag.toFixed(2)}
+                            </div>
+                            <div id="parking-fee-id" class="parking-fee">parking fee</div>
+                        </div>
+                        <div class="standout-details-element">
+                            <div id="standout-to-destination">
+                                <img src="/images/walk-icon.png" height="20" width="20"/>
+                                <span>13 mins</span>
+                            </div>
+                            <div class="to-destination">to destination</div>
+                        </div>
+                    </div>
+                    <div class="location-information-menu">
+                        <div class="info-navigation-element">
+                            <div id="information">
+                                Information
+                            </div>
+                        </div>
+                        <div class="info-navigation-element">
+                            <div id="reviews">
+                                Reviews
+                            </div>
+                        </div>
+                        <div class="info-navigation-element">
+                            <div id="how-to-park">
+                                How to park
+                            </div>
+                        </div>
+                    </div>
+                    <div id="location-information" class="c-location-information">
+                        <div id="information-details" class="detail-element">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the
+                            1500s,
+                            when an unknown printer took a galley of type and scrambled
+                            it to make a type specimen book. It has survived not only five centuries,
+                            but also the leap into electronic typesetting, remaining essentially
+                            unchanged.
+                        </div>
+                        <div id="reservation-details" class="detail-element">
+                            Contrary to popular belief, Lorem Ipsum is not simply random text.
+                            It has roots in a piece of classical Latin literature from 45 BC,
+                            making it over 2000 years old. Richard McClintock, a Latin professor
+                            at Hampden-Sydney College in Virginia.
+                        </div>
+                        <div id="how-to-park-details" class="detail-element">
+                            There are many variations of passages of Lorem Ipsum available,
+                            but the majority have suffered alteration in some form, by injected humour,
+                            or randomised words which don't look even slightly believable.
+                            If you are going to use a passage of Lorem Ipsum, you need to be sure there
+                            isn't anything embarrassing hidden in the middle of text.
+                        </div>
+                    </div>
+                    <div id="reservation-button-id" class="reservation-button-class">
+                        <button id="${reservationButtonId}" 
+                                class="${reservationButtonClass}" 
+                                style="${reservationButtonStyle}">
+                            ${reservationButtonText}
+                            <span style="${reservationButtonSpanStyle}">
+                                $${marker.priceTag.toFixed(2)}
+                            </span>
+                        </button>
+                    </div>
+                `;
+
+                // To prevent errors in configuration page, checking if parksList exists.
+                if (parksList) {
+
+                    // Append the element to the parent
+                    parksList.appendChild(parkingSpace);
+                    parksList.appendChild(parkingSpaceInformation);
+
+                    listenForItemClick();
+                    makeReservationWhenButtonPressed();
+                }
+            });
         });
 }
 
-/*
-   After fetch request is done, session storage is updating itself
-   with new data and populates the map with the new data.
- */
-function populateMarkersFromSessionStorage(map) {
-    let markers = JSON.parse(sessionStorage.getItem('markers'));
-    if (markers) {
-        for (let marker of markers) {
-            addMarker(marker, map);
-        }
-    }
+function populateMarkersFromEndpointIntoMap(map, endpoint) {
+    fetch(endpoint)
+        .then(response => response.json())
+        .then(markers => {
+            if (markers) {
+                for (let marker of markers) {
+                    addMarker(marker, map);
+                }
+            }
+        })
+        .catch(error => console.error(error));
 }
 
 function addMarker(marker, map) {
@@ -137,6 +282,5 @@ function setSearchLogic(map) {
         marker.setVisible(true);
     });
 }
-
 
 window.initMap = initMap;

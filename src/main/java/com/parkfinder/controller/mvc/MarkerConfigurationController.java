@@ -13,12 +13,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/configureMarkers")
-public class MarkerController {
+public class MarkerConfigurationController {
 
     private final MarkerService markerService;
     private static final String MARKER_CONFIGURATION_PAGE = "markerConfigurationPage";
 
-    public MarkerController(MarkerService markerService) {
+    public MarkerConfigurationController(MarkerService markerService) {
         this.markerService = markerService;
     }
 

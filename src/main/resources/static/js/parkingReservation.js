@@ -1,21 +1,24 @@
 let parkingListItems = document.getElementsByClassName("parking-space-class");
 let parkingDetails = document.getElementsByClassName("detailed-park-information");
 
+function listenForItemClick() {
+    // Open details for parking when is clicked.
+    for (let i = 0; i < parkingListItems.length; i++) {
+        let parkingItem = parkingListItems[i];
+        let parkingDetail = parkingDetails[i];
 
-// Logic to open details for parking when is clicked.
-for (let i = 0; i < parkingListItems.length; i++) {
-    let parkingItem = parkingListItems[i];
-    let parkingDetail = parkingDetails[i];
-    parkingItem.addEventListener("click", function () {
-        openDetailsMenu(parkingDetail);
-    });
+        parkingItem.addEventListener("click", function () {
+            openDetailsMenu(parkingDetail);
+        });
 
-    let closeButton = parkingDetail
-        .getElementsByClassName("parking-details-close").item(0);
-    closeButton.addEventListener("click", function () {
-        closeDetailsMenu(parkingDetail);
-    })
-    listenForOpenSubMenu(parkingDetail);
+        let closeButton = parkingDetail
+            .getElementsByClassName("parking-details-close").item(0);
+        closeButton.addEventListener("click", function () {
+            closeDetailsMenu(parkingDetail);
+        })
+
+        listenForOpenSubMenu(parkingDetail);
+    }
 }
 
 function openDetailsMenu(parkingDetail) {
@@ -104,40 +107,55 @@ function listenForOpenSubMenu(parkingDetail) {
     }
 }
 
-// Logic to make reservation when button is pressed.
-for (let i = 0; i < parkingDetails.length; i++) {
-
-    let button = parkingDetails[i]
-        .getElementsByClassName("reservation-button-class").namedItem("reservation-button-id")
-        .getElementsByClassName("btn-success").namedItem("reservation-button");
-
-    if (button != null) {
-        button.addEventListener("click", function () {
-            let parking = parkingDetails[i];
-            makeReservation(parking, button);
-        });
+function makeReservationWhenButtonPressed() {
+    for (let i = 0; i < parkingDetails.length; i++) {
+        let button = parkingDetails[i]
+            .getElementsByClassName("reservation-button-class").namedItem("reservation-button-id")
+            .getElementsByClassName("btn-success").namedItem("reservation-button");
+        if (button != null) {
+            button.addEventListener("click", function (event) {
+                let parkingDetail = parkingDetails[i];
+                let parkingSpace = parkingListItems[i];
+                makeReservation(parkingSpace, parkingDetail, event.target);
+            });
+        }
     }
 }
 
-function makeReservation(parking, button) {
-    let reservableText = parking
+// To prevent multiple request, saving Ids of parkings to check later.
+let parkingIds = [];
+
+function makeReservation(parkingSpace, parkingDetail, button) {
+
+    updateStyle(parkingSpace, parkingDetail, button);
+
+    let parkingId = parkingDetail
+        .getElementsByClassName("location-details").item(0)
+        .getElementsByClassName("parking-address")
+        .item(0).getAttribute("id");
+
+    if (!parkingIds.includes(parkingId)) {
+        makePutRequestById(parkingId);
+    }
+    parkingIds.push(parkingId);
+}
+
+function updateStyle(parkingSpace, parkingDetail, button) {
+    let reservableTextOfDetail = parkingDetail
         .getElementsByClassName("location-details").item(0)
         .getElementsByClassName("parking-reservable").item(0)
         .getElementsByClassName("span-reservable").item(0);
 
-    updateStyle(reservableText, button);
+    let reservableTextOfElement = parkingSpace
+        .getElementsByClassName("parking-details").item(0)
+        .getElementsByClassName("parking-reservable").item(0)
+        .getElementsByClassName("span-reservable").item(0);
 
-    let parkingId = parking
-        .getElementsByClassName("location-details").item(0)
-        .getElementsByClassName("parking-address")
-        .item(0).getAttribute("block");
+    reservableTextOfDetail.innerHTML = "RESERVED";
+    reservableTextOfDetail.style.color = "red";
 
-    makePutRequestById(parkingId);
-}
-
-function updateStyle(reservableText, button) {
-    reservableText.innerHTML = "RESERVED";
-    reservableText.style.color = "red";
+    reservableTextOfElement.innerHTML = "RESERVED";
+    reservableTextOfElement.style.color = "red";
 
     button.innerHTML = "RESERVED";
     button.style.backgroundColor = "red";
