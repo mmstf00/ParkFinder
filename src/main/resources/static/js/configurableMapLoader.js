@@ -1,6 +1,6 @@
 function initConfigurableMap() {
 
-    // TODO: Center should be the user's current location
+    // Dummy center if current location is not enabled.
     const center = {
         lat: 37.43238031167444, lng: -122.16795397128632,
     };
@@ -14,6 +14,7 @@ function initConfigurableMap() {
 
     // Method is called from indexPageMapLoader.js
     populateAllMarkers(configurableMap);
+    getCurrentLocation(configurableMap);
 
     let marker = new google.maps.Marker({
         position: {lat: 37.7749, lng: -122.4194},

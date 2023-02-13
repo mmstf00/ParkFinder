@@ -1,18 +1,19 @@
 function initMap() {
 
-    // Default center if search is not performed.
+    // Dummy center if current location is not enabled.
     let center = {
         lat: 37.43238031167444, lng: -122.16795397128632,
     };
 
     let map = new google.maps.Map(document.getElementById("map"), {
         center: center,
-        zoom: 11,
+        zoom: 12,
         mapId: "4504f8b37365c3d0",
     });
     // Allows to scroll without pressing CTRL button.
     map.setOptions({scrollwheel: true});
 
+    getCurrentLocation(map);
     setSearchLogic(map);
     populateAllMarkers(map);
     updateMarkersOnSearch(map);
@@ -213,6 +214,29 @@ function redirectToDirectionsPage(placeId) {
     window.open(`/directions?placeId=${placeId}`, "_blank");
 }
 
+
+(function setUserCurrentLocationToLocalstorage() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            localStorage.setItem("lat", position.coords.latitude.toString());
+            localStorage.setItem("lng", position.coords.longitude.toString());
+        });
+    }
+})()
+
+function getCurrentLocation(map) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            let center = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setCenter(center);
+            map.setZoom(12);
+        });
+    }
+}
+
 function populateMarkersFromEndpointIntoMap(map, endpoint) {
     fetch(endpoint)
         .then(response => response.json())
@@ -237,7 +261,7 @@ function addMarker(marker, map) {
     advancedMarker.addListener('click', function () {
         // Pan to the marker's position and set the zoom level
         map.panTo(advancedMarker.position);
-        map.setZoom(14); // TODO: Calculate Map zoom and marker zoom for smooth zoom result.
+        map.setZoom(14);
     });
 }
 

@@ -305,21 +305,23 @@
 <script type="text/javascript" th:src="@{/js/directionsService.js}"></script>
 <script>
     let placeId = new URL(window.location.href).searchParams.get("placeId");
+    let userCurrentLocationLat = parseFloat(localStorage.getItem("lat"));
+    let userCurrentLocationLng = parseFloat(localStorage.getItem("lng"));
     const CONFIGURATION = {
         "defaultTravelMode": "DRIVING",
         "distanceMeasurementType": "IMPERIAL",
         "initialDestinations": [
             {
                 "placeId": placeId,
-                "travelMode": "PUBLIC_TRANSIT"
+                "travelMode": "DRIVING"
             }
         ],
         "mapOptions": {
-            "center": {"lat": 37.43238031167444, "lng": -122.16795397128632}, // TODO: change with current user location
+            "center": {"lat": userCurrentLocationLat, "lng": userCurrentLocationLng},
             "fullscreenControl": true,
             "mapTypeControl": false,
             "streetViewControl": false,
-            "zoom": 14,
+            "zoom": 12,
             "zoomControl": true,
             "maxZoom": 20,
             "mapId": "4504f8b37365c3d0"
