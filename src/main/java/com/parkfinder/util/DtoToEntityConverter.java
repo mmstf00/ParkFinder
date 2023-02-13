@@ -14,6 +14,7 @@ public class DtoToEntityConverter {
     public static Marker getMarkerEntity(MarkerDTO markerDTO) {
         Marker marker = new Marker();
         marker.setAddress(markerDTO.getAddress());
+        marker.setPlaceId(markerDTO.getPlaceId());
         marker.setPriceTag(markerDTO.getPriceTag());
         marker.setDateFrom(markerDTO.getDateFrom());
         marker.setDateTo(markerDTO.getDateTo());

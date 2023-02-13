@@ -1,6 +1,6 @@
 function initConfigurableMap() {
 
-    // TODO: Change center when place is searched
+    // TODO: Center should be the user's current location
     const center = {
         lat: 37.43238031167444, lng: -122.16795397128632,
     };
@@ -49,9 +49,10 @@ function setFormData(mapsMouseEvent) {
 
     getAddressData(lat, lng).then(data => {
         document.getElementById('address-input').value = data.results[0].formatted_address;
+        document.getElementById("place-id").value = data.results[0].place_id;
     });
 
-    // These values are setting hidden inputs, lat and lng are hidden from user.
+    // These values are setting hidden, they are not needed for the user.
     document.getElementById("lat-input").value = lat;
     document.getElementById("lng-input").value = lng;
 }

@@ -15,6 +15,7 @@ public class Marker {
     @GeneratedValue
     private Long id;
     private String address;
+    private String placeId;
     private double priceTag;
     @Column(columnDefinition = "TIMESTAMP(0)")
     private LocalDateTime dateFrom;

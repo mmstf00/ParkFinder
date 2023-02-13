@@ -298,8 +298,13 @@ li {
     font-size: 18px;
 }
 
-#reservation-details, #how-to-park-details {
+#reservation-details, #directions-details {
     display: none;
+}
+
+#directions-button {
+    display: flex;
+    margin: auto;
 }
 
 .reservation-button-class {

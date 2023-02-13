@@ -86,23 +86,23 @@ function listenForOpenSubMenu(parkingDetail) {
         .getElementsByClassName("detail-element");
     let informationDetails = elements.namedItem("information-details");
     let reservationDetails = elements.namedItem("reservation-details");
-    let howToParkDetails = elements.namedItem("how-to-park-details");
+    let directionsDetails = elements.namedItem("directions-details");
 
     parkingDetail.onclick = e => {
         if (e.target.id === "information") {
             informationDetails.style.display = "block";
             reservationDetails.style.display = "none";
-            howToParkDetails.style.display = "none";
+            directionsDetails.style.display = "none";
         }
         if (e.target.id === "reviews") {
             informationDetails.style.display = "none";
             reservationDetails.style.display = "block";
-            howToParkDetails.style.display = "none";
+            directionsDetails.style.display = "none";
         }
-        if (e.target.id === "how-to-park") {
+        if (e.target.id === "directions") {
             informationDetails.style.display = "none";
             reservationDetails.style.display = "none";
-            howToParkDetails.style.display = "block";
+            directionsDetails.style.display = "block";
         }
     }
 }

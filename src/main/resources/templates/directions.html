@@ -304,21 +304,18 @@
 </div>
 <script type="text/javascript" th:src="@{/js/directionsService.js}"></script>
 <script>
+    let placeId = new URL(window.location.href).searchParams.get("placeId");
     const CONFIGURATION = {
         "defaultTravelMode": "DRIVING",
         "distanceMeasurementType": "IMPERIAL",
-        "initialDestinations": [ // There should be one destination(from current location of user to park location)
+        "initialDestinations": [
             {
-                "placeId": "ChIJPcr187JrkFQRLApO8QKP8ZM",
+                "placeId": placeId,
                 "travelMode": "PUBLIC_TRANSIT"
-            },
-            {
-                "placeId": "ChIJoZv0y8hqkFQRQcB9L4Wi1EM",
-                "travelMode": "WALKING"
             }
         ],
         "mapOptions": {
-            "center": {"lat": 47.6115, "lng": -122.3222},
+            "center": {"lat": 37.43238031167444, "lng": -122.16795397128632}, // TODO: change with current user location
             "fullscreenControl": true,
             "mapTypeControl": false,
             "streetViewControl": false,

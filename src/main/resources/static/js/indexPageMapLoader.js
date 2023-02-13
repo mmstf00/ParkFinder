@@ -56,9 +56,9 @@ function loadParkListItems(endpoint) {
                 parksList.innerHTML = ""; // Clearing older elements.
             }
 
-            data.forEach(marker => {
+            data.forEach(markerData => {
 
-                let isReservable = marker.reservable;
+                let isReservable = markerData.reservable;
                 let reservableClass = isReservable ? 'span-reservable' : 'span-reserved';
                 let reservableStyle = isReservable ? 'color: green' : 'color: red';
                 let reservableText = isReservable ? 'RESERVABLE' : 'RESERVED';
@@ -68,14 +68,14 @@ function loadParkListItems(endpoint) {
                 parkingSpace.classList.add('parking-space-class');
                 parkingSpace.id = 'parking-space';
                 parkingSpace.innerHTML = `
-                    <div class="parking-details" id="${marker.id}">
-                      <div class="parking-address">${marker.address}</div>
+                    <div class="parking-details" id="${markerData.id}">
+                      <div class="parking-address">${markerData.address}</div>
                       <div class="parking-reservable">
                         <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
                       </div>
                       <div id="parking-details-row">
                         <div id="price-wrapper">
-                          <div class="parking-price">$${marker.priceTag.toFixed(2)}</div>
+                          <div class="parking-price">$${markerData.priceTag.toFixed(2)}</div>
                           <div class="parking-fee">parking fee</div>
                         </div>
                         <div id="parking-distance">
@@ -103,7 +103,7 @@ function loadParkListItems(endpoint) {
                 parkingSpaceInformation.innerHTML = `
                     <div class="parking-details-close"></div>
                     <div class="location-details">
-                        <div class="parking-address" id="${marker.id}">${marker.address}</div>
+                        <div class="parking-address" id="${markerData.id}">${markerData.address}</div>
                         <div class="parking-reservable">
                             <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
                         </div>
@@ -117,7 +117,7 @@ function loadParkListItems(endpoint) {
                         </div>
                         <div class="standout-details-element">
                             <div id="standout-price" class="parking-price">
-                                $${marker.priceTag.toFixed(2)}
+                                $${markerData.priceTag.toFixed(2)}
                             </div>
                             <div id="parking-fee-id" class="parking-fee">parking fee</div>
                         </div>
@@ -141,33 +141,44 @@ function loadParkListItems(endpoint) {
                             </div>
                         </div>
                         <div class="info-navigation-element">
-                            <div id="how-to-park">
-                                How to park
+                            <div id="directions">
+                                Directions
                             </div>
                         </div>
                     </div>
                     <div id="location-information" class="c-location-information">
                         <div id="information-details" class="detail-element">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                            1500s,
-                            when an unknown printer took a galley of type and scrambled
-                            it to make a type specimen book. It has survived not only five centuries,
-                            but also the leap into electronic typesetting, remaining essentially
-                            unchanged.
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the
+                                1500s,
+                                when an unknown printer took a galley of type and scrambled
+                                it to make a type specimen book. It has survived not only five centuries,
+                                but also the leap into electronic typesetting, remaining essentially
+                                unchanged.
+                            </p>
                         </div>
                         <div id="reservation-details" class="detail-element">
-                            Contrary to popular belief, Lorem Ipsum is not simply random text.
-                            It has roots in a piece of classical Latin literature from 45 BC,
-                            making it over 2000 years old. Richard McClintock, a Latin professor
-                            at Hampden-Sydney College in Virginia.
+                            <p>
+                                Contrary to popular belief, Lorem Ipsum is not simply random text.
+                                It has roots in a piece of classical Latin literature from 45 BC,
+                                making it over 2000 years old. Richard McClintock, a Latin professor
+                                at Hampden-Sydney College in Virginia.
+                            </p>
                         </div>
-                        <div id="how-to-park-details" class="detail-element">
-                            There are many variations of passages of Lorem Ipsum available,
-                            but the majority have suffered alteration in some form, by injected humour,
-                            or randomised words which don't look even slightly believable.
-                            If you are going to use a passage of Lorem Ipsum, you need to be sure there
-                            isn't anything embarrassing hidden in the middle of text.
+                        <div id="directions-details" class="detail-element">
+                            <p>
+                                There are many variations of passages of Lorem Ipsum available,
+                                but the majority have suffered alteration in some form, by injected humour,
+                                or randomised words which don't look even slightly believable.
+                                If you are going to use a passage of Lorem Ipsum, you need to be sure there
+                                isn't anything embarrassing hidden in the middle of text.
+                            </p>
+                            <button id="directions-button" 
+                                    class="btn btn-warning" 
+                                    onclick="redirectToDirectionsPage('${markerData.placeId}')"> 
+                                Show directions
+                            </button>
                         </div>
                     </div>
                     <div id="reservation-button-id" class="reservation-button-class">
@@ -176,7 +187,7 @@ function loadParkListItems(endpoint) {
                                 style="${reservationButtonStyle}">
                             ${reservationButtonText}
                             <span style="${reservationButtonSpanStyle}">
-                                $${marker.priceTag.toFixed(2)}
+                                $${markerData.priceTag.toFixed(2)}
                             </span>
                         </button>
                     </div>
@@ -194,6 +205,12 @@ function loadParkListItems(endpoint) {
                 }
             });
         });
+}
+
+// Redirects the user to directions page with selected park location.
+// In directions page is shown the path to the location.
+function redirectToDirectionsPage(placeId) {
+    window.open(`/directions?placeId=${placeId}`, "_blank");
 }
 
 function populateMarkersFromEndpointIntoMap(map, endpoint) {

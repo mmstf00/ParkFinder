@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class MarkerDTO {
     @Length(min = 10, max = 40, message = "Address must be with max 40 length")
     private String address;
+    private String placeId;
     @DecimalMin(value = "0.1", message = "Price must be greater than 0")
     private double priceTag;
     @NotNull(message = "Please select date!")

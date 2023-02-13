@@ -86,6 +86,7 @@
                 <button type="submit" class="btn btn-success btn-block mb-4">
                     Add Park Location
                 </button>
+                <input th:field="*{placeId}" type="hidden" id="place-id" class="form-control"/>
                 <input th:field="*{latitude}" type="hidden" id="lat-input" class="form-control"/>
                 <input th:field="*{longitude}" type="hidden" id="lng-input" class="form-control"/>
             </form>
