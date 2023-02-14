@@ -57,7 +57,9 @@ function loadParkListItems(endpoint) {
                 parksList.innerHTML = ""; // Clearing older elements.
             }
 
-            data.forEach(markerData => {
+            let filteredData = filterMarkersWithinRadius(data);
+
+            filteredData.forEach(markerData => {
 
                 let isReservable = markerData.reservable;
                 let reservableClass = isReservable ? 'span-reservable' : 'span-reserved';
@@ -81,7 +83,7 @@ function loadParkListItems(endpoint) {
                         </div>
                         <div id="parking-distance">
                           <div class="distance-wrapper">
-                            <img src="/images/walk-icon.png" height="20" width="20"/>
+                            <img alt="walk-icon" src="/images/walk-icon.png" height="20" width="20"/>
                             <span>13 mins</span>
                           </div>
                           <div class="to-destination">to destination</div>
@@ -124,7 +126,7 @@ function loadParkListItems(endpoint) {
                         </div>
                         <div class="standout-details-element">
                             <div id="standout-to-destination">
-                                <img src="/images/walk-icon.png" height="20" width="20"/>
+                                <img alt="walk-icon" src="/images/walk-icon.png" height="20" width="20"/>
                                 <span>13 mins</span>
                             </div>
                             <div class="to-destination">to destination</div>
@@ -241,8 +243,9 @@ function populateMarkersFromEndpointIntoMap(map, endpoint) {
     fetch(endpoint)
         .then(response => response.json())
         .then(markers => {
-            if (markers) {
-                for (let marker of markers) {
+            let filteredData = filterMarkersWithinRadius(markers);
+            if (filteredData) {
+                for (let marker of filteredData) {
                     addMarker(marker, map);
                 }
             }
@@ -272,6 +275,34 @@ function setMarkerPrice(price) {
     return priceTag;
 }
 
+function filterMarkersWithinRadius(data) {
+    let radius = 10; // It will render only markers in 10km range.
+    let centerLat = parseFloat(localStorage.getItem("lat"));
+    let centerLng = parseFloat(localStorage.getItem("lng"));
+    let filteredMarkers = [];
+    data.forEach(marker => {
+        const distance = getDistanceFromLatLngInKm(centerLat, centerLng, marker.latitude, marker.longitude);
+        if (distance <= radius) {
+            filteredMarkers.push(marker);
+        }
+    });
+    return filteredMarkers;
+}
+
+function getDistanceFromLatLngInKm(centerLat, centerLng, markerLat, markerLng) {
+    const earthRadiusKm = 6371;
+    const latDifference = degreesToRadians(markerLat - centerLat);
+    const lngDifference = degreesToRadians(markerLng - centerLng);
+    const squareLen = Math.sin(latDifference / 2) * Math.sin(latDifference / 2)
+        + Math.cos(degreesToRadians(centerLat)) * Math.cos(degreesToRadians(markerLat))
+        * Math.sin(lngDifference / 2) * Math.sin(lngDifference / 2);
+    const centralAngle = 2 * Math.atan2(Math.sqrt(squareLen), Math.sqrt(1 - squareLen));
+    return earthRadiusKm * centralAngle;
+}
+
+function degreesToRadians(degrees) {
+    return degrees * (Math.PI / 180);
+}
 
 // Fixes form submitting on page reload.
 if (window.history.replaceState) {
@@ -280,6 +311,7 @@ if (window.history.replaceState) {
 
 function setSearchLogic(map) {
 
+    const submitButton = document.getElementById("submit-button");
     const input = document.getElementById("input");
     const autocomplete = new google.maps.places.Autocomplete(input);
 
@@ -297,19 +329,20 @@ function setSearchLogic(map) {
         anchorPoint: new google.maps.Point(0, -29),
     });
 
-    autocomplete.addListener("place_changed", () => {
+    submitButton.addEventListener("click", function () {
         marker.setVisible(false);
 
         const place = autocomplete.getPlace();
 
         if (!place.geometry || !place.geometry.location) {
             /* User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed. */
-            window.alert(
-                "No details available for input: '" + place.name + "'"
-            );
+             pressed the Enter key, or the Place Details request failed. */
+            window.alert("No details available for input: '" + place.name + "'");
             return;
         }
+
+        localStorage.setItem("lat", place.geometry.location.lat());
+        localStorage.setItem("lng", place.geometry.location.lng());
 
         // If the place has a geometry, then present it on a map.
         if (place.geometry.viewport) {
@@ -321,6 +354,20 @@ function setSearchLogic(map) {
 
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
+    });
+
+    // To prevent center changing when search result is clicked, we only update localstorage.
+    // Actual changing happens when Search button is clicked.
+    autocomplete.addListener("place_changed", () => {
+        const searchedPlace = autocomplete.getPlace();
+        if (!searchedPlace.geometry || !searchedPlace.geometry.location) {
+            /* User entered the name of a Place that was not suggested and
+             pressed the Enter key, or the Place Details request failed. */
+            window.alert("No details available for input: '" + searchedPlace.name + "'");
+            return;
+        }
+        localStorage.setItem("lat", searchedPlace.geometry.location.lat());
+        localStorage.setItem("lng", searchedPlace.geometry.location.lng());
     });
 }
 
