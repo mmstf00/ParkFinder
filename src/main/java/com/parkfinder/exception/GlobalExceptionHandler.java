@@ -9,7 +9,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleAnyException(Exception e) {
-        return new ModelAndView("error-page").addObject("exception", e.getMessage());
+        return new ModelAndView("error").addObject("exception", e.getMessage());
     }
 
     @ExceptionHandler(UserExistsException.class)
