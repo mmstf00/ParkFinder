@@ -33,6 +33,7 @@ public class AppSecurityConfig {
             // Application endpoints.
             "/",
             "/register",
+            "/login",
             "/process_register",
             "/api/v1/**",
             "/search/**",
@@ -79,7 +80,7 @@ public class AppSecurityConfig {
                 .authorizeHttpRequests().requestMatchers("/configureMarkers/**").hasAuthority("ADMIN")
                 .and().authorizeHttpRequests().requestMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated()
                 .and().headers().cacheControl().disable() // Potential fix for MIME, above it's fixed already.
-                .and().formLogin().defaultSuccessUrl("/")
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/", true)
                 .and().exceptionHandling().accessDeniedPage("/accessDenied")
                 .and().logout().logoutSuccessHandler(logoutSuccessHandler())
                 .and().build();
