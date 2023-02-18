@@ -13,7 +13,6 @@
           referrerpolicy="no-referrer"/>
 </head>
 <body>
-
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
@@ -33,7 +32,7 @@
                     <span class="focus-input100"></span>
                 </div>
 
-                <div id="invalid-credentials" th:if="${param.error}">
+                <div class="form-error" th:if="${param.error}">
                     Invalid credentials
                 </div>
 

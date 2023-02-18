@@ -1,0 +1,94 @@
+
+.txt2 {
+    color: #57b846;
+}
+
+.txt3 {
+    color: #57b846;
+}
+
+.login100-form-title {
+    background-color: #57b846;
+}
+
+.login100-form-btn {
+    background-color: #57b846;
+}
+
+.login100-form-btn:hover {
+    background-color: #2c691d;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #2c691d;
+}
+
+#role {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+/*------------------------------------------------------------------
+[ Role buttons ]*/
+
+.wrapper {
+    display: flex;
+    background: #fff;
+    height: 100px;
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.wrapper .option {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 10px;
+    border-radius: 27px;
+    cursor: pointer;
+    padding: 0 10px;
+    border: 2px solid lightgrey;
+    transition: all 0.3s ease;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2 {
+    border-color: #2C3E50;
+    background: #2C3E50;
+}
+
+.wrapper .option span {
+    font-size: 20px;
+    color: #808080;
+}
+
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span {
+    color: #fff;
+}
+
+#role-error {
+    margin-bottom: 20px;
+    margin-top: -27px;
+}
+
+.p-t-170 {
+    padding-top: 125px;
+}

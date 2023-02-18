@@ -423,7 +423,7 @@ a:active {
     text-decoration: none;
 }
 
-#invalid-credentials {
+.form-error {
     padding-top: 10px;
     color: red;
     text-align: center;

@@ -1,7 +1,6 @@
 package com.parkfinder.service;
 
 import com.parkfinder.entity.User;
-import com.parkfinder.exception.UserExistsException;
 import com.parkfinder.model.UserDTO;
 import com.parkfinder.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +13,13 @@ import static com.parkfinder.util.DtoToEntityConverter.getUserEntity;
 public class UserService {
     private final UserRepository userRepository;
 
-    public void saveUser(UserDTO userDTO) throws UserExistsException {
+    public void saveUser(UserDTO userDTO) {
         User user = getUserEntity(userDTO);
-        if (userRepository.existsUserByUsername(user.getUsername())) {
-            throw new UserExistsException("User with this username exists!");
-        }
         userRepository.save(user);
+    }
+
+    public boolean isExistingUser(UserDTO userDTO) {
+        User user = getUserEntity(userDTO);
+        return userRepository.existsUserByUsername(user.getUsername());
     }
 }
