@@ -27,19 +27,6 @@ public class UserRegistrationController {
 
     @PostMapping("/process_register")
     public String processRegister(@Valid UserDTO userDTO, BindingResult result, Model model) {
-        handleErrors(userDTO, result, model);
-
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
-
-        userDTO.setPassword(encodedPassword);
-        userDTO.setRoles(userDTO.getRoles());
-        userService.saveUser(userDTO);
-
-        return REGISTER_SUCCESS;
-    }
-
-    private String handleErrors(UserDTO userDTO, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             return REGISTRATION_FORM;
@@ -57,6 +44,13 @@ public class UserRegistrationController {
             return REGISTRATION_FORM;
         }
 
-        return REGISTRATION_FORM;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
+
+        userDTO.setPassword(encodedPassword);
+        userDTO.setRoles(userDTO.getRoles());
+        userService.saveUser(userDTO);
+
+        return REGISTER_SUCCESS;
     }
 }
