@@ -1,12 +1,11 @@
 body, html {
     height: 100%;
-    font-family: Nunito, Avenir, sans-serif;
+    font-family: var(--bs-font-sans-serif);
     overflow: hidden; /* Removes scroll behaviour */
 }
 
 html {
     box-sizing: border-box;
-    font-family: Nunito, Avenir, sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -125,7 +124,6 @@ textarea:focus, input:focus {
 }
 
 .login100-form-title {
-    font-family: JosefinSans-Bold, sans-serif;
     font-size: 33px;
     font-weight: 700;
     color: #fff;
@@ -370,7 +368,6 @@ textarea:focus, input:focus {
 }
 
 a {
-    font-family: Ubuntu-Regular, sans-serif;
     font-size: 14px;
     font-weight: 700;
     line-height: 1.7;

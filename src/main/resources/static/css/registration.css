@@ -1,4 +1,11 @@
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--bs-font-sans-serif);;
+}
+
 .txt2 {
     color: #57b846;
 }
@@ -22,18 +29,6 @@
 
 a:hover {
     color: #2c691d;
-}
-
-#role {
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Lato', sans-serif;
 }
 
 /*------------------------------------------------------------------
@@ -82,6 +77,11 @@ input[type="radio"] {
 #option-1:checked:checked ~ .option-1 span,
 #option-2:checked:checked ~ .option-2 span {
     color: #fff;
+}
+
+#role {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 #role-error {
