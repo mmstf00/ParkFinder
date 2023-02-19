@@ -19,6 +19,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <sonar.organization>mmstf00</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.sources>src/main/java,src/main/resources</sonar.sources>
     </properties>
     <dependencies>
         <dependency>
