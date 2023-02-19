@@ -8,6 +8,10 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="icon" th:href="@{/images/Icon.png}">
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" th:href="@{/css/login.css}"/>
@@ -50,6 +54,15 @@
 
                 <span class="login100-form-title">Registration</span>
                 <div class="wrap-input100 validate-input m-b-16"
+                     data-validate="Please enter valid email">
+                    <input class="input100" th:field="*{email}"
+                           type="text"
+                           name="email"
+                           placeholder="Email">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-16"
                      data-validate="Please enter username">
                     <input class="input100" th:field="*{username}"
                            type="text"
@@ -59,7 +72,7 @@
                 </div>
 
                 <div class="wrap-input100 validate-input"
-                     data-validate="Please enter password">
+                     data-validate="Password is too weak">
                     <input class="input100" th:field="*{password}"
                            type="password"
                            name="password"

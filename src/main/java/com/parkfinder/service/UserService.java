@@ -20,6 +20,6 @@ public class UserService {
 
     public boolean isExistingUser(UserDTO userDTO) {
         User user = getUserEntity(userDTO);
-        return userRepository.existsUserByUsername(user.getUsername());
+        return userRepository.existsUserByEmail(user.getEmail());
     }
 }

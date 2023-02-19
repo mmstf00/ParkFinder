@@ -34,7 +34,7 @@ public class UserRegistrationController {
 
         if (userService.isExistingUser(userDTO)) {
             model.addAttribute("user", userDTO);
-            model.addAttribute("userExistsMessage", "User already exists");
+            model.addAttribute("userExistsMessage", "An account with this email already exists");
             return REGISTRATION_FORM;
         }
 
