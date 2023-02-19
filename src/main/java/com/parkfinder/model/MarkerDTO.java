@@ -2,13 +2,15 @@ package com.parkfinder.model;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 public class MarkerDTO {
     @Length(min = 10, max = 40, message = "Address must be with max 40 length")
     private String address;

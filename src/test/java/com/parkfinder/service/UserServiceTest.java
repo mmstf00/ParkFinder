@@ -26,6 +26,7 @@ class UserServiceTest {
     @BeforeEach
     void init() {
         userDTO = new UserDTO();
+        userDTO.setId(123L);
         userDTO.setEmail("john.doe@example.com");
         userDTO.setUsername("John Doe");
         userDTO.setPassword("12345678");
