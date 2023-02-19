@@ -15,6 +15,9 @@ body {
     font-family: Nunito, Avenir, sans-serif;
     color: var(--blue);
     font-size: 1em;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 button {
@@ -220,12 +223,6 @@ nav[data-state=open] ul li:nth-child(4) {
 .col-md-6 {
     width: 50%;
     height: 50%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
 }
 
 @media only screen and (max-width: 768px) {

@@ -6,9 +6,9 @@
     $('.validate-form').on('submit', function () {
         let check = true;
 
-        for (let i = 0; i < input.length; i++) {
-            if (validate(input[i]) === false) {
-                showValidate(input[i]);
+        for (const element of input) {
+            if (validate(element) === false) {
+                showValidate(element);
                 check = false;
             }
         }

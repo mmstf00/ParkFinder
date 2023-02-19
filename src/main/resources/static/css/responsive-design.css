@@ -13,6 +13,8 @@
 
     #submit-button {
         order: 2;
+        width: auto;
+        height: 37.8px;
     }
 
     #date-and-time {
@@ -33,11 +35,6 @@
         margin-left: 53%;
         width: 47%;
         padding-top: 8px;
-    }
-
-    #submit-button {
-        width: auto;
-        height: 37.8px;
     }
 }
 

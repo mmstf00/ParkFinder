@@ -314,7 +314,6 @@ function Commutes(configuration) {
             getDirections(destination)
                 .then((response) => {
                     if (!response) return;
-                    const currentIndex = activeDestinationIndex;
                     // Remove current active direction before replacing it with updated
                     // routes.
                     removeDirectionsFromMapView(destination);
@@ -534,6 +533,7 @@ function Commutes(configuration) {
                         destinations[i], i, DestinationOperation.ADD);
                     assignMapObjectListeners(destinations[i], i);
                 }
+                break;
             default:
         }
         if (!destinations.length) {

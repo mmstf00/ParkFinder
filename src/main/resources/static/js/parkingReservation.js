@@ -29,8 +29,8 @@ function openDetailsMenu(parkingDetail) {
 }
 
 function hideParkListItems() {
-    for (let i = 0; i < parkingListItems.length; i++) {
-        parkingListItems[i].style.display = "none";
+    for (const parkingListItem of parkingListItems) {
+        parkingListItem.style.display = "none";
     }
 }
 
@@ -42,8 +42,8 @@ function closeDetailsMenu(parkingDetail) {
 }
 
 function returnParkListItems() {
-    for (let i = 0; i < parkingListItems.length; i++) {
-        parkingListItems[i].style.display = "block";
+    for (const parkingListItem of parkingListItems) {
+        parkingListItem.style.display = "block";
     }
 }
 

@@ -42,8 +42,8 @@ function updateMarkersOnSearch(map) {
 
 function clearMap() {
     let divsToRemove = document.querySelectorAll(".yNHHyP-marker-view");
-    for (let i = 0; i < divsToRemove.length; i++) {
-        divsToRemove[i].style.display = "none";
+    for (const div of divsToRemove) {
+        div.style.display = "none";
     }
 }
 
