@@ -407,3 +407,8 @@ a:active {
     font-size: 17px;
     font-weight: 600;
 }
+
+/* Remove light-blue background in autocomplete input */
+input:-webkit-autofill {
+    -webkit-background-clip: text;
+}
