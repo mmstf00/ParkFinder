@@ -116,4 +116,13 @@ class MarkerServiceTest {
 
         assertTrue(result);
     }
+
+    @Test
+    void testIsNotDuplicateEntry() {
+        when(markerRepository.findByLatitudeAndLongitude(any(Double.class), any(Double.class))).thenReturn(null);
+
+        boolean result = markerService.isDuplicateEntry(markerDTO);
+
+        assertFalse(result);
+    }
 }
