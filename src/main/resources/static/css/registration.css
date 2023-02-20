@@ -92,3 +92,18 @@ input[type="radio"] {
 .p-t-170 {
     padding-top: 100px;
 }
+
+@media screen and (max-width: 992px) {
+    .wrap-login100 {
+        height: 675px;
+    }
+
+    .p-t-178 {
+        padding-top: 115px !important;
+    }
+
+    .login100-form-title {
+        padding-top: 30px;
+        padding-bottom: 26px;
+    }
+}

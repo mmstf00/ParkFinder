@@ -73,7 +73,7 @@ textarea:focus, input:focus {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 15px;
     position: relative;
     background: url("../images/login-background.jpg") no-repeat center center fixed;
@@ -85,11 +85,10 @@ textarea:focus, input:focus {
 
 .wrap-login100 {
     width: 550px;
-    height: 750px;
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
-    margin-top: -140px;
+    margin-top: 50px;
     box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
     -moz-box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
@@ -309,6 +308,8 @@ textarea:focus, input:focus {
     opacity: 1;
 }
 
+/*------------------------------------------------------------------
+[ Responsive ]*/
 @media (max-width: 992px) {
     .alert-validate::before {
         visibility: visible;
@@ -316,12 +317,26 @@ textarea:focus, input:focus {
     }
 }
 
-/*------------------------------------------------------------------
-[ Responsive ]*/
 @media (max-width: 576px) {
     .login100-form {
         padding-left: 15px;
         padding-right: 15px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .container-login100 {
+        padding-bottom: 100%;
+    }
+
+    .wrap-login100 {
+        max-width: 100%;
+        margin-top: 10px;
+        height: 565px;;
+    }
+
+    .p-t-170 {
+        padding-top: 35px !important;
     }
 }
 
@@ -345,7 +360,7 @@ textarea:focus, input:focus {
 }
 
 .p-t-170 {
-    padding-top: 170px;
+    padding-top: 200px;
 }
 
 .text-right {
