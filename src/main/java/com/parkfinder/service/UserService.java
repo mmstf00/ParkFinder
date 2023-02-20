@@ -6,6 +6,8 @@ import com.parkfinder.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import static com.parkfinder.util.DtoToEntityConverter.getUserEntity;
 
 @Service
@@ -21,5 +23,9 @@ public class UserService {
     public boolean isExistingUser(UserDTO userDTO) {
         User user = getUserEntity(userDTO);
         return userRepository.existsUserByEmail(user.getEmail());
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
 }

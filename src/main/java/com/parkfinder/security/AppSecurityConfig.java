@@ -80,7 +80,7 @@ public class AppSecurityConfig {
                 .authorizeHttpRequests().requestMatchers("/configureMarkers/**").hasAuthority("ADMIN")
                 .and().authorizeHttpRequests().requestMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated()
                 .and().headers().cacheControl().disable() // Potential fix for MIME, above it's fixed already.
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/", true)
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/", true).usernameParameter("email")
                 .and().exceptionHandling().accessDeniedPage("/accessDenied")
                 .and().logout().logoutSuccessHandler(logoutSuccessHandler())
                 .and().build();

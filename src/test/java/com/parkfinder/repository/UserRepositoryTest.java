@@ -21,16 +21,16 @@ class UserRepositoryTest {
     @Test
     void testFindUserByUsername() {
         // Given
-        String username = "testUser";
+        String email = "testEmail";
         User user = new User();
-        user.setEmail("testEmail");
-        user.setUsername(username);
+        user.setEmail(email);
+        user.setUsername("testUsername");
         user.setPassword("testPassword");
         user.setRoles("ROLE_USER");
-        when(userRepository.findUserByUsername(username)).thenReturn(Optional.of(user));
+        when(userRepository.findUserByEmail(email)).thenReturn(Optional.of(user));
 
         // When
-        Optional<User> foundUser = userRepository.findUserByUsername(username);
+        Optional<User> foundUser = userRepository.findUserByEmail(email);
 
         // Then
         assertTrue(foundUser.isPresent());

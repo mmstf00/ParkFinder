@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -19,7 +21,6 @@ class UserServiceTest {
     private UserRepository userRepository;
     @InjectMocks
     private UserService userService;
-
     private UserDTO userDTO;
     private User user;
 
@@ -76,5 +77,21 @@ class UserServiceTest {
         // Then
         verify(userRepository).existsUserByEmail(user.getEmail());
         assertFalse(result);
+    }
+
+    @Test
+    void testGetUserByEmail() {
+        // Given
+        User testUser = new User();
+        testUser.setEmail("test@example.com");
+
+        // When
+        when(userRepository.findUserByEmail("test@example.com")).thenReturn(Optional.of(testUser));
+
+        // Then
+        Optional<User> result = userService.getUserByEmail("test@example.com");
+        verify(userRepository).findUserByEmail("test@example.com");
+        assertTrue(result.isPresent());
+        assertEquals(testUser, result.get());
     }
 }

@@ -22,7 +22,6 @@ class CustomUserDetailsServiceTest {
 
     @Mock
     private UserRepository userRepository;
-
     @InjectMocks
     private CustomUserDetailsService customUserDetailsService;
 
@@ -30,30 +29,30 @@ class CustomUserDetailsServiceTest {
     void testLoadUserByUsernameWhenUserExists() {
         // Given
         User user = new User();
-        user.setUsername("testuser");
+        user.setUsername("testEmail");
         user.setPassword("testpassword");
         user.setRoles("ROLE_USER");
-        when(userRepository.findUserByUsername("testuser")).thenReturn(Optional.of(user));
+        when(userRepository.findUserByEmail("testEmail")).thenReturn(Optional.of(user));
 
         // When
-        UserDetails userDetails = customUserDetailsService.loadUserByUsername("testuser");
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername("testEmail");
 
         // Then
         assertNotNull(userDetails);
-        assertEquals(user.getUsername(), userDetails.getUsername());
+        assertEquals(user.getEmail(), userDetails.getUsername());
         assertEquals(user.getPassword(), userDetails.getPassword());
     }
 
     @Test
     void testLoadUserByUsernameWhenUserDoesNotExist() {
         // Given
-        when(userRepository.findUserByUsername("testuser")).thenReturn(Optional.empty());
+        when(userRepository.findUserByEmail("testEmail")).thenReturn(Optional.empty());
 
         // When and then
         assertThrows(
                 UsernameNotFoundException.class,
-                () -> customUserDetailsService.loadUserByUsername("testuser"),
-                "user not found testuser"
+                () -> customUserDetailsService.loadUserByUsername("testEmail"),
+                "email not found testEmail"
         );
     }
 }
