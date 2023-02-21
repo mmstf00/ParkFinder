@@ -19,13 +19,3 @@
     background-color: #2c691d;
     cursor: pointer;
 }
-
-@media screen and (max-width: 992px) {
-    .p-t-178 {
-        padding-top: 460px !important;
-    }
-
-    .login100-form-title {
-        padding-top: 122px;
-    }
-}

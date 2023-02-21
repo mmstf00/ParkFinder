@@ -310,10 +310,27 @@ textarea:focus, input:focus {
 
 /*------------------------------------------------------------------
 [ Responsive ]*/
+
+@media (max-width: 1630px) {
+    .wrap-login100 {
+        transform: scale(0.8);
+        margin-top: -40px;
+    }
+}
+
 @media (max-width: 992px) {
     .alert-validate::before {
         visibility: visible;
         opacity: 1;
+    }
+
+    .container-login100 {
+        padding-bottom: 100%;
+    }
+
+    .wrap-login100 {
+        transform: scale(0.7);
+        margin-top: -60px;
     }
 }
 
@@ -322,21 +339,9 @@ textarea:focus, input:focus {
         padding-left: 15px;
         padding-right: 15px;
     }
-}
-
-@media screen and (max-width: 992px) {
-    .container-login100 {
-        padding-bottom: 100%;
-    }
 
     .wrap-login100 {
-        max-width: 100%;
-        margin-top: 10px;
-        height: 565px;;
-    }
-
-    .p-t-170 {
-        padding-top: 35px !important;
+        margin-top: -100px;
     }
 }
 
