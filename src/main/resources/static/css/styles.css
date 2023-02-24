@@ -173,6 +173,12 @@ li {
     margin-left: 5px;
 }
 
+.empty-parkings-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .parking-address {
     font-family: Nunito, Avenir, sans-serif;
     font-size: 14px;

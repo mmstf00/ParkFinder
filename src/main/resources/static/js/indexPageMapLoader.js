@@ -59,6 +59,25 @@ function loadParkListItems(endpoint) {
 
             let filteredData = filterMarkersWithinRadius(data);
 
+            if (filteredData.length === 0) {
+                let emptyParkingList = document.createElement('div');
+                emptyParkingList.classList.add('parking-space-class');
+                emptyParkingList.id = 'parking-space';
+                emptyParkingList.style.backgroundColor = "#e8f0fb";
+                emptyParkingList.style.color = "#4a90e2";
+                emptyParkingList.style.border = "1px solid";
+                emptyParkingList.innerHTML = `
+                    <div class="parking-details empty-parkings-list">
+                      <span>
+                          We couldn't find any matches for your search criteria. 
+                          All spaces might be fully booked or no listings available 
+                          in the searched area yet.
+                       </span>
+                    </div>
+                `;
+                parksList.appendChild(emptyParkingList)
+            }
+
             filteredData.forEach(markerData => {
 
                 let isReservable = markerData.reservable;
