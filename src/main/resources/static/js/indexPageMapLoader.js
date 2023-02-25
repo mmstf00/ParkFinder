@@ -59,161 +59,11 @@ function loadParkListItems(endpoint) {
 
             let filteredData = filterMarkersWithinRadius(data);
 
-            if (filteredData.length === 0) {
-                let emptyParkingList = document.createElement('div');
-                emptyParkingList.classList.add('parking-space-class');
-                emptyParkingList.id = 'parking-space';
-                emptyParkingList.style.backgroundColor = "#e8f0fb";
-                emptyParkingList.style.color = "#4a90e2";
-                emptyParkingList.style.border = "1px solid";
-                emptyParkingList.innerHTML = `
-                    <div class="parking-details empty-parkings-list">
-                      <span>
-                          We couldn't find any matches for your search criteria. 
-                          All spaces might be fully booked or no listings available 
-                          in the searched area yet.
-                       </span>
-                    </div>
-                `;
-                parksList.appendChild(emptyParkingList)
-            }
+            showMessageWhenNoParkingsFound(filteredData, parksList);
 
             filteredData.forEach(markerData => {
-
-                let isReservable = markerData.reservable;
-                let reservableClass = isReservable ? 'span-reservable' : 'span-reserved';
-                let reservableStyle = isReservable ? 'color: green' : 'color: red';
-                let reservableText = isReservable ? 'RESERVABLE' : 'RESERVED';
-
-                // Create the parking HTML element
-                let parkingSpace = document.createElement('div');
-                parkingSpace.classList.add('parking-space-class');
-                parkingSpace.id = 'parking-space';
-                parkingSpace.innerHTML = `
-                    <div class="parking-details" id="${markerData.id}">
-                      <div class="parking-address">${markerData.address}</div>
-                      <div class="parking-reservable">
-                        <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
-                      </div>
-                      <div id="parking-details-row">
-                        <div id="price-wrapper">
-                          <div class="parking-price">$${markerData.priceTag.toFixed(2)}</div>
-                          <div class="parking-fee">parking fee</div>
-                        </div>
-                        <div id="parking-distance">
-                          <div class="distance-wrapper">
-                            <img alt="walk-icon" src="/images/walk-icon.png" height="20" width="20"/>
-                            <span>13 mins</span>
-                          </div>
-                          <div class="to-destination">to destination</div>
-                        </div>
-                      </div>
-                    </div>
-                `;
-
-
-                let reservationButtonClass = isReservable ? 'btn btn-success' : 'btn btn-danger';
-                let reservationButtonId = isReservable ? 'reservation-button' : 'reserved-button';
-                let reservationButtonText = isReservable ? 'Reserve for' : 'RESERVED';
-                let reservationButtonStyle = isReservable ? 'background-color: green' : 'background-color: red';
-
-                let reservationButtonSpanStyle = isReservable ? 'display: inline' : 'display: none';
-
-                // Create the parking details HTML element
-                let parkingSpaceInformation = document.createElement('div');
-                parkingSpaceInformation.classList.add('detailed-park-information');
-                parkingSpaceInformation.innerHTML = `
-                    <div class="parking-details-close"></div>
-                    <div class="location-details">
-                        <div class="parking-address" id="${markerData.id}">${markerData.address}</div>
-                        <div class="parking-reservable">
-                            <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
-                        </div>
-                    </div>
-                    <div class="standout-details">
-                        <div class="standout-details-element">
-                            <div id="standout-duration">
-                                4d 19h
-                            </div>
-                            <div class="total-duration"> Total duration</div>
-                        </div>
-                        <div class="standout-details-element">
-                            <div id="standout-price" class="parking-price">
-                                $${markerData.priceTag.toFixed(2)}
-                            </div>
-                            <div id="parking-fee-id" class="parking-fee">parking fee</div>
-                        </div>
-                        <div class="standout-details-element">
-                            <div id="standout-to-destination">
-                                <img alt="walk-icon" src="/images/walk-icon.png" height="20" width="20"/>
-                                <span>13 mins</span>
-                            </div>
-                            <div class="to-destination">to destination</div>
-                        </div>
-                    </div>
-                    <div class="location-information-menu">
-                        <div class="info-navigation-element">
-                            <div id="information">
-                                Information
-                            </div>
-                        </div>
-                        <div class="info-navigation-element">
-                            <div id="reviews">
-                                Reviews
-                            </div>
-                        </div>
-                        <div class="info-navigation-element">
-                            <div id="directions">
-                                Directions
-                            </div>
-                        </div>
-                    </div>
-                    <div id="location-information" class="c-location-information">
-                        <div id="information-details" class="detail-element">
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy text ever since the
-                                1500s,
-                                when an unknown printer took a galley of type and scrambled
-                                it to make a type specimen book. It has survived not only five centuries,
-                                but also the leap into electronic typesetting, remaining essentially
-                                unchanged.
-                            </p>
-                        </div>
-                        <div id="reservation-details" class="detail-element">
-                            <p>
-                                Contrary to popular belief, Lorem Ipsum is not simply random text.
-                                It has roots in a piece of classical Latin literature from 45 BC,
-                                making it over 2000 years old. Richard McClintock, a Latin professor
-                                at Hampden-Sydney College in Virginia.
-                            </p>
-                        </div>
-                        <div id="directions-details" class="detail-element">
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available,
-                                but the majority have suffered alteration in some form, by injected humour,
-                                or randomised words which don't look even slightly believable.
-                                If you are going to use a passage of Lorem Ipsum, you need to be sure there
-                                isn't anything embarrassing hidden in the middle of text.
-                            </p>
-                            <button id="directions-button" 
-                                    class="btn btn-warning" 
-                                    onclick="redirectToDirectionsPage('${markerData.placeId}')"> 
-                                Show directions
-                            </button>
-                        </div>
-                    </div>
-                    <div id="reservation-button-id" class="reservation-button-class">
-                        <button id="${reservationButtonId}" 
-                                class="${reservationButtonClass}" 
-                                style="${reservationButtonStyle}">
-                            ${reservationButtonText}
-                            <span style="${reservationButtonSpanStyle}">
-                                $${markerData.priceTag.toFixed(2)}
-                            </span>
-                        </button>
-                    </div>
-                `;
+                let parkingSpace = loadParking(markerData);
+                let parkingSpaceInformation = loadDetailsForParking(markerData);
 
                 // To prevent errors in configuration page, checking if parksList exists.
                 if (parksList) {
@@ -227,6 +77,172 @@ function loadParkListItems(endpoint) {
                 }
             });
         });
+}
+
+function showMessageWhenNoParkingsFound(filteredData, parksList) {
+    if (filteredData.length === 0) {
+        let emptyParkingList = document.createElement('div');
+        emptyParkingList.classList.add('parking-space-class');
+        emptyParkingList.id = 'parking-space';
+        emptyParkingList.style.backgroundColor = "#e8f0fb";
+        emptyParkingList.style.color = "#4a90e2";
+        emptyParkingList.style.border = "1px solid";
+        emptyParkingList.innerHTML = `
+            <div class="parking-details empty-parkings-list">
+              <span>
+                  We couldn't find any matches for your search criteria. 
+                  All spaces might be fully booked or no listings available 
+                  in the searched area yet.
+               </span>
+            </div>
+        `;
+        parksList.appendChild(emptyParkingList)
+    }
+}
+
+function loadParking(markerData) {
+    let isReservable = markerData.reservable;
+    let reservableClass = isReservable ? 'span-reservable' : 'span-reserved';
+    let reservableStyle = isReservable ? 'color: green' : 'color: red';
+    let reservableText = isReservable ? 'RESERVABLE' : 'RESERVED';
+
+    // Create the parking HTML element
+    let parkingSpace = document.createElement('div');
+    parkingSpace.classList.add('parking-space-class');
+    parkingSpace.id = 'parking-space';
+    parkingSpace.innerHTML = `
+        <div class="parking-details" id="${markerData.id}">
+          <div class="parking-address">${markerData.address}</div>
+          <div class="parking-reservable">
+            <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
+          </div>
+          <div id="parking-details-row">
+            <div id="price-wrapper">
+              <div class="parking-price">$${markerData.priceTag.toFixed(2)}</div>
+              <div class="parking-fee">parking fee</div>
+            </div>
+            <div id="parking-distance">
+              <div class="distance-wrapper">
+                <img alt="walk-icon" src="/images/walk-icon.png" height="20" width="20"/>
+                <span>13 mins</span>
+              </div>
+              <div class="to-destination">to destination</div>
+            </div>
+          </div>
+        </div>
+    `;
+    return parkingSpace;
+}
+
+function loadDetailsForParking(markerData) {
+    let isReservable = markerData.reservable;
+    let reservableClass = isReservable ? 'span-reservable' : 'span-reserved';
+    let reservableStyle = isReservable ? 'color: green' : 'color: red';
+    let reservableText = isReservable ? 'RESERVABLE' : 'RESERVED';
+
+    let reservationButtonClass = isReservable ? 'btn btn-success' : 'btn btn-danger';
+    let reservationButtonId = isReservable ? 'reservation-button' : 'reserved-button';
+    let reservationButtonText = isReservable ? 'Reserve for' : 'RESERVED';
+    let reservationButtonStyle = isReservable ? 'background-color: green' : 'background-color: red';
+
+    let reservationButtonSpanStyle = isReservable ? 'display: inline' : 'display: none';
+
+    // Create the parking details HTML element
+    let parkingSpaceInformation = document.createElement('div');
+    parkingSpaceInformation.classList.add('detailed-park-information');
+    parkingSpaceInformation.innerHTML = `
+        <div class="parking-details-close"></div>
+        <div class="location-details">
+            <div class="parking-address" id="${markerData.id}">${markerData.address}</div>
+            <div class="parking-reservable">
+                <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
+            </div>
+        </div>
+        <div class="standout-details">
+            <div class="standout-details-element">
+                <div id="standout-duration">
+                    4d 19h
+                </div>
+                <div class="total-duration"> Total duration</div>
+            </div>
+            <div class="standout-details-element">
+                <div id="standout-price" class="parking-price">
+                    $${markerData.priceTag.toFixed(2)}
+                </div>
+                <div id="parking-fee-id" class="parking-fee">parking fee</div>
+            </div>
+            <div class="standout-details-element">
+                <div id="standout-to-destination">
+                    <img alt="walk-icon" src="/images/walk-icon.png" height="20" width="20"/>
+                    <span>13 mins</span>
+                </div>
+                <div class="to-destination">to destination</div>
+            </div>
+        </div>
+        <div class="location-information-menu">
+            <div class="info-navigation-element">
+                <div id="information">
+                    Information
+                </div>
+            </div>
+            <div class="info-navigation-element">
+                <div id="reviews">
+                    Reviews
+                </div>
+            </div>
+            <div class="info-navigation-element">
+                <div id="directions">
+                    Directions
+                </div>
+            </div>
+        </div>
+        <div id="location-information" class="c-location-information">
+            <div id="information-details" class="detail-element">
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the
+                    1500s,
+                    when an unknown printer took a galley of type and scrambled
+                    it to make a type specimen book. It has survived not only five centuries,
+                    but also the leap into electronic typesetting, remaining essentially
+                    unchanged.
+                </p>
+            </div>
+            <div id="reservation-details" class="detail-element">
+                <p>
+                    Contrary to popular belief, Lorem Ipsum is not simply random text.
+                    It has roots in a piece of classical Latin literature from 45 BC,
+                    making it over 2000 years old. Richard McClintock, a Latin professor
+                    at Hampden-Sydney College in Virginia.
+                </p>
+            </div>
+            <div id="directions-details" class="detail-element">
+                <p>
+                    There are many variations of passages of Lorem Ipsum available,
+                    but the majority have suffered alteration in some form, by injected humour,
+                    or randomised words which don't look even slightly believable.
+                    If you are going to use a passage of Lorem Ipsum, you need to be sure there
+                    isn't anything embarrassing hidden in the middle of text.
+                </p>
+                <button id="directions-button" 
+                        class="btn btn-warning" 
+                        onclick="redirectToDirectionsPage('${markerData.placeId}')"> 
+                    Show directions
+                </button>
+            </div>
+        </div>
+        <div id="reservation-button-id" class="reservation-button-class">
+            <button id="${reservationButtonId}" 
+                    class="${reservationButtonClass}" 
+                    style="${reservationButtonStyle}">
+                ${reservationButtonText}
+                <span style="${reservationButtonSpanStyle}">
+                    $${markerData.priceTag.toFixed(2)}
+                </span>
+            </button>
+        </div>
+    `;
+    return parkingSpaceInformation;
 }
 
 // Redirects the user to directions page with selected park location.
@@ -284,6 +300,7 @@ function addMarker(marker, map) {
         // Pan to the marker's position and set the zoom level
         map.panTo(advancedMarker.position);
         map.setZoom(14);
+        addOpenParkDetailsFunctionality(advancedMarker);
     });
 }
 
@@ -292,6 +309,11 @@ function setMarkerPrice(price) {
     priceTag.className = "price-tag";
     priceTag.textContent = "$" + price;
     return priceTag;
+}
+
+function addOpenParkDetailsFunctionality(advancedMarker) {
+    console.log(advancedMarker.position.lat);
+    console.log(advancedMarker.position.lng);
 }
 
 function filterMarkersWithinRadius(data) {

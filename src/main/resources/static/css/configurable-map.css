@@ -34,9 +34,16 @@
     width: 400px;
     float: right;
     position: relative;
+    background-color: #efefef;
 }
 
 #marker-form {
-    margin: 30px;
+    margin: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    transition: border-color 0.3s ease-in-out;
+    background-color: white;
+    font-weight: 500;
 }
 
