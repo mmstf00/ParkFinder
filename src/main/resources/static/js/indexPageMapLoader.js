@@ -352,6 +352,8 @@ if (window.history.replaceState) {
 
 function setSearchLogic(map) {
 
+    setDefaultSearchPlace();
+
     const submitButton = document.getElementById("submit-button");
     const input = document.getElementById("input");
     const autocomplete = new google.maps.places.Autocomplete(input);
@@ -410,6 +412,37 @@ function setSearchLogic(map) {
         localStorage.setItem("lat", searchedPlace.geometry.location.lat());
         localStorage.setItem("lng", searchedPlace.geometry.location.lng());
     });
+}
+
+// Set default value, which is current location of the user
+function setDefaultSearchPlace() {
+    let lat = parseFloat(localStorage.getItem("lat"));
+    let lng = parseFloat(localStorage.getItem("lng"));
+
+    // Define the Google Maps Geocoding API endpoint URL
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI`;
+
+    // Send a request to the API endpoint
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            // Assuming place is a PlaceResult object returned by the Google Maps API
+            const addressComponents = data.results[0].address_components;
+
+            // Find the city and country components in the address components array
+            const cityComponent = addressComponents.find(component => component.types.includes('locality'));
+            const countryComponent = addressComponents.find(component => component.types.includes('country'));
+
+            // Extract the long names of the city and country components
+            const city = cityComponent && cityComponent.long_name || '';
+            const country = countryComponent && countryComponent.long_name || '';
+
+            // Combine the city and country names
+            document.getElementById("input").value = `${city}, ${country}`;
+        })
+        .catch(error => {
+            console.error(error);
+        });
 }
 
 window.initMap = initMap;
