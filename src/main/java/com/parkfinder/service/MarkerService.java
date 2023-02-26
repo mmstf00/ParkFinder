@@ -30,6 +30,10 @@ public class MarkerService {
         return markerRepository.findAll();
     }
 
+    public Marker getMarkerByLatLng(double latitude, double longitude) {
+        return markerRepository.findByLatitudeAndLongitude(latitude, longitude);
+    }
+
     public void updateMarker(MarkerDTO markerDTO) {
         Marker updatedMarker = getMarkerEntity(markerDTO);
         markerRepository.save(updatedMarker);

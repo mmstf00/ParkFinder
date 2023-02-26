@@ -51,32 +51,35 @@ function loadParkListItems(endpoint) {
     fetch(endpoint)
         .then(response => response.json())
         .then(data => {
-            // Getting the reference to the parent element where we will add the new elements.
-            let parksList = document.querySelector('#parks-list');
-            if (parksList) {
-                parksList.innerHTML = ""; // Clearing older elements.
-            }
-
-            let filteredData = filterMarkersWithinRadius(data);
-
-            showMessageWhenNoParkingsFound(filteredData, parksList);
-
-            filteredData.forEach(markerData => {
-                let parkingSpace = loadParking(markerData);
-                let parkingSpaceInformation = loadDetailsForParking(markerData);
-
-                // To prevent errors in configuration page, checking if parksList exists.
-                if (parksList) {
-
-                    // Append the element to the parent
-                    parksList.appendChild(parkingSpace);
-                    parksList.appendChild(parkingSpaceInformation);
-
-                    listenForItemClick();
-                    makeReservationWhenButtonPressed();
-                }
-            });
+            loadAllParkings(data);
         });
+}
+
+function loadAllParkings(data) {
+    // Getting the reference to the parent element where we will add the new elements.
+    let parksList = document.querySelector('#parks-list');
+    if (parksList) {
+        parksList.innerHTML = ""; // Clearing older elements.
+    }
+
+    let filteredData = filterMarkersWithinRadius(data);
+
+    showMessageWhenNoParkingsFound(filteredData, parksList);
+
+    filteredData.forEach(markerData => {
+        let parkingSpace = loadParking(markerData);
+        let parkingSpaceInformation = loadDetailsForParking(markerData);
+
+        // To prevent errors in configuration page, checking if parksList exists.
+        if (parksList) {
+            // Append the element to the parent
+            parksList.appendChild(parkingSpace);
+            parksList.appendChild(parkingSpaceInformation);
+
+            listenForItemClick();
+            makeReservationWhenButtonPressed();
+        }
+    });
 }
 
 function showMessageWhenNoParkingsFound(filteredData, parksList) {
@@ -295,6 +298,8 @@ function addMarker(marker, map) {
         position: {lat: marker.latitude, lng: marker.longitude},
     });
 
+    advancedMarker.metadata = {id: marker.id};
+
     // Adding zoom event to the marker.
     advancedMarker.addListener('click', function () {
         // Pan to the marker's position and set the zoom level
@@ -311,9 +316,22 @@ function setMarkerPrice(price) {
     return priceTag;
 }
 
+// When marker is clicked, opens details to corresponding marker.
 function addOpenParkDetailsFunctionality(advancedMarker) {
-    console.log(advancedMarker.position.lat);
-    console.log(advancedMarker.position.lng);
+    let parksList = document.querySelector('#parks-list');
+
+    for (let parking of parksList.children) {
+        let idOfParkListElement = parseInt(parking.children[0].id);
+        if (advancedMarker.metadata.id === idOfParkListElement) {
+            let parkListElement = document.getElementById(idOfParkListElement.toString());
+            // // Check if the park list element is already opened
+            if (parkListElement.classList.contains('active')) {
+                // Clear the park list element content
+                parkListElement.innerHTML = '';
+            }
+            parkListElement.click();
+        }
+    }
 }
 
 function filterMarkersWithinRadius(data) {

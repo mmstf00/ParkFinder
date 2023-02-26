@@ -60,6 +60,21 @@ class MarkerServiceTest {
     }
 
     @Test
+    void testGetMarkerByLatLng() {
+        double latitude = 37.7749;
+        double longitude = -122.4194;
+
+        Marker marker = new Marker();
+        marker.setLatitude(latitude);
+        marker.setLongitude(longitude);
+
+        when(markerRepository.findByLatitudeAndLongitude(latitude, longitude)).thenReturn(marker);
+
+        Marker result = markerService.getMarkerByLatLng(latitude, longitude);
+        assertEquals(marker, result);
+    }
+
+    @Test
     void testGetMarkers() {
         when(markerRepository.findAll()).thenReturn(markerList);
 

@@ -26,6 +26,11 @@ public class RestMarkerController {
         return markerService.getMarkers();
     }
 
+    @GetMapping(value = "/getMarker", produces = "application/json")
+    public Marker getMarker(@RequestParam("lat") double latitude, @RequestParam("lng") double longitude) {
+        return markerService.getMarkerByLatLng(latitude, longitude);
+    }
+
     @GetMapping(value = "/search", produces = "application/json")
     public List<Marker> getAllByDateRange(
             @RequestParam("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime dateFrom,

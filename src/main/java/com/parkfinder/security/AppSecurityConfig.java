@@ -36,7 +36,6 @@ public class AppSecurityConfig {
             "/login",
             "/process_register",
             "/api/v1/**",
-            "/search/**",
             "/directions/**",
 
             // MIME error fix.
