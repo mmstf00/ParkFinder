@@ -154,7 +154,7 @@ function loadDetailsForParking(markerData) {
     let parkingSpaceInformation = document.createElement('div');
     parkingSpaceInformation.classList.add('detailed-park-information');
     parkingSpaceInformation.innerHTML = `
-        <div id="close-button" class="parking-details-close"></div>
+        <div class="parking-details-close"></div>
         <div class="location-details">
             <div class="parking-address" id="${markerData.id}">${markerData.address}</div>
             <div class="parking-reservable">
@@ -316,23 +316,22 @@ function setMarkerPrice(price) {
     return priceTag;
 }
 
-let parkingDetailOpened = false;
-
-// When marker is clicked, opens details of corresponding marker.
+// When marker is clicked, opens details to corresponding marker.
 function addOpenParkDetailsFunctionality(advancedMarker) {
-    let idOfParkListElement = parseInt(advancedMarker.metadata.id);
-    let parkListElement = document.getElementById(idOfParkListElement.toString());
+    let parksList = document.querySelector('#parks-list');
 
-    // Check if the park list element is already opened
-    if (parkingDetailOpened) {
-        let closeButton = document.getElementById("close-button");
-        // Click close button if there is opened detail.
-        closeButton.click();
-        parkingDetailOpened = false;
+    for (let parking of parksList.children) {
+        let idOfParkListElement = parseInt(parking.children[0].id);
+        if (advancedMarker.metadata.id === idOfParkListElement) {
+            let parkListElement = document.getElementById(idOfParkListElement.toString());
+            // // Check if the park list element is already opened
+            if (parkListElement.classList.contains('active')) {
+                // Clear the park list element content
+                parkListElement.innerHTML = '';
+            }
+            parkListElement.click();
+        }
     }
-
-    parkListElement.click();
-    parkingDetailOpened = true;
 }
 
 function filterMarkersWithinRadius(data) {
