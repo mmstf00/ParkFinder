@@ -154,7 +154,7 @@ function loadDetailsForParking(markerData) {
     let parkingSpaceInformation = document.createElement('div');
     parkingSpaceInformation.classList.add('detailed-park-information');
     parkingSpaceInformation.innerHTML = `
-        <div class="parking-details-close"></div>
+        <div id="close-button" class="parking-details-close"></div>
         <div class="location-details">
             <div class="parking-address" id="${markerData.id}">${markerData.address}</div>
             <div class="parking-reservable">
@@ -324,11 +324,6 @@ function addOpenParkDetailsFunctionality(advancedMarker) {
         let idOfParkListElement = parseInt(parking.children[0].id);
         if (advancedMarker.metadata.id === idOfParkListElement) {
             let parkListElement = document.getElementById(idOfParkListElement.toString());
-            // // Check if the park list element is already opened
-            if (parkListElement.classList.contains('active')) {
-                // Clear the park list element content
-                parkListElement.innerHTML = '';
-            }
             parkListElement.click();
         }
     }
