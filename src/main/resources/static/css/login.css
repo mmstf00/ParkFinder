@@ -85,6 +85,7 @@ textarea:focus, input:focus {
 
 .wrap-login100 {
     width: 550px;
+    height: 730px;
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
@@ -365,7 +366,7 @@ textarea:focus, input:focus {
 }
 
 .p-t-170 {
-    padding-top: 200px;
+    padding-top: 140px;
 }
 
 .text-right {

@@ -254,7 +254,7 @@ function redirectToDirectionsPage(placeId) {
     window.open(`/directions?placeId=${placeId}`, "_blank");
 }
 
-
+// Saves current location of user in localstorage for later usage
 (function setUserCurrentLocationToLocalstorage() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -264,6 +264,7 @@ function redirectToDirectionsPage(placeId) {
     }
 })()
 
+// Returns current location of the user and zooms in the map.
 function getCurrentLocation(map) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>ParkFinder</title>
+    <link rel="icon" th:href="@{/images/Icon.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/css/responsive-design.css}"/>
+    <link rel="stylesheet" th:href="@{/css/confirm-reservation.css}"/>
+</head>
+
+<header>
+    <div id="main-header-div">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/"
+                       class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <h2 id="logo">
+                            ParkFinder
+                        </h2>
+                    </a>
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#table"></use>
+                                </svg>
+                                Help
+                            </a>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <div sec:authorize="hasAuthority('ADMIN')">
+                                <a href="/configureMarkers" class="nav-link text-white">
+                                    <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                        <use xlink:href="#grid"></use>
+                                    </svg>
+                                    Admin Page
+                                </a>
+                            </div>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <a href="/logout" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#grid"></use>
+                                </svg>
+                                Logout
+                            </a>
+                        </li>
+                        <li sec:authorize="isAnonymous()">
+                            <a href="/login" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#grid"></use>
+                                </svg>
+                                Login
+                            </a>
+                        </li>
+                        <li sec:authorize="isAnonymous()">
+                            <a href="/register" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#people-circle"></use>
+                                </svg>
+                                Register
+                            </a>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <div class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                    <use xlink:href="#people-circle"></use>
+                                </svg>
+                                Welcome, <span th:text="${user.username}"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<body>
+<div id="app-content">
+    <div class="p-monthly-checkout">
+        <h1 class="c-typography c-typography--h2 c-typography--bold c-typography--color-primary c-typography-pkUSF
+        c-typography--h2-FEwmj c-typography--bold-H4gYa c-typography--color-primary-NHSju c-monthly-header">
+            <span th:text="${user?.username} ?: 'Guest'"></span>, confirm your booking and pay
+        </h1>
+        <div class="p-monthly-checkout__container">
+            <div class="p-monthly-checkout__main">
+                <div class="p-monthly-checkout__main-inner">
+                    <div class="c-panel c-panel--minimal c-monthly-checkout-core-info">
+                        <div class="c-panel__container c-panel__container--minimal">
+                            <h2 class="c-typography c-typography--h2 c-typography--bold
+                                 c-typography--color-primary c-typography-pkUSF c-typography--h2-FEwmj
+                                 c-typography--bold-H4gYa c-typography--color-primary-NHSju
+                                 c-monthly-checkout-core-info__heading">
+                                Booking details
+                            </h2>
+
+                            <div id="location-mobile"
+                                 class="c-monthly-checkout-core-info__row c-monthly-checkout-core-info__row--mobile-only">
+                                <svg viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg" class="size1x-O6Ult">
+                                    <path d="M19 10.897C19 15.31 12 20 12 20s-7-4.69-7-9.103C5 7.034 8.289 4 12 4s7 3.034 7 6.897z"
+                                          stroke="#141414" stroke-width="2" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M12 9a2 2 0 100 4 2 2 0 000-4z" fill="#000"></path>
+                                </svg>
+                                <div class="c-monthly-checkout-core-info__details"><span
+                                        class="c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">Location</span><span
+                                        class="c-typography c-typography--primary c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--bold-H4gYa c-typography--color-primary-NHSju">Parking on South Stour Avenue, TN23</span>
+                                </div>
+                            </div>
+
+                            <div class="c-monthly-checkout-core-info__row">
+                                <svg viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg" class="size1x-O6Ult">
+                                    <path d="M4.75 11.25v-2.5a2 2 0 012-2h10.5a2 2 0 012 2v8.5a2 2 0 01-2 2h-4.5M16 4.75v3.5m-8-3.5v3.5m8.25 2.5h-8.5"
+                                          stroke="#141414" stroke-width="2" stroke-linecap="round"
+                                          stroke-linejoin="round">
+
+                                    </path>
+                                    <path d="M7.1 14l2.882 2.677L7.1 19.352m1.5-2.675h-5"
+                                          stroke="#141414" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round">
+
+                                    </path>
+                                </svg>
+                                <div class="c-monthly-checkout-core-info__details">
+                                    <span class="c-typography c-typography--primary c-typography--color-primary
+                                        c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">
+                                        Arriving on
+                                    </span>
+                                    <button class="c-link-button " type="button">
+                                        <div data-cy="monthly-checkout-core-info-arriving-on"
+                                             class="c-typography c-typography--primary c-typography--bold
+                                             c-typography--color-primary c-typography--underline c-typography-pkUSF
+                                             c-typography--primary-yh5cC c-typography--bold-H4gYa c-typography--color-primary-NHSju
+                                             c-typography--underline-RoNXI c-monthly-checkout-core-info__date-wrapper">
+                                            Today at 21:00
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="c-monthly-checkout-core-info__row">
+                                <svg viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg" class="size1x-O6Ult">
+                                    <path d="M19.25 11.25v-2.5a2 2 0 00-2-2H6.75a2 2 0 00-2 2v8.5a2 2 0 002 2h4.5M8 4.75v3.5m8-3.5v3.5m-8.25 2.5h8.5"
+                                          stroke="#141414" stroke-width="2" stroke-linecap="round"
+                                          stroke-linejoin="round">
+                                    </path>
+                                    <path d="M17.5 14l2.882 2.677-2.882 2.676m1.5-2.676h-5"
+                                          stroke="#141414" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round">
+                                    </path>
+                                </svg>
+                                <div class="c-monthly-checkout-core-info__details">
+                                    <span class="c-typography c-typography--primary c-typography--color-primary
+                                         c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">
+                                    Leaving on
+                                </span>
+                                    <button class="c-link-button " type="button">
+                                        <div data-cy="monthly-checkout-core-info-leaving-on"
+                                             class="c-typography c-typography--primary c-typography--bold
+                                              c-typography--color-primary c-typography--underline
+                                              c-typography-pkUSF c-typography--primary-yh5cC
+                                              c-typography--bold-H4gYa c-typography--color-primary-NHSju
+                                              c-typography--underline-RoNXI c-monthly-checkout-core-info__date-wrapper">
+                                            Today at 23:00
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="c-monthly-checkout-core-info__row">
+                                <svg viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg" class="size1x-O6Ult">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M19 12a7 7 0 11-14 0 7 7 0 0114 0zm2 0a9 9 0 11-18 0 9 9 0 0118 0zm-8-4a1 1 0 10-2 0v4.414l.293.293 2 2a1 1 0 001.414-1.414L13 11.586V8z"
+                                          fill="#141414">
+
+                                    </path>
+                                </svg>
+                                <div class="c-monthly-checkout-core-info__details">
+                                    <span class="c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">Duration</span>
+                                    <div data-cy="monthly-checkout-core-info-duration"
+                                         class="c-typography c-typography--primary c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--bold-H4gYa c-typography--color-primary-NHSju">
+                                        2 hours
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-panel c-panel--minimal c-monthly-checkout-sidebar-mobile">
+                        <div class="c-panel__container c-panel__container--minimal">
+                            <span class="c-typography c-typography--h2 c-typography--bold c-typography--color-primary
+                             c-typography-pkUSF c-typography--h2-FEwmj c-typography--bold-H4gYa c-typography--color-primary-NHSju
+                             c-monthly-checkout-sidebar-mobile__mobile-price-heading">
+                                Price details
+                            </span>
+                            <div class="c-monthly-checkout-sidebar-price c-monthly-checkout-sidebar-price--large-breakdown">
+                                <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--parking_fee">
+                                    <span class="c-monthly-checkout-sidebar-price__name">
+                                        Parking fee
+                                    </span>
+                                    <span class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">£2.30</span>
+                                </div>
+                                <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--transaction_fee">
+                                    <span class="c-monthly-checkout-sidebar-price__name">
+                                        Transaction fee
+                                        <div class="c-checkoutInfoToolTip">
+                                            <span aria-expanded="false">
+                                                <div class="c-tool-tip-native-modal__children-container">
+                                                    <svg fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg"
+                                                         viewBox="0 0 24 24"
+                                                         class="c-information c-checkoutInfoToolTip__info-icon">
+                                                        <path fill-rule="evenodd"
+                                                              clip-rule="evenodd"
+                                                              d="M5.5 12a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM12 4a8 8 0 100 16 8 8 0 000-16zm1 5a1 1 0 11-2 0 1 1 0 012 0zm-1 2a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1z"
+                                                              fill="#9E9E9E">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </span>
+                                    <span class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">£0.99</span>
+                                </div>
+                                <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--final_price">
+                                    <span class="c-monthly-checkout-sidebar-price__name c-monthly-checkout-sidebar-price__name--bold c-monthly-checkout-sidebar-price__name--large">Final price</span><span
+                                        class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold c-monthly-checkout-sidebar-price__price--large">£3.29</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-panel c-panel--minimal c-monthly-vehicles">
+                        <div class="c-panel__container c-panel__container--minimal">
+                            <div id="vehicles-header" class="c-monthly-vehicles__header">
+                                <h2 class="c-typography c-typography--h2 c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--h2-FEwmj c-typography--bold-H4gYa c-typography--color-primary-NHSju c-monthly-vehicles__heading">
+                                    Vehicle information
+                                </h2>
+                                <div id="add-vehicle-container"
+                                     class="c-monthly-vehicles__vehicles-container c-monthly-vehicles__vehicles-container--noVehicles c-monthly-vehicles__vehicles-container--showAddNewVehicle">
+                                    <div class="c-vehicles">
+                                        <div class="c-input c-vehicles__vrm-input">
+                                            <div class="c-input__label">
+                                                <div class="c-input__labeltext c-typography c-typography--secondary c-typography--bold c-typography--color-light c-typography-pkUSF c-typography--secondary-LfNMC c-typography--bold-H4gYa c-typography--color-light-tkfIA">
+                                                    Add a new vehicle
+                                                </div>
+                                                <div class="c-input__inputwrapper">
+                                                    <input id="vehicle-input"
+                                                           class="c-input__inputbox c-typography c-typography--primary
+                                                                  c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC
+                                                                  c-typography--color-primary-NHSju"
+                                                           placeholder="Enter vehicle number plate"
+                                                           type="text"
+                                                           inputmode="text"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="c-vehicles__btn-group">
+                                            <button id="add-vehicle-button"
+                                                    class="c-button c-button--primary c-vehicles__add-button"
+                                                    type="button">
+                                                <span class="c-typography c-typography--h3 c-typography--bold
+                                                     c-typography--color-primary c-typography-pkUSF c-typography--h3-rLKwZ
+                                                     c-typography--bold-H4gYa c-typography--color-primary-NHSju c-button__text">
+                                                    Add
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a id="edit-vehicle" class="c-monthly-vehicles__edit-form">
+                                    Edit vehicle registration
+                                </a>
+                            </div>
+                            <div id="added-vehicle"
+                                 class="c-item-card c-item-card--focused c-item-card--black c-vehicle-card "
+                                 data-testid="vehicle-card">
+                                <input type="radio" tabindex="-1" readonly="">
+                                <div class="c-panel c-panel--vehicle c-vehicle-panel ">
+                                    <div class="c-panel__container c-panel__container--vehicle">
+                                        <div class="c-vehicle-panel__details">
+                                            <div class="c-conditional-image">
+                                                <div></div>
+                                            </div>
+                                            <div class="c-vehicle-details">
+                                                <div class="c-ellipsis "
+                                                     x-ms-format-detection="none">
+                                                    <div class="c-vehicle-details__info">
+                                                        <div class="c-vehicle-details__registration c-typography
+                                                                c-typography--primary c-typography--bold c-typography--color-primary
+                                                                c-typography-pkUSF c-typography--primary-yh5cC c-typography--bold-H4gYa
+                                                                c-typography--color-primary-NHSju">
+                                                            <span id="vehicle-plate-span"></span>
+                                                        </div>
+                                                        <div class="c-vehicle-details__make c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">
+                                                            Other
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="c-ellipsis c-typography c-typography--secondary c-typography--color-muted c-typography-pkUSF c-typography--secondary-LfNMC c-typography--color-muted-WlC7k"
+                                                     x-ms-format-detection="none">
+                                                    <div class="c-vehicle-details__model">
+                                                        Other
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="payment-container-before-vehicle"
+                         class="c-panel c-panel--minimal c-monthly-payments">
+                        <div class="c-panel__container c-panel__container--minimal">
+                            <section class="c-payment c-payment--disabled">
+                                <div class="c-payment__inner">
+                                    <div class="c-payment__header">
+                                        <h1>Payment information</h1>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div id="payment-container-after-vehicle"
+                         class="c-panel c-panel--minimal c-monthly-payments">
+                        <div class="c-panel__container c-panel__container--minimal">
+                            <section class="c-payment">
+                                <div class="c-payment__inner">
+                                    <div class="c-payment__header">
+                                        <h1>Payment information</h1>
+                                    </div>
+                                    <div class="c-accepted-payments-header">
+                                        <div class="c-accepted-payments-header__inner"><span
+                                                class="c-typography c-typography--primary c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--bold-H4gYa c-typography--color-primary-NHSju">Accepted Cards</span>
+                                            <div class="c-card-payment-icons ">
+                                                <svg viewBox="0 0 3384.54 2077.85"
+                                                     xmlns="http://www.w3.org/2000/svg"
+                                                     class="c-card-payment-icons__icon c-card-payment-icons__icon--visa">
+                                                    <path d="M1461.26 739.84l-251.37 599.74h-164l-123.7-478.62c-7.51-29.48-14.04-40.28-36.88-52.7-37.29-20.23-98.87-39.21-153.05-50.99l3.68-17.43h263.99c33.65 0 63.9 22.4 71.54 61.15l65.33 347.04 161.46-408.2h163zm642.58 403.93c.66-158.29-218.88-167.01-217.37-237.72.47-21.52 20.96-44.4 65.81-50.24 22.23-2.91 83.48-5.13 152.95 26.84l27.25-127.18c-37.33-13.55-85.36-26.59-145.12-26.59-153.35 0-261.27 81.52-262.18 198.25-.99 86.34 77.03 134.52 135.81 163.21 60.47 29.38 80.76 48.26 80.53 74.54-.43 40.23-48.23 57.99-92.9 58.69-77.98 1.2-123.23-21.1-159.3-37.87l-28.12 131.39c36.25 16.63 103.16 31.14 172.53 31.87 162.99 0 269.61-80.51 270.11-205.19m404.94 195.81h143.49l-125.25-599.74h-132.44c-29.78 0-54.9 17.34-66.02 44l-232.81 555.74h162.91L2291 1250h199.05l18.73 89.58zm-173.11-212.5l81.66-225.18 47 225.18h-128.66zm-652.74-387.24l-128.29 599.74H1399.5l128.34-599.74h155.09z"
+                                                          fill="#1434cb"></path>
+                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     viewBox="0 0 26 28"
+                                                     class="c-card-payment-icons__icon c-card-payment-icons__icon--mastercard">
+                                                    <defs>
+                                                        <filter id="mastercard_round_svg__a"
+                                                                width="130.8%" height="130.8%"
+                                                                x="-15.4%" y="-15.4%"
+                                                                filterUnits="objectBoundingBox">
+                                                            <feOffset dy="2" in="SourceAlpha"
+                                                                      result="shadowOffsetOuter1"></feOffset>
+                                                            <feColorMatrix in="shadowOffsetOuter1"
+                                                                           result="shadowMatrixOuter1"
+                                                                           values="0 0 0 0 0.850980392 0 0 0 0 0.850980392 0 0 0 0 0.850980392 0 0 0 1 0"></feColorMatrix>
+                                                            <feMerge>
+                                                                <feMergeNode
+                                                                        in="shadowMatrixOuter1"></feMergeNode>
+                                                                <feMergeNode
+                                                                        in="SourceGraphic"></feMergeNode>
+                                                            </feMerge>
+                                                        </filter>
+                                                    </defs>
+                                                    <g fill="none" fill-rule="evenodd"
+                                                       filter="url(#mastercard_round_svg__a)">
+                                                        <circle cx="12.998" cy="12.998" r="12.998"
+                                                                fill="#E9E9E9"></circle>
+                                                        <path fill="#EA001B"
+                                                              d="M10.337 12.83c0-1.83.843-3.462 2.16-4.53a5.83 5.83 0 100 9.06 5.817 5.817 0 01-2.16-4.53z"></path>
+                                                        <path fill="#F79F1A"
+                                                              d="M16.166 7c-1.39 0-2.667.487-3.668 1.3a5.817 5.817 0 012.16 4.53 5.82 5.82 0 01-2.16 4.53A5.83 5.83 0 1016.166 7z"></path>
+                                                        <path fill="#FF5F01"
+                                                              d="M14.658 12.83c0-1.83-.842-3.462-2.16-4.53a5.818 5.818 0 00-2.161 4.53c0 1.828.843 3.46 2.16 4.53a5.817 5.817 0 002.161-4.53z"></path>
+                                                    </g>
+                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     viewBox="0 0 26 28"
+                                                     class="c-card-payment-icons__icon c-card-payment-icons__icon--american_express">
+                                                    <path class="american_express_round_svg__st0"
+                                                          d="M0 14.8v-3.3c.2-.2.1-.4.2-.6C1.3 5.4 4.6 1.9 10 .3c.5-.1 1.1-.1 1.6-.3h2.8c0 .1.2.1.2.1 2.9.4 5.4 1.6 7.5 3.7.1.1.3.2.3.5-.2.6-.5 1.3-.7 2-.3-.8-.5-1.5-.8-2.1-.1-.3-.2-.4-.5-.4h-4.1c-.7 0-.7 0-.7.7v2.4c-.5-.9-.9-1.8-1.3-2.8-.1-.2-.2-.3-.5-.3h-3.4c-.3 0-.4.1-.5.4-1.3 3-2.7 6-4 9-.2.3 0 .4.3.4h2.5c.4 0 .5.1.5.5v7.6c0 .4.1.5.5.5h9.8c.3 0 .5-.1.7-.3.4-.5.8-.9 1.2-1.3.2-.2.3-.2.4 0 .3.3.6.7.9 1-2.4 2.8-5.5 4.2-9.1 4.4-2.5.1-4.9-.4-7.1-1.7-3.3-2-5.4-4.9-6.2-8.7-.1-.3-.1-.6-.3-.8z"></path>
+                                                    <path class="american_express_round_svg__st0"
+                                                          d="M26 12.5h-1.1c-.3 0-.4-.1-.4-.4V7.5c-.2.1-.2.2-.2.4-.5 1.4-1.1 2.8-1.6 4.3-.1.3-.2.4-.6.4-1.4 0-1.4 0-1.9-1.3-.5-1.2-.9-2.5-1.4-3.7v4.6c0 .3-.1.4-.4.4h-3.6c-.3 0-.5-.1-.5-.3-.2-1.1-.9-1.3-1.9-1.2-.6.1-1.2 0-1.7 0-.3 0-.4.1-.5.3-.2 1.1-.9 1.3-1.9 1.2-.9-.1-.9 0-.6-.8.9-2.1 1.9-4.3 2.8-6.4.1-.3.3-.4.6-.4h1.8c.3 0 .5.1.6.4.9 2.1 1.9 4.3 2.8 6.4.1.2.1.3.2.5.1-.2.1-.4.1-.6V5.4c0-.4.1-.5.5-.5h2.3c.3 0 .5.1.6.4.5 1.4 1 2.8 1.5 4.3.6-1.5 1.1-3 1.6-4.4.2 0 .3.2.3.3 1.2 1.8 2 3.7 2.3 5.8 0 .1 0 .2.1.3.2.3.2.6.2.9zM12 6.8c-.3.8-.6 1.5-.9 2.2-.1.2 0 .3.2.3h1.4c.2 0 .3 0 .2-.3-.3-.7-.5-1.4-.9-2.2zm11.4 13.8c-.5-.5-1-1-1.5-1.6-.3-.3-.4-.3-.7 0-.5.6-1.1 1.2-1.6 1.8-.2.2-.4.3-.6.3h-8.3c-.3 0-.4-.1-.4-.4v-6.8c0-.3.1-.4.4-.4h8.4c.3 0 .4.1.6.3.6.6 1.1 1.3 1.7 1.9.2.2.3.2.5 0 .5-.6 1.1-1.2 1.6-1.8.3-.3.5-.4.9-.4h1.5v.8c-.1 0-.2 0-.2.1-.9.9-1.8 1.8-2.6 2.8-.2.2-.1.3.1.4.4.5.9.9 1.3 1.4-.3.5-.5 1.2-1.1 1.6zm-6.7.4c.1-.1.2-.1.2-.1 1.1-1.1 2.1-2.3 3.2-3.4.2-.2.1-.3 0-.4-.7-.8-1.5-1.5-2.2-2.3-.3-.4-.7-.7-1.2-1.2v1.3c0 .4-.1.5-.5.5H13c-.8 0-.7-.2-.7.7 0 .4.1.5.5.4h2.5c1.3 0 1.3 0 1.3 1.3 0 .3-.1.4-.4.4h-3.4c-.5 0-.4.3-.4.6s-.1.6.4.6h3.3c.5 0 .7.2.6.6v1z"></path>
+                                                    <path d="M23.4 20.6c.6-.4.8-1.1 1.1-1.7.2-.3.4-.7.5-1.1.3-.5.5-1 .5-1.6l.1-.1c.2-.5.1-1.1.4-1.6v1.9c-.2.2-.1.4-.2.6-1.1 5.5-4.4 9-9.8 10.6-.5.1-1.1.1-1.6.3h-2.9c-.2-.2-.4-.1-.6-.2-5.4-.9-9.6-5-10.7-10.3-.1-.3 0-.7-.2-1v-1.7c.2.2.2.5.3.8.8 3.8 2.9 6.7 6.2 8.7 2.2 1.3 4.6 1.9 7.1 1.7 3.6-.2 6.7-1.6 9.1-4.4.3-.2.6-.4.7-.9z"></path>
+                                                    <path class="american_express_round_svg__st0"
+                                                          d="M25 17.9c-.6-.6-.6-.6 0-1.1l.5-.5c0 .6-.2 1.1-.5 1.6zm.5-1.6l.1-.1c-.1 0-.1.1-.1.1z"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="payment-data-container" class="c-createPaymentMethod">
+                                        <div class="c-payment-details-form c-payment-details-form--hasErrors">
+                                            <div style="display: block;">
+                                                <div class="c-input"
+                                                     data-cy="payment-method-cardholder">
+                                                    <div class="c-input__label">
+                                                        <div class="c-input__labeltext c-typography c-typography--secondary c-typography--bold c-typography--color-light c-typography-pkUSF c-typography--secondary-LfNMC c-typography--bold-H4gYa c-typography--color-light-tkfIA">
+                                                            Cardholder name
+                                                        </div>
+                                                        <div class="c-input__inputwrapper">
+                                                            <input id="c-payment-field-cardholder"
+                                                                   class="c-input__inputbox c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju"
+                                                                   placeholder="Enter cardholder name"
+                                                                   aria-invalid="false"
+                                                                   aria-describedby="c-payment-field-cardholder-error"
+                                                                   type="text" autocomplete=""
+                                                                   data-cy="payment-method-cardholder-input"
+                                                                   inputmode="text" novalidate=""
+                                                                   value="">
+                                                        </div>
+                                                    </div>
+                                                    <div data-cy="payment-method-cardholder-error"
+                                                         id="c-payment-field-cardholder-error"></div>
+                                                </div>
+                                                <div class="c-fake-input ">
+                                                    <div class="c-fake-input__label">
+                                                        <div class="c-fake-input__labeltext c-typography c-typography--secondary c-typography--bold c-typography--color-light c-typography-pkUSF c-typography--secondary-LfNMC c-typography--bold-H4gYa c-typography--color-light-tkfIA">
+                                                            Card number
+                                                        </div>
+                                                        <div class="c-input__inputwrapper">
+                                                            <input id="c-payment-field-card-number"
+                                                                   class="c-input__inputbox c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju"
+                                                                   placeholder="4111 1111 1111 1111"
+                                                                   aria-invalid="false"
+                                                                   aria-describedby="c-payment-field-cardholder-error"
+                                                                   type="text" autocomplete=""
+                                                                   data-cy="payment-method-cardholder-input"
+                                                                   inputmode="text" novalidate=""
+                                                                   value="">
+                                                        </div>
+                                                    </div>
+                                                    <div id="c-payment-field-card-number-error"></div>
+                                                </div>
+                                                <div class="c-payment-details-form__card-group">
+                                                    <div class="c-fake-input c-payment-details-form__expiry">
+                                                        <div class="c-fake-input__label">
+                                                            <div class="c-fake-input__labeltext c-typography c-typography--secondary c-typography--bold c-typography--color-light c-typography-pkUSF c-typography--secondary-LfNMC c-typography--bold-H4gYa c-typography--color-light-tkfIA">
+                                                                Expiry
+                                                            </div>
+                                                            <div class="c-fake-input__inputwrapper">
+                                                                <input id="c-payment-field-expiration-date"
+                                                                       class="c-input__inputbox c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju"
+                                                                       placeholder="10/2026"
+                                                                       aria-invalid="false"
+                                                                       aria-describedby="c-payment-field-cardholder-error"
+                                                                       type="text" autocomplete=""
+                                                                       data-cy="payment-method-cardholder-input"
+                                                                       inputmode="text"
+                                                                       novalidate=""
+                                                                       value="">
+                                                            </div>
+                                                        </div>
+                                                        <div id="c-payment-field-expiration-date-error"></div>
+                                                    </div>
+                                                    <div class="c-fake-input c-payment-details-form__cvv">
+                                                        <div class="c-fake-input__label">
+                                                            <div class="c-fake-input__labeltext c-typography c-typography--secondary c-typography--bold c-typography--color-light c-typography-pkUSF c-typography--secondary-LfNMC c-typography--bold-H4gYa c-typography--color-light-tkfIA">
+                                                                CVV
+                                                            </div>
+                                                            <div class="c-fake-input__inputwrapper">
+                                                                <input id="c-payment-field-cvv"
+                                                                       class="c-input__inputbox c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju"
+                                                                       placeholder="123"
+                                                                       aria-invalid="false"
+                                                                       aria-describedby="c-payment-field-cardholder-error"
+                                                                       type="text" autocomplete=""
+                                                                       data-cy="payment-method-cardholder-input"
+                                                                       inputmode="text"
+                                                                       novalidate=""
+                                                                       value="">
+                                                            </div>
+                                                        </div>
+                                                        <div id="c-payment-field-cvv-error"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="c-payment-details-form__billing-group">
+                                                    <div class="c-input c-payment-details-form__post-code"
+                                                         data-cy="payment-method-postal-code">
+                                                        <div class="c-input__label">
+                                                            <div class="c-input__labeltext c-typography c-typography--secondary c-typography--bold c-typography--color-light c-typography-pkUSF c-typography--secondary-LfNMC c-typography--bold-H4gYa c-typography--color-light-tkfIA">
+                                                                Billing postcode
+                                                            </div>
+                                                            <div class="c-input__inputwrapper">
+                                                                <input id="c-payment-field-postcode"
+                                                                       class="c-input__inputbox c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju"
+                                                                       placeholder="Enter billing address postcode"
+                                                                       aria-invalid="false"
+                                                                       aria-describedby="c-payment-field-postcode-error"
+                                                                       type="text"
+                                                                       autocomplete="postal-code"
+                                                                       data-cy="payment-method-postal-code-input"
+                                                                       inputmode="text"
+                                                                       novalidate=""
+                                                                       value="">
+                                                            </div>
+                                                        </div>
+                                                        <div data-cy="payment-method-postal-code-error"
+                                                             id="c-payment-field-postcode-error"></div>
+                                                    </div>
+                                                    <div class="c-dropdown c-country-picker">
+                                                        <div class="c-dropdown__label">
+                                                            <div class="c-typography c-typography--secondary c-typography--bold c-typography--color-light c-typography-pkUSF c-typography--secondary-LfNMC c-typography--bold-H4gYa c-typography--color-light-tkfIA">
+                                                                Country
+                                                            </div>
+                                                            <div class="c-dropdown__control">
+                                                                <span class="c-dropdown__icon c-dropdown__icon--chevron">
+                                                                <svg fill="none"
+                                                                     xmlns="http://www.w3.org/2000/svg"
+                                                                     viewBox="0 0 24 24"
+                                                                     class="c-chevron-icon c-chevron-icon--down "
+                                                                     style="width: 24px; height: 24px;">
+                                                                    <path clip-rule="evenodd"
+                                                                          d="M18.364 14.707a1 1 0 01-1.414 0L12 9.757l-4.95 4.95a1 1 0 01-1.414-1.414l5.516-5.516a1.2 1.2 0 011.697 0l5.515 5.516a1 1 0 010 1.414z">
+                                                                    </path>
+                                                                </svg>
+                                                                </span>
+                                                                <select name="country"
+                                                                        class="c-dropdown__select c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">
+                                                                    <option value="AU">Australia
+                                                                    </option>
+                                                                    <option value="AT">Austria
+                                                                    </option>
+                                                                    <option value="CA">Canada
+                                                                    </option>
+                                                                    <option value="DK">Denmark
+                                                                    </option>
+                                                                    <option value="FI">Finland
+                                                                    </option>
+                                                                    <option value="FR">France
+                                                                    </option>
+                                                                    <option value="DE">Germany
+                                                                    </option>
+                                                                    <option value="IE">Ireland
+                                                                    </option>
+                                                                    <option value="IL">Israel
+                                                                    </option>
+                                                                    <option value="IT">Italy
+                                                                    </option>
+                                                                    <option value="NL">Netherlands
+                                                                    </option>
+                                                                    <option value="NZ">New Zealand
+                                                                    </option>
+                                                                    <option value="NO">Norway
+                                                                    </option>
+                                                                    <option value="ES">Spain
+                                                                    </option>
+                                                                    <option value="SE">Sweden
+                                                                    </option>
+                                                                    <option value="TR">Turkey
+                                                                    </option>
+                                                                    <option value="GB">United
+                                                                        Kingdom
+                                                                    </option>
+                                                                    <option value="US">United States
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button id="save-payment-button"
+                                            class="c-button c-button--primary verify-payment-details-button"
+                                            type="button">
+                                        <span class="c-typography c-typography--h3 c-typography--bold
+                                                c-typography--color-primary c-typography-pkUSF c-typography--h3-rLKwZ
+                                                c-typography--bold-H4gYa c-typography--color-primary-NHSju c-button__text">
+                                            Save and continue
+                                        </span>
+                                    </button>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="c-monthly-checkout-button">
+                        <button id="pay-now-button"
+                                class="bt bt--primary bt--large c-monthly-checkout-button__button"
+                                type="submit"
+                                disabled>
+                            <span>£3.29 - Pay now and reserve</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="p-monthly-checkout__sidebar">
+                <div class="c-panel c-panel--minimal c-monthly-checkout-sidebar__panel">
+                    <div class="c-panel__container c-panel__container--minimal">
+                        <div class="c-monthly-checkout-sidebar__photo-container">
+                            <div class="c-gallery">
+                                <ul>
+                                    <li class="c-gallery__item c-gallery__item--full-width">
+                                        <img id="park-image" th:src="@{/images/park-image.png}"
+                                             alt="image description">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="c-monthly-checkout-sidebar__content">
+                            <span class="c-typography c-typography--h2 c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--h2-FEwmj c-typography--bold-H4gYa c-typography--color-primary-NHSju c-monthly-checkout-sidebar__location">Parking on South Stour Avenue, TN23</span>
+                            <div class="c-monthly-checkout-sidebar__star-rating-container">
+                                <div title="Rating: 5 / 5"
+                                     class="c-star-rating c-star-rating--medium">
+                                    <div class="c-link-button " type="button">
+                                        <div class="c-star-rating__star c-star-rating__star--full">
+                                            <div style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="c-link-button " type="button">
+                                        <div class="c-star-rating__star c-star-rating__star--full">
+                                            <div style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="c-link-button " type="button">
+                                        <div class="c-star-rating__star c-star-rating__star--full">
+                                            <div style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="c-link-button " type="button">
+                                        <div class="c-star-rating__star c-star-rating__star--full">
+                                            <div style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="c-link-button " type="button">
+                                        <div class="c-star-rating__star c-star-rating__star--full">
+                                            <div style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <span class="c-typography c-typography--primary c-typography--color-muted c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-muted-WlC7k c-star-rating__rating">(1)</span>
+                                </div>
+                            </div>
+                            <div class="c-monthly-checkout-sidebar__checkout-price-container">
+                                <div class="c-monthly-checkout-sidebar-price c-monthly-checkout-sidebar-price--large-breakdown">
+                                    <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--parking_fee">
+                                        <span class="c-monthly-checkout-sidebar-price__name">Parking fee</span><span
+                                            class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">£2.30</span>
+                                    </div>
+                                    <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--transaction_fee">
+                                        <span class="c-monthly-checkout-sidebar-price__name">Transaction fee<div
+                                                class="c-checkoutInfoToolTip"><span
+                                                aria-expanded="false">
+                                            <div class="c-tool-tip-native-modal__children-container"><svg
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    class="c-information c-checkoutInfoToolTip__info-icon"><path
+                                                    fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.5 12a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM12 4a8 8 0 100 16 8 8 0 000-16zm1 5a1 1 0 11-2 0 1 1 0 012 0zm-1 2a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1z"
+                                                    fill="#9E9E9E"></path></svg></div></span></div></span><span
+                                            class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">£0.99</span>
+                                    </div>
+                                    <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--final_price">
+                                        <span class="c-monthly-checkout-sidebar-price__name c-monthly-checkout-sidebar-price__name--bold c-monthly-checkout-sidebar-price__name--large">Final price</span><span
+                                            class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold c-monthly-checkout-sidebar-price__price--large">£3.29</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/js/confirmReservation.js}"></script>
+</html>
