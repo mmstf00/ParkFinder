@@ -40,6 +40,9 @@ editVehicleLink.addEventListener("click", function () {
     vehiclesHeader.style.flexDirection = "column";
 
     addVehicleContainer.style.display = "flex";
+
+    document.getElementById("add-vehicle-span").innerText = "Edit vehicle";
+    document.getElementById("add-span").innerText = "Edit";
 });
 
 
