@@ -56,14 +56,6 @@ h1 {
     }
 }
 
-/*.p-monthly-checkout .c-monthly-header {*/
-/*    display: none;*/
-/*}*/
-
-.c-typography--color-primary-NHSju {
-    color: #212121;
-}
-
 .c-typography--bold-H4gYa {
     font-weight: 700;
 }
@@ -206,10 +198,6 @@ img, svg {
     line-height: 1.63;
 }
 
-.c-typography--bold-H4gYa {
-    font-weight: 700;
-}
-
 .c-panel--minimal {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -264,21 +252,6 @@ img, svg {
     .c-monthly-checkout-sidebar-price--large-breakdown {
         margin-top: 55px;
     }
-}
-
-.c-monthly-checkout-sidebar-price {
-    font-size: 16px;
-    line-height: 1.4;
-    position: relative;
-}
-
-.c-monthly-checkout-sidebar-price__name {
-    align-items: center;
-    display: flex;
-}
-
-.c-monthly-checkout-sidebar-price__price--bold {
-    font-weight: 700;
 }
 
 .c-monthly-checkout-sidebar-price__price {
@@ -342,12 +315,6 @@ img, svg {
     height: 150px;
 }
 
-.c-monthly-vehicles__vehicles-container {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
 @media print, screen and (min-width: 40em) {
     .c-monthly-vehicles__vehicles-container .c-vehicles__vrm-input {
         margin-bottom: 0;
@@ -407,14 +374,6 @@ img, svg {
 
 .c-typography--color-light-tkfIA {
     color: #666;
-}
-
-.c-typography--bold-H4gYa {
-    font-weight: 700;
-}
-
-.c-typography--secondary-LfNMC {
-    font-size: 14px;
 }
 
 @media print, screen and (min-width: 40em) {
@@ -518,31 +477,13 @@ input:disabled, input[readonly], textarea:disabled, textarea[readonly] {
     padding: 0;
 }
 
-button, input, optgroup, select, textarea {
-    font-family: inherit;
-}
-
-button, input {
-    overflow: visible;
-}
-
-button, input, optgroup, select, textarea {
-    font-size: 100%;
-    line-height: 1.15;
-    margin: 0;
-}
-
 .c-vehicle-panel {
     width: 100%;
 }
 
 .c-panel--vehicle {
-    background-color: #f5f5f7;
-    border-radius: 3px;
-}
-
-.c-panel--vehicle {
     background-color: transparent !important;
+    border-radius: 3px;
 }
 
 .c-vehicle-card .c-vehicle-panel .c-panel__container {
@@ -888,10 +829,6 @@ button, input, optgroup, select, textarea {
     margin-bottom: 0;
 }
 
-.c-createPaymentMethod label .c-typography {
-    color: #3e3e3e !important;
-}
-
 .c-input__labeltext {
     margin-bottom: 5px;
 }
@@ -912,17 +849,9 @@ button, input, optgroup, select, textarea {
     width: 100%;
 }
 
-.c-createPaymentMethod label .c-typography {
-    color: #3e3e3e !important;
-}
-
 .c-createPaymentMethod .c-input__inputbox {
     height: 40px;
     padding: 10px;
-}
-
-.c-input .c-input__inputbox, .c-input .c-input__inputwrapper {
-    height: 46px;
 }
 
 .c-input__inputbox {
@@ -1037,10 +966,6 @@ button, input, optgroup, select, textarea {
 }
 
 .c-dropdown__control select {
-    padding-right: 35px;
-}
-
-.c-dropdown__control select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -1111,31 +1036,6 @@ option {
     width: 100%;
 }
 
-/*[type=button], [type=submit] {*/
-/*    -webkit-appearance: none;*/
-/*    -moz-appearance: none;*/
-/*    appearance: none;*/
-/*    border-radius: 0;*/
-/*}*/
-[type=button], [type=reset], [type=submit], button {
-    -webkit-appearance: button;
-}
-
-button, input, optgroup, select, textarea {
-    font-family: inherit;
-}
-
-/*button {*/
-/*    -webkit-appearance: none;*/
-/*    -moz-appearance: none;*/
-/*    appearance: none;*/
-/*    background: transparent;*/
-/*    border: 0;*/
-/*    border-radius: 0;*/
-/*    cursor: auto;*/
-/*    line-height: 1;*/
-/*    padding: 0;*/
-/*}*/
 button, select {
     text-transform: none;
 }
@@ -1146,12 +1046,9 @@ button, input {
 
 button, input, optgroup, select, textarea {
     font-size: 100%;
+    font-family: inherit;
     line-height: 1.15;
     margin: 0;
-}
-
-*, :after, :before {
-    box-sizing: inherit;
 }
 
 .c-button .c-button__text {
@@ -1197,12 +1094,6 @@ button, input, optgroup, select, textarea {
 .c-monthly-checkout-sidebar__panel {
     box-shadow: 0 4px 8px rgb(231 233 239 / 40%), 0 33px 41px rgb(231 233 239 / 70%);
     margin: 0 auto;
-}
-
-.c-panel--minimal {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
 }
 
 .c-monthly-checkout-sidebar__content {
@@ -1283,13 +1174,10 @@ dl, ol, ul {
 img {
     -ms-interpolation-mode: bicubic;
     display: inline-block;
+    border-style: none;
     height: auto;
     max-width: 100%;
     vertical-align: middle;
-}
-
-img {
-    border-style: none;
 }
 
 .c-monthly-checkout-sidebar__location {
@@ -1359,10 +1247,6 @@ img {
     -webkit-appearance: button;
 }
 
-button, input, optgroup, select, textarea {
-    font-family: inherit;
-}
-
 button {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -1373,20 +1257,6 @@ button {
     cursor: auto;
     line-height: 1;
     padding: 0;
-}
-
-button, select {
-    text-transform: none;
-}
-
-button, input {
-    overflow: visible;
-}
-
-button, input, optgroup, select, textarea {
-    font-size: 100%;
-    line-height: 1.15;
-    margin: 0;
 }
 
 .bt--primary:disabled, .bt--primary:disabled:hover {

@@ -59,8 +59,8 @@ function checkInputsNotEmpty() {
     let allInputs = paymentData.querySelectorAll("input");
 
     // Loop through all the input elements and check if their values are empty
-    for (let i = 0; i < allInputs.length; i++) {
-        if (allInputs[i].value === '') {
+    for (const input of allInputs) {
+        if (input.value === '') {
             return false; // Return false if any input field is empty
         }
     }

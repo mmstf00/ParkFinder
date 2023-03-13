@@ -82,6 +82,6 @@ const burger = document.querySelector('.burger');
 const nav = document.querySelector('nav');
 
 burger.addEventListener('click', () => {
-    burger.dataset.state === 'closed' ? burger.dataset.state = "open" : burger.dataset.state = "closed"
-    nav.dataset.state === "closed" ? nav.dataset.state = "open" : nav.dataset.state = "closed"
+    burger.dataset.state = (burger.dataset.state === "closed" ? "open" : "closed");
+    nav.dataset.state = (nav.dataset.state === "closed" ? "open" : "closed");
 })
