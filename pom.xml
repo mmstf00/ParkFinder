@@ -125,7 +125,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/controller/**</exclude>
+                        <exclude>**/rest/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
