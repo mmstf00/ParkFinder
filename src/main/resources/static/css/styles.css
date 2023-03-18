@@ -313,7 +313,7 @@ li {
     margin: auto;
 }
 
-.reservation-button-class {
+.reservation-button-wrapper {
     display: flex;
     height: 100px;
     justify-content: center;

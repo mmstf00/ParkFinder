@@ -107,66 +107,19 @@ function listenForOpenSubMenu(parkingDetail) {
     }
 }
 
-function makeReservationWhenButtonPressed() {
-    for (let i = 0; i < parkingDetails.length; i++) {
-        let button = parkingDetails[i]
-            .getElementsByClassName("reservation-button-class").namedItem("reservation-button-id")
-            .getElementsByClassName("btn-success").namedItem("reservation-button");
-        if (button != null) {
-            button.addEventListener("click", function (event) {
-                let parkingDetail = parkingDetails[i];
-                let parkingSpace = parkingListItems[i];
-                makeReservation(parkingSpace, parkingDetail, event.target);
-            });
-        }
-    }
-}
+// Redirects the user to reservation page when RESERVE button is pressed.
+function redirectToReservationPage() {
+    let allParkingButtons = document.querySelectorAll(".reservation-button-wrapper");
+    let parkingTimeFrom = document.getElementById("from-date-picker").value;
+    let parkingTimeUntil = document.getElementById("to-date-picker").value;
 
-// To prevent multiple request, saving Ids of parkings to check later.
-let parkingIds = [];
-
-function makeReservation(parkingSpace, parkingDetail, button) {
-
-    updateStyle(parkingSpace, parkingDetail, button);
-
-    let parkingId = parkingDetail
-        .getElementsByClassName("location-details").item(0)
-        .getElementsByClassName("parking-address")
-        .item(0).getAttribute("id");
-
-    if (!parkingIds.includes(parkingId)) {
-        makePutRequestById(parkingId);
-    }
-    parkingIds.push(parkingId);
-}
-
-function updateStyle(parkingSpace, parkingDetail, button) {
-    let reservableTextOfDetail = parkingDetail
-        .getElementsByClassName("location-details").item(0)
-        .getElementsByClassName("parking-reservable").item(0)
-        .getElementsByClassName("span-reservable").item(0);
-
-    let reservableTextOfElement = parkingSpace
-        .getElementsByClassName("parking-details").item(0)
-        .getElementsByClassName("parking-reservable").item(0)
-        .getElementsByClassName("span-reservable").item(0);
-
-    reservableTextOfDetail.innerHTML = "RESERVED";
-    reservableTextOfDetail.style.color = "red";
-
-    reservableTextOfElement.innerHTML = "RESERVED";
-    reservableTextOfElement.style.color = "red";
-
-    button.innerHTML = "RESERVED";
-    button.style.backgroundColor = "red";
-}
-
-function makePutRequestById(parkingId) {
-    fetch('/api/v1', {
-        method: 'PUT', headers: {
-            'Content-Type': 'application/json'
-        }, body: JSON.stringify({
-            id: parkingId, isNotReserved: false
-        })
-    }).catch(error => console.error(error));
+    allParkingButtons.forEach(function (button) {
+        button.addEventListener("click", function (event) {
+            let reserveButton = event.target;
+            // Preventing redirection for reserved parkings
+            if (reserveButton.id === "reservation-button") {
+                window.open(`/confirmation?parkingId=${reserveButton.value}&parkingFrom=${parkingTimeFrom}&parkingUntil=${parkingTimeUntil}`, "_self");
+            }
+        });
+    });
 }

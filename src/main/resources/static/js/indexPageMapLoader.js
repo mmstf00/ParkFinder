@@ -77,9 +77,13 @@ function loadAllParkings(data) {
             parksList.appendChild(parkingSpaceInformation);
 
             listenForItemClick();
-            makeReservationWhenButtonPressed();
         }
     });
+
+    // To prevent ReferenceError in Admin page
+    if (parksList != null) {
+        redirectToReservationPage();
+    }
 }
 
 function showMessageWhenNoParkingsFound(filteredData, parksList) {
@@ -234,10 +238,11 @@ function loadDetailsForParking(markerData) {
                 </button>
             </div>
         </div>
-        <div id="reservation-button-id" class="reservation-button-class">
+        <div class="reservation-button-wrapper">
             <button id="${reservationButtonId}" 
                     class="${reservationButtonClass}" 
-                    style="${reservationButtonStyle}">
+                    style="${reservationButtonStyle}" 
+                    value="${markerData.id}">
                 ${reservationButtonText}
                 <span style="${reservationButtonSpanStyle}">
                     $${markerData.priceTag.toFixed(2)}
