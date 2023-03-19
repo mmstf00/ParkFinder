@@ -60,13 +60,16 @@ h1 {
     font-weight: 700;
 }
 
+.c-typography--underline-RoNXI {
+    text-decoration: underline;
+}
+
 .c-typography--h2-FEwmj {
     font-size: 20px;
 }
 
 .c-typography-pkUSF {
     font-family: Nunito, Avenir, sans-serif;
-    font-weight: 400;
 }
 
 /* Checkout design */
@@ -194,7 +197,7 @@ img, svg {
 }
 
 .c-typography--primary-yh5cC {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.63;
 }
 
@@ -284,6 +287,10 @@ img, svg {
 .c-monthly-vehicles__heading {
     flex: 1 1 auto;
     margin-bottom: 24px;
+}
+
+#vehicle-plate-span {
+    font-size: 30px;
 }
 
 @media print, screen and (min-width: 53.75em) {
@@ -592,6 +599,7 @@ input:disabled, input[readonly], textarea:disabled, textarea[readonly] {
     display: -ms-flexbox;
     display: flex;
     margin: 0;
+    justify-content: center;
 }
 
 .c-vehicle-details__registration {

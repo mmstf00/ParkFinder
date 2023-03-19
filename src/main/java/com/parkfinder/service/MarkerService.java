@@ -34,15 +34,21 @@ public class MarkerService {
         return markerRepository.findByLatitudeAndLongitude(latitude, longitude);
     }
 
+    public Marker getMarkerById(Long id) {
+        return markerRepository.findById(id).orElse(null);
+    }
+
     public void updateMarker(MarkerDTO markerDTO) {
-        Marker updatedMarker = getMarkerEntity(markerDTO);
-        markerRepository.save(updatedMarker);
+        Marker markerToBeUpdated = getMarkerEntity(markerDTO);
+        markerRepository.save(markerToBeUpdated);
     }
 
     public void updateMarkerReservationById(Long id, boolean reservation) {
-        Marker updatedMarker = markerRepository.getReferenceById(id);
-        updatedMarker.setReservable(reservation);
-        markerRepository.save(updatedMarker);
+        Marker markerToBeUpdated = getMarkerById(id);
+        if (markerToBeUpdated != null) {
+            markerToBeUpdated.setReservable(reservation);
+            markerRepository.save(markerToBeUpdated);
+        }
     }
 
     public void deleteMarker(MarkerDTO markerDTO) {

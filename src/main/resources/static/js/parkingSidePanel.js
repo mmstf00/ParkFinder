@@ -110,16 +110,40 @@ function listenForOpenSubMenu(parkingDetail) {
 // Redirects the user to reservation page when RESERVE button is pressed.
 function redirectToReservationPage() {
     let allParkingButtons = document.querySelectorAll(".reservation-button-wrapper");
-    let parkingTimeFrom = document.getElementById("from-date-picker").value;
-    let parkingTimeUntil = document.getElementById("to-date-picker").value;
+    let parkingFrom = document.getElementById("from-date-picker").value;
+    let parkingUntil = document.getElementById("to-date-picker").value;
+
+    let parkingDateFrom = getFormattedDate(parkingFrom);
+    let parkingTimeFrom = getFormattedTime(parkingFrom);
+    let parkingDateTo = getFormattedDate(parkingUntil);
+    let parkingTimeTo = getFormattedTime(parkingUntil);
 
     allParkingButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
             let reserveButton = event.target;
             // Preventing redirection for reserved parkings
             if (reserveButton.id === "reservation-button") {
-                window.open(`/confirmation?parkingId=${reserveButton.value}&parkingFrom=${parkingTimeFrom}&parkingUntil=${parkingTimeUntil}`, "_self");
+                window.open(`/confirmation?parkingId=${reserveButton.value}&parkingDateFrom=${parkingDateFrom}&parkingTimeFrom=${parkingTimeFrom}&parkingDateTo=${parkingDateTo}&parkingTimeTo=${parkingTimeTo}`, "_self");
             }
         });
     });
+}
+
+function getFormattedDate(dateAndTime) {
+    const parkingDate = new Date(dateAndTime);
+    const year = parkingDate.getFullYear();
+    const month = parkingDate.getMonth() + 1;
+    const day = parkingDate.getDate();
+
+    // Returns formatted date in format YYYY-MM-DD
+    return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+}
+
+function getFormattedTime(dateAndTime) {
+    const parkingTime = new Date(dateAndTime);
+    const hours = parkingTime.getHours();
+    const minutes = parkingTime.getMinutes();
+
+    // Returns formatted time in format HH:MM
+    return `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
 }

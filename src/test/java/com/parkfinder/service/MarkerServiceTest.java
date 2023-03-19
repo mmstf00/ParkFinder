@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.parkfinder.util.DtoToEntityConverter.getMarkerEntity;
 import static org.junit.jupiter.api.Assertions.*;
@@ -94,12 +95,12 @@ class MarkerServiceTest {
 
     @Test
     void testUpdateMarkerReservationById() {
-        when(markerRepository.getReferenceById(any(Long.class))).thenReturn(marker);
+        when(markerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(marker));
         when(markerRepository.save(any(Marker.class))).thenReturn(marker);
 
         markerService.updateMarkerReservationById(marker.getId(), false);
 
-        verify(markerRepository, times(1)).getReferenceById(any(Long.class));
+        verify(markerRepository, times(1)).findById(any(Long.class));
         verify(markerRepository, times(1)).save(any(Marker.class));
         assertFalse(marker.isReservable());
     }

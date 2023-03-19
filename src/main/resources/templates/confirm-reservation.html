@@ -114,9 +114,13 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                           d="M12 9a2 2 0 100 4 2 2 0 000-4z" fill="#000"></path>
                                 </svg>
-                                <div class="c-monthly-checkout-core-info__details"><span
-                                        class="c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">Location</span><span
-                                        class="c-typography c-typography--primary c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--bold-H4gYa c-typography--color-primary-NHSju">Parking on South Stour Avenue, TN23</span>
+                                <div class="c-monthly-checkout-core-info__details">
+                                    <span class="c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">
+                                        Location
+                                    </span>
+                                    <span th:text="${parking.getAddress()}"
+                                          class="c-typography c-typography--primary c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--bold-H4gYa c-typography--color-primary-NHSju">
+                                    </span>
                                 </div>
                             </div>
 
@@ -145,7 +149,9 @@
                                              c-typography--color-primary c-typography--underline c-typography-pkUSF
                                              c-typography--primary-yh5cC c-typography--bold-H4gYa c-typography--color-primary-NHSju
                                              c-typography--underline-RoNXI c-monthly-checkout-core-info__date-wrapper">
-                                            Today at 21:00
+                                            <span th:text="${param.parkingDateFrom}"></span>
+                                            at <span
+                                                th:text="${param.parkingTimeFrom}"></span>
                                         </div>
                                     </button>
                                 </div>
@@ -174,7 +180,9 @@
                                               c-typography-pkUSF c-typography--primary-yh5cC
                                               c-typography--bold-H4gYa c-typography--color-primary-NHSju
                                               c-typography--underline-RoNXI c-monthly-checkout-core-info__date-wrapper">
-                                            Today at 23:00
+                                            <span th:text="${param.parkingDateTo}"></span>
+                                            at <span
+                                                th:text="${param.parkingTimeTo}"></span>
                                         </div>
                                     </button>
                                 </div>
@@ -192,7 +200,8 @@
                                     <span class="c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">Duration</span>
                                     <div data-cy="monthly-checkout-core-info-duration"
                                          class="c-typography c-typography--primary c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--bold-H4gYa c-typography--color-primary-NHSju">
-                                        2 hours
+                                        <span th:text="${duration}"></span> <span
+                                            th:text="${durationText}"></span>
                                     </div>
                                 </div>
                             </div>
@@ -210,7 +219,9 @@
                                     <span class="c-monthly-checkout-sidebar-price__name">
                                         Parking fee
                                     </span>
-                                    <span class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">£2.30</span>
+                                    <span th:text="${#numbers.formatCurrency(parking.priceTag).replace('¤','$')}"
+                                          class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">
+                                    </span>
                                 </div>
                                 <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--transaction_fee">
                                     <span class="c-monthly-checkout-sidebar-price__name">
@@ -232,11 +243,17 @@
                                             </span>
                                         </div>
                                     </span>
-                                    <span class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">£0.99</span>
+                                    <span class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">
+                                        $0.99
+                                    </span>
                                 </div>
                                 <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--final_price">
-                                    <span class="c-monthly-checkout-sidebar-price__name c-monthly-checkout-sidebar-price__name--bold c-monthly-checkout-sidebar-price__name--large">Final price</span><span
-                                        class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold c-monthly-checkout-sidebar-price__price--large">£3.29</span>
+                                    <span class="c-monthly-checkout-sidebar-price__name c-monthly-checkout-sidebar-price__name--bold c-monthly-checkout-sidebar-price__name--large">
+                                        Final price
+                                    </span>
+                                    <span th:text="${#numbers.formatCurrency(parking.priceTag + 0.99).replace('¤','$')}"
+                                          class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold c-monthly-checkout-sidebar-price__price--large">
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +280,8 @@
                                                            placeholder="Enter vehicle number plate"
                                                            type="text"
                                                            inputmode="text"
-                                                           required>
+                                                           required
+                                                           maxlength="10">
                                                 </div>
                                             </div>
                                         </div>
@@ -282,7 +300,7 @@
                                 </div>
 
                                 <a id="edit-vehicle" class="c-monthly-vehicles__edit-form">
-                                    Edit vehicle registration
+                                    Change
                                 </a>
                             </div>
                             <div id="added-vehicle"
@@ -305,15 +323,6 @@
                                                                 c-typography--color-primary-NHSju">
                                                             <span id="vehicle-plate-span"></span>
                                                         </div>
-                                                        <div class="c-vehicle-details__make c-typography c-typography--primary c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--color-primary-NHSju">
-                                                            Other
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="c-ellipsis c-typography c-typography--secondary c-typography--color-muted c-typography-pkUSF c-typography--secondary-LfNMC c-typography--color-muted-WlC7k"
-                                                     x-ms-format-detection="none">
-                                                    <div class="c-vehicle-details__model">
-                                                        Other
                                                     </div>
                                                 </div>
                                             </div>
@@ -593,7 +602,8 @@
                                 class="bt bt--primary bt--large c-monthly-checkout-button__button"
                                 type="submit"
                                 disabled>
-                            <span>£3.29 - Pay now and reserve</span>
+                            <span th:text="${#numbers.formatCurrency(parking.priceTag + 0.99).replace('¤','$')}"></span>
+                            <span>- Pay now and reserve</span>
                         </button>
                     </div>
                 </div>
@@ -612,7 +622,9 @@
                             </div>
                         </div>
                         <div class="c-monthly-checkout-sidebar__content">
-                            <span class="c-typography c-typography--h2 c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--h2-FEwmj c-typography--bold-H4gYa c-typography--color-primary-NHSju c-monthly-checkout-sidebar__location">Parking on South Stour Avenue, TN23</span>
+                            <span th:text="${parking.getAddress()}"
+                                  class="c-typography c-typography--h2 c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--h2-FEwmj c-typography--bold-H4gYa c-typography--color-primary-NHSju c-monthly-checkout-sidebar__location">
+                            </span>
                             <div class="c-monthly-checkout-sidebar__star-rating-container">
                                 <div title="Rating: 5 / 5"
                                      class="c-star-rating c-star-rating--medium">
@@ -647,25 +659,41 @@
                             <div class="c-monthly-checkout-sidebar__checkout-price-container">
                                 <div class="c-monthly-checkout-sidebar-price c-monthly-checkout-sidebar-price--large-breakdown">
                                     <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--parking_fee">
-                                        <span class="c-monthly-checkout-sidebar-price__name">Parking fee</span><span
-                                            class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">£2.30</span>
+                                        <span class="c-monthly-checkout-sidebar-price__name">Parking fee</span>
+                                        <span th:text="${#numbers.formatCurrency(parking.priceTag).replace('¤','$')}"
+                                              class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">
+                                        </span>
                                     </div>
                                     <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--transaction_fee">
-                                        <span class="c-monthly-checkout-sidebar-price__name">Transaction fee<div
-                                                class="c-checkoutInfoToolTip"><span
-                                                aria-expanded="false">
-                                            <div class="c-tool-tip-native-modal__children-container"><svg
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24"
-                                                    class="c-information c-checkoutInfoToolTip__info-icon"><path
-                                                    fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M5.5 12a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM12 4a8 8 0 100 16 8 8 0 000-16zm1 5a1 1 0 11-2 0 1 1 0 012 0zm-1 2a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1z"
-                                                    fill="#9E9E9E"></path></svg></div></span></div></span><span
-                                            class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">£0.99</span>
+                                        <span class="c-monthly-checkout-sidebar-price__name">Transaction fee
+                                            <div class="c-checkoutInfoToolTip">
+                                                <span aria-expanded="false">
+                                                    <div class="c-tool-tip-native-modal__children-container">
+                                                        <svg fill="none"
+                                                             xmlns="http://www.w3.org/2000/svg"
+                                                             viewBox="0 0 24 24"
+                                                             class="c-information c-checkoutInfoToolTip__info-icon">
+                                                            <path fill-rule="evenodd"
+                                                                  clip-rule="evenodd"
+                                                                  d="M5.5 12a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM12 4a8 8 0 100 16 8 8 0 000-16zm1 5a1 1 0 11-2 0 1 1 0 012 0zm-1 2a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1z"
+                                                                  fill="#9E9E9E">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </span>
+                                        <span class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold">
+                                            $0.99
+                                        </span>
                                     </div>
                                     <div class="c-monthly-checkout-sidebar-price__row c-monthly-checkout-sidebar-price__row--final_price">
-                                        <span class="c-monthly-checkout-sidebar-price__name c-monthly-checkout-sidebar-price__name--bold c-monthly-checkout-sidebar-price__name--large">Final price</span><span
-                                            class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold c-monthly-checkout-sidebar-price__price--large">£3.29</span>
+                                        <span class="c-monthly-checkout-sidebar-price__name c-monthly-checkout-sidebar-price__name--bold c-monthly-checkout-sidebar-price__name--large">
+                                            Final price
+                                        </span>
+                                        <span th:text="${#numbers.formatCurrency(parking.priceTag + 0.99).replace('¤','$')}"
+                                              class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold c-monthly-checkout-sidebar-price__price--large">
+                                        </span>
                                     </div>
                                 </div>
                             </div>
