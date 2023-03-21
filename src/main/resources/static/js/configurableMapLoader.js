@@ -2,7 +2,7 @@ function initConfigurableMap() {
 
     // Dummy center if current location is not enabled.
     const center = {
-        lat: 37.43238031167444, lng: -122.16795397128632,
+        lat: 43.835571, lng: 25.965654,
     };
 
     const configurableMap = new google.maps.Map(document.getElementById("map"), {
@@ -59,7 +59,7 @@ function setFormData(mapsMouseEvent) {
 }
 
 function getAddressData(lat, lng) {
-    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI`)
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCTtV6EOMg0cshyQe2h6G_UYUUOlx8Kc5g`)
         .then(response => response.json());
 }
 

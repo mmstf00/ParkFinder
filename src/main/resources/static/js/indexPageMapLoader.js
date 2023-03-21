@@ -2,7 +2,7 @@ function initMap() {
 
     // Dummy center if current location is not enabled.
     let center = {
-        lat: 37.43238031167444, lng: -122.16795397128632,
+        lat: 43.835571, lng: 25.965654,
     };
 
     let map = new google.maps.Map(document.getElementById("map"), {
@@ -439,7 +439,7 @@ function setDefaultSearchPlace() {
     let lng = parseFloat(localStorage.getItem("lng"));
 
     // Define the Google Maps Geocoding API endpoint URL
-    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBPBjwslCsB5pffDskDq-2EfEgzJec_UqI`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCTtV6EOMg0cshyQe2h6G_UYUUOlx8Kc5g`;
 
     // Send a request to the API endpoint
     fetch(apiUrl)
