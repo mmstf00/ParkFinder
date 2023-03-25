@@ -2,7 +2,7 @@ package com.parkfinder.controller.rest;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.MarkerDTO;
-import com.parkfinder.model.ReservationModel;
+import com.parkfinder.model.ReservationRequest;
 import com.parkfinder.service.MarkerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,16 +22,16 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.parkfinder.util.DtoToEntityConverter.getMarkerEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -56,8 +56,6 @@ class RestMarkerControllerTest {
         markerDTO.setAddress("San Francisco");
         markerDTO.setPlaceId("abc123");
         markerDTO.setPriceTag(5.0);
-        markerDTO.setDateFrom(LocalDateTime.now());
-        markerDTO.setDateTo(LocalDateTime.now().plusDays(1));
         markerDTO.setLatitude(37.7749);
         markerDTO.setLongitude(-122.4194);
         markerDTO.setReservable(true);
@@ -69,8 +67,6 @@ class RestMarkerControllerTest {
         markerDTO1.setAddress("New York");
         markerDTO1.setPlaceId("abc123");
         markerDTO1.setPriceTag(5.0);
-        markerDTO1.setDateFrom(LocalDateTime.now());
-        markerDTO1.setDateTo(LocalDateTime.now().plusDays(1));
         markerDTO1.setLatitude(40.7128);
         markerDTO1.setLongitude(-74.0060);
         markerDTO1.setReservable(true);
@@ -146,17 +142,23 @@ class RestMarkerControllerTest {
 
     @Test
     void testUpdateMarker() throws Exception {
-        ReservationModel reservation = new ReservationModel();
-        reservation.setId(1L);
-        reservation.setNotReserved(false);
+        ReservationRequest reservationRequest = new ReservationRequest();
+        reservationRequest.setId(1L);
+        reservationRequest.setPlateNumber("H4595BH");
+        reservationRequest.setDateFrom(LocalDate.of(2023, 3, 25));
+        reservationRequest.setTimeFrom(LocalTime.of(11, 30));
+        reservationRequest.setDateTo(LocalDate.of(2023, 3, 25));
+        reservationRequest.setTimeTo(LocalTime.of(12, 30));
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/v1")
-                        .contentType("application/json")
-                        .content("{ \"id\": 1, \"notReserved\": false }"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .contentType("application/json")
+                .content("{ \"id\": 1, \"plateNumber\": \"H4595BH\", " +
+                        "\"dateFrom\": \"2023-03-25\", \"timeFrom\": \"11:30:00\", " +
+                        "\"dateTo\": \"2023-03-25\", \"timeTo\": \"12:30:00\" }"
+                )).andExpect(MockMvcResultMatchers.status().isOk());
 
         verify(markerService, times(1))
-                .updateMarkerReservationById(reservation.getId(), reservation.isNotReserved());
+                .makeReservation(reservationRequest);
     }
 
 }

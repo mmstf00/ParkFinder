@@ -2,16 +2,18 @@ package com.parkfinder.controller.mvc;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.entity.User;
+import com.parkfinder.model.ConfirmReservationRequest;
 import com.parkfinder.service.MarkerService;
 import com.parkfinder.service.UserService;
+import com.parkfinder.util.DateTimeUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.Duration;
 import java.util.Optional;
@@ -25,7 +27,7 @@ public class ConfirmReservationController {
     private final MarkerService markerService;
 
     @GetMapping
-    public String getConfirmationPage(Model model, @RequestParam("parkingId") String parkingId) {
+    public String getConfirmationPage(Model model, @ModelAttribute ConfirmReservationRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
 
@@ -33,10 +35,10 @@ public class ConfirmReservationController {
         Optional<User> user = userService.getUserByEmail(email);
         user.ifPresent(value -> model.addAttribute("user", value));
 
-        Marker parking = markerService.getMarkerById(Long.valueOf(parkingId));
+        Marker parking = markerService.getMarkerById(request.getParkingId());
         model.addAttribute("parking", parking);
 
-        Duration duration = Duration.between(parking.getDateTo().toLocalTime(), parking.getDateFrom().toLocalTime()).abs();
+        Duration duration = DateTimeUtil.getParkingDurationFromRequest(request);
         if (duration.toHours() == 0) {
             model.addAttribute("duration", duration.toMinutes());
             model.addAttribute("durationText", "minutes");

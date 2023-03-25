@@ -68,33 +68,31 @@ function checkInputsNotEmpty() {
 }
 
 
-(function makeReservation() {
-    let payNowButton = document.getElementById("pay-now-button");
-
+payNowButton.addEventListener("click", () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const parkingId = urlParams.get('parkingId');
-    const parkingTimeFrom = urlParams.get('parkingFrom');
-    const parkingTimeUntil = urlParams.get('parkingUntil');
+    let parkingId = urlParams.get('parkingId');
+    let parkingDateFrom = urlParams.get('parkingDateFrom');
+    let parkingTimeFrom = urlParams.get('parkingTimeFrom');
+    let parkingDateTo = urlParams.get('parkingDateTo');
+    let parkingTimeTo = urlParams.get('parkingTimeTo');
 
-    console.log(parkingId);
-    console.log(parkingTimeFrom);
-    console.log(parkingTimeUntil);
+    let plateNumber = vehiclePlateInput.value;
+    makeReservation(parkingId, plateNumber, parkingDateFrom, parkingTimeFrom, parkingDateTo, parkingTimeTo);
+    // TODO: Redirect to successful reservation page
+    window.open(`/`, "_self");
+});
 
-    payNowButton.addEventListener("click", () => {
-        // makePutRequestById(parkingId);
-        // TODO: Redirect to successful reservation page
-        window.open(`/`, "_self");
-    });
-}())
-
-
-// TODO: Add also the reservation times
-function makePutRequestById(parkingId) {
+function makeReservation(parkingId, plateNumber, parkingDateFrom, parkingTimeFrom, parkingDateTo, parkingTimeTo) {
     fetch('/api/v1', {
         method: 'PUT', headers: {
             'Content-Type': 'application/json'
         }, body: JSON.stringify({
-            id: parkingId, isNotReserved: false
+            id: parkingId,
+            plateNumber: plateNumber,
+            dateFrom: parkingDateFrom,
+            timeFrom: parkingTimeFrom,
+            dateTo: parkingDateTo,
+            timeTo: parkingTimeTo
         })
     }).catch(error => console.error(error));
 }

@@ -65,17 +65,21 @@
                 </div>
                 <div class="form-outline mb-4">
                     <div class="input-group date">
-                        <input th:field="*{dateFrom}" class="form-control" type="datetime-local"
+                        <input th:field="*{reservationDTO.dateFrom}" class="form-control"
+                               type="datetime-local"
                                id="config-date-from" placeholder="Set parking time from">
                     </div>
-                    <p th:if="${#fields.hasErrors('dateFrom')}" th:errors="*{dateFrom}"></p>
+                    <p th:if="${#fields.hasErrors('reservationDTO.dateFrom')}"
+                       th:errors="*{reservationDTO.dateFrom}"></p>
                 </div>
                 <div class="form-outline mb-4">
                     <div class="input-group date">
-                        <input th:field="*{dateTo}" class="form-control" type="datetime-local"
+                        <input th:field="*{reservationDTO.dateTo}" class="form-control"
+                               type="datetime-local"
                                id="config-date-to" placeholder="Set parking time to">
                     </div>
-                    <p th:if="${#fields.hasErrors('dateTo')}" th:errors="*{dateTo}"></p>
+                    <p th:if="${#fields.hasErrors('reservationDTO.dateTo')}"
+                       th:errors="*{reservationDTO.dateTo}"></p>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="price-input">Price</label>

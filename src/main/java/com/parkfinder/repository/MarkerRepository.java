@@ -13,6 +13,21 @@ import java.util.List;
 public interface MarkerRepository extends JpaRepository<Marker, Long> {
     Marker findByLatitudeAndLongitude(double latitude, double longitude);
 
-    @Query("SELECT m FROM Marker m WHERE m.dateFrom <= ?1 AND m.dateTo >= ?2")
+
+    /**
+     * Returns a list of available markers that do not have any reservations
+     * overlapping with the specified date range.
+     *
+     * @param dateFrom the start of the date range to check for availability.
+     * @param dateTo   the end of the date range to check for availability.
+     * @return a list of available markers.
+     */
+    @Query("SELECT DISTINCT m FROM Marker m " +
+            "LEFT JOIN m.reservations r " +
+            "ON ((r.dateFrom BETWEEN :dateFrom AND :dateTo) OR " +
+            "(r.dateTo BETWEEN :dateFrom AND :dateTo) OR " +
+            "(:dateFrom BETWEEN r.dateFrom AND r.dateTo) OR " +
+            "(:dateTo BETWEEN r.dateFrom AND r.dateTo)) " +
+            "WHERE r.id IS NULL")
     List<Marker> findByDateBetween(@Param("dateFrom") LocalDateTime dateFrom, @Param("dateTo") LocalDateTime dateTo);
 }

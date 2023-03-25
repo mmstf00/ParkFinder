@@ -1,9 +1,14 @@
 package com.parkfinder.service;
 
 import com.parkfinder.entity.Marker;
+import com.parkfinder.entity.Reservation;
 import com.parkfinder.model.MarkerDTO;
+import com.parkfinder.model.ReservationRequest;
 import com.parkfinder.repository.MarkerRepository;
+import com.parkfinder.repository.ReservationRepository;
+import com.parkfinder.util.ReservationUtil;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,13 +18,11 @@ import static com.parkfinder.util.DtoToEntityConverter.getMarkerEntity;
 
 @Service
 @Transactional // Fix for 403 error.
+@RequiredArgsConstructor
 public class MarkerService {
 
     private final MarkerRepository markerRepository;
-
-    public MarkerService(MarkerRepository markerRepository) {
-        this.markerRepository = markerRepository;
-    }
+    private final ReservationRepository reservationRepository;
 
     public void addMarker(MarkerDTO markerDTO) {
         Marker marker = getMarkerEntity(markerDTO);
@@ -43,11 +46,23 @@ public class MarkerService {
         markerRepository.save(markerToBeUpdated);
     }
 
-    public void updateMarkerReservationById(Long id, boolean reservation) {
-        Marker markerToBeUpdated = getMarkerById(id);
-        if (markerToBeUpdated != null) {
-            markerToBeUpdated.setReservable(reservation);
-            markerRepository.save(markerToBeUpdated);
+    public void makeReservation(ReservationRequest reservationRequest) {
+
+        if (reservationRequest == null) {
+            throw new IllegalArgumentException("Reservation request cannot be null");
+        }
+
+        Marker parkingToBeReserved = getMarkerById(reservationRequest.getId());
+
+        if (parkingToBeReserved != null) {
+            List<Reservation> reservations = parkingToBeReserved.getReservations();
+            Reservation reservation = ReservationUtil.getReservationFromRequest(reservationRequest);
+            reservations.add(reservation);
+
+            parkingToBeReserved.setReservations(reservations);
+
+            reservation.setMarker(parkingToBeReserved);
+            reservationRepository.save(reservation);
         }
     }
 

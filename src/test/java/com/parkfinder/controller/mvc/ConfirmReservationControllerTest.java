@@ -1,7 +1,9 @@
 package com.parkfinder.controller.mvc;
 
 import com.parkfinder.entity.Marker;
+import com.parkfinder.entity.Reservation;
 import com.parkfinder.entity.User;
+import com.parkfinder.model.ConfirmReservationRequest;
 import com.parkfinder.service.MarkerService;
 import com.parkfinder.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +19,11 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,19 +42,33 @@ class ConfirmReservationControllerTest {
     private ConfirmReservationController confirmReservationController;
 
     private Marker marker;
+    private ConfirmReservationRequest request;
 
     @BeforeEach
     void init() {
+        List<Reservation> reservations = new ArrayList<>();
+        Reservation reservation = new Reservation();
+
+        reservation.setDateFrom(LocalDateTime.now());
+        reservation.setDateTo(LocalDateTime.now().plusDays(1));
+        reservations.add(reservation);
+
         marker = new Marker();
         marker.setId(123L);
         marker.setAddress("123 Main St");
         marker.setPlaceId("abc123");
         marker.setPriceTag(5.0);
-        marker.setDateFrom(LocalDateTime.now());
-        marker.setDateTo(LocalDateTime.now().plusDays(1));
+        marker.setReservations(reservations);
         marker.setLatitude(38.8977);
         marker.setLongitude(77.0365);
         marker.setReservable(true);
+
+        request = new ConfirmReservationRequest();
+        request.setParkingId(123L);
+        request.setParkingDateFrom(LocalDate.now());
+        request.setParkingTimeFrom(LocalTime.now());
+        request.setParkingDateTo(LocalDate.now());
+        request.setParkingTimeTo(LocalTime.now());
     }
 
     @Test
@@ -69,7 +89,7 @@ class ConfirmReservationControllerTest {
         when(markerService.getMarkerById(123L)).thenReturn(marker);
 
         // Act
-        String result = confirmReservationController.getConfirmationPage(model, "123");
+        String result = confirmReservationController.getConfirmationPage(model, request);
 
         // Assert
         assertEquals("confirm-reservation", result);
@@ -89,7 +109,7 @@ class ConfirmReservationControllerTest {
         when(markerService.getMarkerById(123L)).thenReturn(marker);
 
         // Act
-        String result = confirmReservationController.getConfirmationPage(model, "123");
+        String result = confirmReservationController.getConfirmationPage(model, request);
 
         // Assert
         assertEquals("confirm-reservation", result);

@@ -1,13 +1,11 @@
 package com.parkfinder.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -20,10 +18,9 @@ public class Marker {
     private String address;
     private String placeId;
     private double priceTag;
-    @Column(columnDefinition = "TIMESTAMP(0)")
-    private LocalDateTime dateFrom;
-    @Column(columnDefinition = "TIMESTAMP(0)")
-    private LocalDateTime dateTo;
+    @OneToMany(mappedBy = "marker", fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Reservation> reservations;
     @Column(unique = true)
     private double latitude;
     @Column(unique = true)
@@ -42,13 +39,12 @@ public class Marker {
                 Objects.equals(id, marker.id) &&
                 Objects.equals(address, marker.address) &&
                 Objects.equals(placeId, marker.placeId) &&
-                Objects.equals(dateFrom, marker.dateFrom) &&
-                Objects.equals(dateTo, marker.dateTo);
+                Objects.equals(reservations, marker.reservations);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, address, placeId, priceTag,
-                dateFrom, dateTo, latitude, longitude, isReservable);
+                reservations, latitude, longitude, isReservable);
     }
 }

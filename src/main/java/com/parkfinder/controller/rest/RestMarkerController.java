@@ -1,7 +1,7 @@
 package com.parkfinder.controller.rest;
 
 import com.parkfinder.entity.Marker;
-import com.parkfinder.model.ReservationModel;
+import com.parkfinder.model.ReservationRequest;
 import com.parkfinder.service.MarkerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -41,8 +41,8 @@ public class RestMarkerController {
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<String> updateMarker(@RequestBody ReservationModel reservation) {
-        markerService.updateMarkerReservationById(reservation.getId(), reservation.isNotReserved());
+    public ResponseEntity<String> makeReservation(@RequestBody ReservationRequest reservationRequest) {
+        markerService.makeReservation(reservationRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
