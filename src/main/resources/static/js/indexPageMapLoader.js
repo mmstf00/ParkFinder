@@ -19,9 +19,15 @@ function initMap() {
     updateMarkersOnSearch(map);
 }
 
-// Getting all data from certain endpoint.
 function populateAllMarkers(map) {
-    let endpoint = "api/v1";
+    let parkingFrom = document.getElementById("from-date-picker");
+    let parkingUntil = document.getElementById("to-date-picker");
+    let endpoint = `api/v1`; // For Admin page all markers will be rendered
+
+    if (parkingFrom != null && parkingUntil != null) {
+        endpoint = `api/v1/search?dateFrom=${parkingFrom.value}&dateTo=${parkingUntil.value}`;
+    }
+
     populateMarkersFromEndpointIntoMap(map, endpoint);
     loadParkListItems(endpoint);
 }
