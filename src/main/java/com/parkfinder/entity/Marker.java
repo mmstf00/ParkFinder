@@ -25,7 +25,6 @@ public class Marker {
     private double latitude;
     @Column(unique = true)
     private double longitude;
-    private boolean isReservable = true;
     @Column(columnDefinition = "text", length = 490)
     private String detailedInformation;
 
@@ -37,7 +36,6 @@ public class Marker {
         return Double.compare(marker.priceTag, priceTag) == 0 &&
                 Double.compare(marker.latitude, latitude) == 0 &&
                 Double.compare(marker.longitude, longitude) == 0 &&
-                isReservable == marker.isReservable &&
                 Objects.equals(id, marker.id) &&
                 Objects.equals(address, marker.address) &&
                 Objects.equals(placeId, marker.placeId) &&
@@ -47,6 +45,6 @@ public class Marker {
     @Override
     public int hashCode() {
         return Objects.hash(id, address, placeId, priceTag,
-                reservations, latitude, longitude, isReservable);
+                reservations, latitude, longitude);
     }
 }

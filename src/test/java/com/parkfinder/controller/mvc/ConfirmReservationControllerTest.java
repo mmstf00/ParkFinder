@@ -61,7 +61,6 @@ class ConfirmReservationControllerTest {
         marker.setReservations(reservations);
         marker.setLatitude(38.8977);
         marker.setLongitude(77.0365);
-        marker.setReservable(true);
 
         request = new ConfirmReservationRequest();
         request.setParkingId(123L);

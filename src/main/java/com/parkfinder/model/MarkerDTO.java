@@ -16,6 +16,5 @@ public class MarkerDTO {
     private ReservationDTO reservationDTO;
     private double latitude;
     private double longitude;
-    private boolean isReservable = true;
     private String detailedInformation;
 }

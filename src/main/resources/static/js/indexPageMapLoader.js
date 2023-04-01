@@ -108,11 +108,6 @@ function showMessageWhenNoParkingsFound(filteredData, parksList) {
 }
 
 function loadParking(markerData) {
-    let isReservable = markerData.reservable;
-    let reservableClass = isReservable ? 'span-reservable' : 'span-reserved';
-    let reservableStyle = isReservable ? 'color: green' : 'color: red';
-    let reservableText = isReservable ? 'RESERVABLE' : 'RESERVED';
-
     // Create the parking HTML element
     let parkingSpace = document.createElement('div');
     parkingSpace.classList.add('parking-space-class');
@@ -121,7 +116,7 @@ function loadParking(markerData) {
         <div class="parking-details" id="${markerData.id}">
           <div class="parking-address">${markerData.address}</div>
           <div class="parking-reservable">
-            <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
+            <span class="span-reservable" style="color: green">RESERVABLE</span>
           </div>
           <div id="parking-details-row">
             <div id="price-wrapper">
@@ -142,18 +137,6 @@ function loadParking(markerData) {
 }
 
 function loadDetailsForParking(markerData) {
-    let isReservable = markerData.reservable;
-    let reservableClass = isReservable ? 'span-reservable' : 'span-reserved';
-    let reservableStyle = isReservable ? 'color: green' : 'color: red';
-    let reservableText = isReservable ? 'RESERVABLE' : 'RESERVED';
-
-    let reservationButtonClass = isReservable ? 'btn btn-success' : 'btn btn-danger';
-    let reservationButtonId = isReservable ? 'reservation-button' : 'reserved-button';
-    let reservationButtonText = isReservable ? 'Reserve for' : 'RESERVED';
-    let reservationButtonStyle = isReservable ? 'background-color: green' : 'background-color: red';
-
-    let reservationButtonSpanStyle = isReservable ? 'display: inline' : 'display: none';
-
     // Create the parking details HTML element
     let parkingSpaceInformation = document.createElement('div');
     parkingSpaceInformation.classList.add('detailed-park-information');
@@ -162,7 +145,7 @@ function loadDetailsForParking(markerData) {
         <div class="location-details">
             <div class="parking-address" id="${markerData.id}">${markerData.address}</div>
             <div class="parking-reservable">
-                <span class="${reservableClass}" style="${reservableStyle}">${reservableText}</span>
+                <span class="span-reservable" style="color: green">RESERVABLE</span>
             </div>
         </div>
         <div class="standout-details">
@@ -233,12 +216,12 @@ function loadDetailsForParking(markerData) {
             </div>
         </div>
         <div class="reservation-button-wrapper">
-            <button id="${reservationButtonId}" 
-                    class="${reservationButtonClass}" 
-                    style="${reservationButtonStyle}" 
+            <button id="reservation-button" 
+                    class="btn btn-success" 
+                    style="background-color: green" 
                     value="${markerData.id}">
-                ${reservationButtonText}
-                <span style="${reservationButtonSpanStyle}">
+                Reserve for
+                <span style="display: inline">
                     $${markerData.priceTag.toFixed(2)}
                 </span>
             </button>

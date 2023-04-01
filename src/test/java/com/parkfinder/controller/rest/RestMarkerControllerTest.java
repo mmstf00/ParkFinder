@@ -58,7 +58,6 @@ class RestMarkerControllerTest {
         markerDTO.setPriceTag(5.0);
         markerDTO.setLatitude(37.7749);
         markerDTO.setLongitude(-122.4194);
-        markerDTO.setReservable(true);
 
         marker = getMarkerEntity(markerDTO);
         marker.setId(1L);
@@ -69,7 +68,6 @@ class RestMarkerControllerTest {
         markerDTO1.setPriceTag(5.0);
         markerDTO1.setLatitude(40.7128);
         markerDTO1.setLongitude(-74.0060);
-        markerDTO1.setReservable(true);
 
         marker1 = getMarkerEntity(markerDTO1);
         marker1.setId(2L);

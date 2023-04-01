@@ -59,7 +59,6 @@ class MarkerServiceTest {
         markerDTO.setPriceTag(5.0);
         markerDTO.setLatitude(38.8977);
         markerDTO.setLongitude(77.0365);
-        markerDTO.setReservable(true);
 
         marker = getMarkerEntity(markerDTO);
         marker.setId(1L);
@@ -112,7 +111,7 @@ class MarkerServiceTest {
     }
 
     @Test
-    @Disabled("Will be fixed later")
+    @Disabled("Should be moved to ReservationTest.java")
     void testUpdateMarkerReservationById() {
         when(markerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(marker));
         when(markerRepository.save(any(Marker.class))).thenReturn(marker);
@@ -121,7 +120,6 @@ class MarkerServiceTest {
 
         verify(markerRepository, times(1)).findById(any(Long.class));
         verify(markerRepository, times(1)).save(any(Marker.class));
-        assertFalse(marker.isReservable());
     }
 
     @Test
