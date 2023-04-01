@@ -26,6 +26,8 @@ public class Marker {
     @Column(unique = true)
     private double longitude;
     private boolean isReservable = true;
+    @Column(columnDefinition = "text", length = 490)
+    private String detailedInformation;
 
     @Override
     public boolean equals(Object o) {

@@ -17,4 +17,5 @@ public class MarkerDTO {
     private double latitude;
     private double longitude;
     private boolean isReservable = true;
+    private String detailedInformation;
 }
