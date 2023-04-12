@@ -111,7 +111,6 @@ li {
     position: relative;
     -webkit-transition: background .25s ease-in-out, color .25s ease-in-out;
     transition: background .25s ease-in-out, color .25s ease-in-out;
-    width: -moz-fit-content;
     text-align: center;
     font-size: 13px;
     font-weight: bold;
@@ -173,7 +172,7 @@ li {
     margin-left: 5px;
 }
 
-.empty-parkings-list{
+.empty-parkings-list {
     display: flex;
     justify-content: center;
     align-items: center;

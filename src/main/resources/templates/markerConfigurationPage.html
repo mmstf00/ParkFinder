@@ -58,9 +58,11 @@
                     <div>
                         <label class="form-label" for="address-input">Address</label>
                         <input th:field="*{address}" type="text" id="address-input"
-                               class="form-control" maxlength="40"/>
+                               class="form-control" maxlength="40"
+                               placeholder="Click on map to get the address"/>
                     </div>
-                    <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+                    <p style="color: red"
+                       th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
                 </div>
 
                 <div class="form-outline mb-4">
@@ -74,7 +76,8 @@
                     <label class="form-label" for="price-input">Price</label>
                     <input th:field="*{priceTag}" type="text" id="price-input"
                            class="form-control"/>
-                    <p th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></p>
+                    <p style="color: red"
+                       th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></p>
                 </div>
 
                 <button type="submit" class="btn btn-success btn-block mb-4">
