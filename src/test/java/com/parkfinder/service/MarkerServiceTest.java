@@ -110,17 +110,17 @@ class MarkerServiceTest {
         verify(markerRepository, times(1)).save(any(Marker.class));
     }
 
-//    @Test
-//    @Disabled("Should be moved to ReservationTest.java")
-//    void testUpdateMarkerReservationById() {
-//        when(markerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(marker));
-//        when(markerRepository.save(any(Marker.class))).thenReturn(marker);
-//
-//        markerService.makeReservation(reservationRequest);
-//
-//        verify(markerRepository, times(1)).findById(any(Long.class));
-//        verify(markerRepository, times(1)).save(any(Marker.class));
-//    }
+    @Test
+    @Disabled("Should be moved to ReservationTest.java")
+    void testUpdateMarkerReservationById() {
+        when(markerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(marker));
+        when(markerRepository.save(any(Marker.class))).thenReturn(marker);
+
+        markerService.makeReservation(reservationRequest);
+
+        verify(markerRepository, times(1)).findById(any(Long.class));
+        verify(markerRepository, times(1)).save(any(Marker.class));
+    }
 
     @Test
     void testDeleteMarker() {
