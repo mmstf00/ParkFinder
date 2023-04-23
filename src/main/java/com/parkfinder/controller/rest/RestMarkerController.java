@@ -2,6 +2,7 @@ package com.parkfinder.controller.rest;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.ReservationRequest;
+import com.parkfinder.model.UpdateRequest;
 import com.parkfinder.service.MarkerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +26,12 @@ public class RestMarkerController {
         return new ResponseEntity<>(markers, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Marker> getById(@PathVariable Long id) {
+        Marker marker = markerService.getMarkerById(id);
+        return new ResponseEntity<>(marker, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/getMarker", produces = "application/json")
     public ResponseEntity<Marker> getMarker(@RequestParam("lat") double latitude,
                                             @RequestParam("lng") double longitude) {
@@ -43,6 +50,18 @@ public class RestMarkerController {
     @PutMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> makeReservation(@RequestBody ReservationRequest reservationRequest) {
         markerService.makeReservation(reservationRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/update")
+    public ResponseEntity<String> updateMarker(@RequestBody UpdateRequest updateRequest) {
+        markerService.updateMarker(updateRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteMarker(@PathVariable Long id) {
+        markerService.deleteMarkerById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -294,8 +294,109 @@ function addMarker(marker, map) {
         // Pan to the marker's position and set the zoom level
         map.panTo(advancedMarker.position);
         map.setZoom(14);
-        addOpenParkDetailsFunctionality(advancedMarker);
+
+        // If the endpoint is configureMarkers then show Update/Delete window,
+        // otherwise open details of parking
+        if (window.location.pathname.replace(/\/$/, '') === '/configureMarkers') {
+            openInfoWindow(map, advancedMarker);
+        } else {
+            addOpenParkDetailsFunctionality(advancedMarker);
+        }
     });
+}
+
+function openInfoWindow(map, advancedMarker) {
+    const contentString = `
+                <div id="buttons-container">
+                  <button type="button" id="update-button" class="btn btn-warning">
+                    Update
+                  </button>
+                  <button type="button" id="delete-button" class="btn btn-danger">
+                    Delete
+                  </button>
+                </div>
+            `;
+
+    const infoWindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+
+    performRequest(advancedMarker, infoWindow)
+    infoWindow.open(map, advancedMarker);
+}
+
+// Perform Update / Delete action on button click
+function performRequest(advancedMarker, infoWindow) {
+    infoWindow.addListener("domready", () => {
+        const updateButton = document.querySelector("#update-button");
+        const deleteButton = document.querySelector("#delete-button");
+
+        updateButton.addEventListener("click", () => {
+            let markerId = advancedMarker.metadata.id;
+
+            updateMarker(markerId);
+        });
+
+        deleteButton.addEventListener("click", () => {
+            let markerId = advancedMarker.metadata.id;
+            deleteMarker(markerId);
+            location.reload();
+        });
+    });
+}
+
+function updateMarker(id) {
+    document.getElementById("add-parking-button").style.display = "none";
+    let updateButton = document.getElementById("update-parking-button");
+    updateButton.style.display = "block";
+
+
+    let marker = fetch(`/api/v1/${id}`, {
+        method: 'GET', headers: {
+            'Content-Type': 'application/json'
+        }
+    }).catch(error => console.error(error));
+
+    marker.then(function (result) {
+        // Filling the form with current data, that can be updated
+        result.json().then(function (data) {
+            console.log(data)
+            let address = document.getElementById("address-input");
+            address.value = data.address;
+
+            let details = document.getElementById("details");
+            details.value = data.detailedInformation;
+
+            let price = document.getElementById("price-input");
+            price.value = data.priceTag;
+
+            updateButton.addEventListener('click', () => {
+                updateMarkerData(data.id, address.value, details.value, price.value);
+                location.reload();
+            })
+        });
+    });
+}
+
+function updateMarkerData(id, address, details, price) {
+    fetch('/api/v1/update', {
+        method: 'PUT', headers: {
+            'Content-Type': 'application/json'
+        }, body: JSON.stringify({
+            id: id,
+            address: address,
+            details: details,
+            price: price,
+        })
+    }).catch(error => console.error(error));
+}
+
+function deleteMarker(id) {
+    fetch(`/api/v1/${id}`, {
+        method: 'DELETE', headers: {
+            'Content-Type': 'application/json'
+        }
+    }).catch(error => console.error(error));
 }
 
 function setMarkerPrice(price) {

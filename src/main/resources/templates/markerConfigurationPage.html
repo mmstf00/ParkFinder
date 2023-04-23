@@ -80,8 +80,13 @@
                        th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></p>
                 </div>
 
-                <button type="submit" class="btn btn-success btn-block mb-4">
+                <button type="submit" id="add-parking-button" class="btn btn-success btn-block mb-4">
                     Add Park Location
+                </button>
+
+                <button type="button" id="update-parking-button" style="display: none"
+                        class="btn btn-warning btn-block mb-4">
+                    Update parking
                 </button>
 
                 <input th:field="*{placeId}" type="hidden" id="place-id" class="form-control"/>

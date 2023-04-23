@@ -4,6 +4,7 @@ import com.parkfinder.entity.Marker;
 import com.parkfinder.entity.Reservation;
 import com.parkfinder.model.MarkerDTO;
 import com.parkfinder.model.ReservationRequest;
+import com.parkfinder.model.UpdateRequest;
 import com.parkfinder.repository.MarkerRepository;
 import com.parkfinder.repository.ReservationRepository;
 import com.parkfinder.util.ReservationUtil;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.parkfinder.util.DtoToEntityConverter.getMarkerEntity;
+import static com.parkfinder.util.DtoToEntityConverter.getUpdatedMarker;
 
 @Service
 @Transactional // Fix for 403 error.
@@ -46,6 +48,12 @@ public class MarkerService {
         markerRepository.save(markerToBeUpdated);
     }
 
+    public void updateMarker(UpdateRequest updateRequest) {
+        Marker marker = getMarkerById(updateRequest.getId());
+        Marker updatedMarker = getUpdatedMarker(marker, updateRequest);
+        markerRepository.save(updatedMarker);
+    }
+
     public void makeReservation(ReservationRequest reservationRequest) {
 
         if (reservationRequest == null) {
@@ -69,6 +77,10 @@ public class MarkerService {
     public void deleteMarker(MarkerDTO markerDTO) {
         Marker markerToBeDeleted = getMarkerEntity(markerDTO);
         markerRepository.delete(markerToBeDeleted);
+    }
+
+    public void deleteMarkerById(Long id) {
+        markerRepository.deleteById(id);
     }
 
     public List<Marker> getAllBySelectedDateRange(LocalDateTime dateFrom, LocalDateTime dateTo) {

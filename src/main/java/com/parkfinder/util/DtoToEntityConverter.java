@@ -3,6 +3,7 @@ package com.parkfinder.util;
 import com.parkfinder.entity.Marker;
 import com.parkfinder.entity.User;
 import com.parkfinder.model.MarkerDTO;
+import com.parkfinder.model.UpdateRequest;
 import com.parkfinder.model.UserDTO;
 
 public class DtoToEntityConverter {
@@ -19,6 +20,13 @@ public class DtoToEntityConverter {
         marker.setLatitude(markerDTO.getLatitude());
         marker.setLongitude(markerDTO.getLongitude());
         marker.setDetailedInformation(markerDTO.getDetailedInformation());
+        return marker;
+    }
+
+    public static Marker getUpdatedMarker(Marker marker, UpdateRequest updateRequest) {
+        marker.setAddress(updateRequest.getAddress());
+        marker.setDetailedInformation(updateRequest.getDetails());
+        marker.setPriceTag(updateRequest.getPrice());
         return marker;
     }
 

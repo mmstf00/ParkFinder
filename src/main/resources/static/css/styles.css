@@ -140,6 +140,12 @@ li {
     outline: none;
 }
 
+/* InfoWindow styles*/
+
+#update-button {
+    margin-right: 10px;
+}
+
 /*             Parkings list styles
    ============================================= */
 
