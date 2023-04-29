@@ -215,7 +215,7 @@ function loadDetailsForParking(markerData) {
                     isn't anything embarrassing hidden in the middle of text.
                 </p>
                 <button id="directions-button" 
-                        class="btn btn-warning" 
+                        class="btn btn-info" 
                         onclick="redirectToDirectionsPage('${markerData.placeId}')"> 
                     Show directions
                 </button>
