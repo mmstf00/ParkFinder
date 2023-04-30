@@ -18,7 +18,7 @@ public class Marker {
     private String address;
     private String placeId;
     private double priceTag;
-    @OneToMany(mappedBy = "marker", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "marker", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private List<Reservation> reservations;
     @Column(unique = true)

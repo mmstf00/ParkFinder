@@ -20,7 +20,7 @@ public class Reservation {
     @Column(columnDefinition = "TIMESTAMP(0)")
     private LocalDateTime dateTo;
     private String plateNumber;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     private Marker marker;
 
