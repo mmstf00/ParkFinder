@@ -25,6 +25,7 @@ public class ConfirmReservationController {
 
     private final UserService userService;
     private final MarkerService markerService;
+    private Marker currentParking;
 
     @GetMapping
     public String getConfirmationPage(Model model, @ModelAttribute ConfirmReservationRequest request) {
@@ -35,8 +36,8 @@ public class ConfirmReservationController {
         Optional<User> user = userService.getUserByEmail(email);
         user.ifPresent(value -> model.addAttribute("user", value));
 
-        Marker parking = markerService.getMarkerById(request.getParkingId());
-        model.addAttribute("parking", parking);
+        currentParking = markerService.getMarkerById(request.getParkingId());
+        model.addAttribute("parking", currentParking);
 
         Duration duration = DateTimeUtil.getParkingDurationFromRequest(request);
         if (duration.toHours() == 0) {
@@ -48,5 +49,11 @@ public class ConfirmReservationController {
         }
 
         return "confirm-reservation";
+    }
+
+    @GetMapping("/success")
+    public String successfulReservationPage(Model model) {
+        model.addAttribute("parking", currentParking);
+        return "successful-reservation";
     }
 }

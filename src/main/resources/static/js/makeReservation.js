@@ -78,8 +78,7 @@ payNowButton.addEventListener("click", () => {
 
     let plateNumber = vehiclePlateInput.value;
     makeReservation(parkingId, plateNumber, parkingDateFrom, parkingTimeFrom, parkingDateTo, parkingTimeTo);
-    // TODO: Redirect to successful reservation page
-    window.open(`/`, "_self");
+    window.open(`/confirmation/success`, "_self");
 });
 
 function makeReservation(parkingId, plateNumber, parkingDateFrom, parkingTimeFrom, parkingDateTo, parkingTimeTo) {
