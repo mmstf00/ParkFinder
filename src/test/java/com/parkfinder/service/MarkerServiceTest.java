@@ -2,7 +2,7 @@ package com.parkfinder.service;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.entity.Reservation;
-import com.parkfinder.model.MarkerDTO;
+import com.parkfinder.model.dto.MarkerDTO;
 import com.parkfinder.model.ReservationRequest;
 import com.parkfinder.repository.MarkerRepository;
 import com.parkfinder.repository.ReservationRepository;

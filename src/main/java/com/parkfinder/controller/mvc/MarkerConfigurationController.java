@@ -1,7 +1,7 @@
 package com.parkfinder.controller.mvc;
 
 import com.parkfinder.entity.Marker;
-import com.parkfinder.model.MarkerDTO;
+import com.parkfinder.model.dto.MarkerDTO;
 import com.parkfinder.service.MarkerService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

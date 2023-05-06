@@ -2,9 +2,9 @@ package com.parkfinder.util;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.entity.User;
-import com.parkfinder.model.MarkerDTO;
+import com.parkfinder.model.dto.MarkerDTO;
 import com.parkfinder.model.UpdateRequest;
-import com.parkfinder.model.UserDTO;
+import com.parkfinder.model.dto.UserDTO;
 
 public class DtoToEntityConverter {
 

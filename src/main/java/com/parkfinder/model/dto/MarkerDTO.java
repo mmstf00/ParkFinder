@@ -1,4 +1,4 @@
-package com.parkfinder.model;
+package com.parkfinder.model.dto;
 
 import jakarta.validation.constraints.DecimalMin;
 import lombok.Getter;

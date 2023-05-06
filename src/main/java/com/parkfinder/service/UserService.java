@@ -1,7 +1,7 @@
 package com.parkfinder.service;
 
 import com.parkfinder.entity.User;
-import com.parkfinder.model.UserDTO;
+import com.parkfinder.model.dto.UserDTO;
 import com.parkfinder.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

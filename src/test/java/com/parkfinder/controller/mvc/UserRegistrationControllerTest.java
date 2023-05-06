@@ -1,6 +1,6 @@
 package com.parkfinder.controller.mvc;
 
-import com.parkfinder.model.UserDTO;
+import com.parkfinder.model.dto.UserDTO;
 import com.parkfinder.service.UserService;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.BeforeEach;

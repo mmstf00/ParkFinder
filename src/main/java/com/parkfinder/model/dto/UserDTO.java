@@ -1,4 +1,4 @@
-package com.parkfinder.model;
+package com.parkfinder.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
