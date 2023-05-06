@@ -73,7 +73,7 @@
                                 <svg class="bi d-block mx-auto mb-1" width="1" height="1">
                                     <use xlink:href="#people-circle"></use>
                                 </svg>
-                                Welcome, <span sec:authentication="name"></span>
+                                Welcome, <span th:text="${user.username}"></span>
                             </div>
                         </li>
                     </ul>

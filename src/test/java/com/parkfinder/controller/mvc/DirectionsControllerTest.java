@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DirectionsControllerTest {
 
-    private final DirectionsController controller = new DirectionsController();
+    private final DirectionsController controller = new DirectionsController(null);
 
     @Test
     void testDirectionsPage() {
-        String directionsPage = controller.getDirections();
+        String directionsPage = controller.getDirections(null);
         assertEquals("directions", directionsPage);
     }
 }
