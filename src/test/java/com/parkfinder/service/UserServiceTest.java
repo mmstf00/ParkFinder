@@ -3,6 +3,7 @@ package com.parkfinder.service;
 import com.parkfinder.entity.User;
 import com.parkfinder.model.dto.UserDTO;
 import com.parkfinder.repository.UserRepository;
+import com.parkfinder.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,14 +14,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
     @Mock
     private UserRepository userRepository;
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
     private UserDTO userDTO;
     private User user;
 

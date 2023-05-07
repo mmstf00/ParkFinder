@@ -1,14 +1,8 @@
 package com.parkfinder.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
-
-import java.util.Optional;
-
 import com.parkfinder.entity.User;
 import com.parkfinder.repository.UserRepository;
+import com.parkfinder.service.impl.UserDetailsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,13 +11,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 class CustomUserDetailsServiceTest {
 
     @Mock
     private UserRepository userRepository;
     @InjectMocks
-    private CustomUserDetailsService customUserDetailsService;
+    private UserDetailsServiceImpl customUserDetailsService;
 
     @Test
     void testLoadUserByUsernameWhenUserExists() {

@@ -2,17 +2,18 @@ package com.parkfinder.service;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.entity.Reservation;
-import com.parkfinder.model.dto.MarkerDTO;
 import com.parkfinder.model.ReservationRequest;
+import com.parkfinder.model.UpdateRequest;
+import com.parkfinder.model.dto.MarkerDTO;
 import com.parkfinder.repository.MarkerRepository;
 import com.parkfinder.repository.ReservationRepository;
+import com.parkfinder.service.impl.MarkerServiceImpl;
 import com.parkfinder.util.ReservationUtil;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -34,22 +35,29 @@ class MarkerServiceTest {
     private MarkerRepository markerRepository;
     @Mock
     private ReservationRepository reservationRepository;
-    private ReservationRequest reservationRequest;
-    @InjectMocks
-    private MarkerService markerService;
+    private UpdateRequest updateRequest;
+    private ExtendedMarkerService markerService;
     private MarkerDTO markerDTO;
     private Marker marker;
     private List<Marker> markerList;
 
     @BeforeEach
     void setUp() {
-        reservationRequest = new ReservationRequest();
+        ReservationRequest reservationRequest = new ReservationRequest();
         reservationRequest.setId(1L);
         reservationRequest.setPlateNumber("H4595BH");
         reservationRequest.setDateFrom(LocalDate.of(2023, 3, 25));
         reservationRequest.setTimeFrom(LocalTime.of(11, 30));
         reservationRequest.setDateTo(LocalDate.of(2023, 3, 25));
         reservationRequest.setTimeTo(LocalTime.of(12, 30));
+
+        updateRequest = new UpdateRequest();
+        updateRequest.setId(1L);
+        updateRequest.setAddress("Test Update Address");
+        updateRequest.setDetails("Test Update Details");
+        updateRequest.setPrice(12.34);
+
+        markerService = new MarkerServiceImpl(markerRepository, reservationRepository);
 
         Reservation reservation = ReservationUtil.getReservationFromRequest(reservationRequest);
 
@@ -93,6 +101,19 @@ class MarkerServiceTest {
     }
 
     @Test
+    void testGetMarkerById() {
+        Long id = 1L;
+
+        Marker marker = new Marker();
+        marker.setId(id);
+
+        when(markerRepository.findById(id)).thenReturn(Optional.of(marker));
+
+        Marker result = markerService.getMarkerById(id);
+        assertEquals(marker, result);
+    }
+
+    @Test
     void testGetMarkers() {
         when(markerRepository.findAll()).thenReturn(markerList);
 
@@ -111,15 +132,55 @@ class MarkerServiceTest {
     }
 
     @Test
-    @Disabled("Should be moved to ReservationTest.java")
-    void testUpdateMarkerReservationById() {
-        when(markerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(marker));
+    void testUpdateMarkerRequest() {
         when(markerRepository.save(any(Marker.class))).thenReturn(marker);
+        when(markerRepository.findById(1L)).thenReturn(Optional.ofNullable(marker));
 
+        markerService.updateMarker(updateRequest);
+
+        verify(markerRepository, times(1)).save(any(Marker.class));
+    }
+
+    @Test
+    void testMakeReservation() {
+
+        // Create a marker to reserve
+        Marker markerToReserve = new Marker();
+        markerToReserve.setId(1L);
+        markerToReserve.setReservations(new ArrayList<>());
+
+        // Set up the mock marker repository to return the marker to reserve
+        when(markerRepository.findById(1L)).thenReturn(Optional.of(markerToReserve));
+
+        // Create a reservation request
+        ReservationRequest reservationRequest = new ReservationRequest();
+        reservationRequest.setId(1L);
+        reservationRequest.setDateFrom(LocalDate.now());
+        reservationRequest.setTimeFrom(LocalTime.now());
+        reservationRequest.setDateTo(LocalDate.now().plusDays(1));
+        reservationRequest.setTimeTo(LocalTime.now().plusHours(1));
+        reservationRequest.setPlateNumber("H1234BH");
+
+        // Call the makeReservation method
         markerService.makeReservation(reservationRequest);
 
-        verify(markerRepository, times(1)).findById(any(Long.class));
-        verify(markerRepository, times(1)).save(any(Marker.class));
+
+        // Verify that the marker repository's findById method was called with the correct argument
+        verify(markerRepository).findById(1L);
+
+        // Verify that the reservation repository's save method was called with the correct argument
+        verify(reservationRepository).save(Mockito.any(Reservation.class));
+
+        // Verify that the marker's reservations list was updated correctly
+        assertEquals(1, markerToReserve.getReservations().size());
+        assertEquals("H1234BH", markerToReserve.getReservations().get(0).getPlateNumber());
+    }
+
+    @Test
+    void testMakeReservationWithNullRequest() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            markerService.makeReservation(null);
+        }, "Reservation request cannot be null");
     }
 
     @Test
@@ -129,6 +190,13 @@ class MarkerServiceTest {
         markerService.deleteMarker(markerDTO);
 
         verify(markerRepository, times(1)).delete(any(Marker.class));
+    }
+
+    @Test
+    void testDeleteMarkerById() {
+        markerService.deleteMarkerById(1L);
+
+        verify(markerRepository).deleteById(1L);
     }
 
     @Test

@@ -1,9 +1,10 @@
 package com.parkfinder.controller.rest;
 
 import com.parkfinder.entity.Marker;
-import com.parkfinder.model.dto.MarkerDTO;
 import com.parkfinder.model.ReservationRequest;
-import com.parkfinder.service.MarkerService;
+import com.parkfinder.model.UpdateRequest;
+import com.parkfinder.model.dto.MarkerDTO;
+import com.parkfinder.service.ExtendedMarkerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +33,7 @@ import java.util.List;
 import static com.parkfinder.util.DtoToEntityConverter.getMarkerEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -44,7 +46,7 @@ class RestMarkerControllerTest {
     private int randomServerPort;
     private RestTemplate restTemplate;
     @MockBean
-    private MarkerService markerService;
+    private ExtendedMarkerService markerService;
     private Marker marker;
     private Marker marker1;
 
@@ -116,6 +118,25 @@ class RestMarkerControllerTest {
     }
 
     @Test
+    void testGetMarkerById() {
+        Long id = 2L;
+        Marker tempMarker = marker;
+        tempMarker.setId(2L);
+
+
+        when(markerService.getMarkerById(id)).thenReturn(tempMarker);
+
+        String url = "http://localhost:" + randomServerPort + "/api/v1/{id}";
+        ResponseEntity<Marker> response = restTemplate.getForEntity(
+                url,
+                Marker.class,
+                id);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(tempMarker, response.getBody());
+    }
+
+    @Test
     void testGetAllByDateRange() {
         LocalDateTime dateFrom = LocalDateTime.of(2022, 1, 1, 0, 0, 0);
         LocalDateTime dateTo = LocalDateTime.of(2022, 1, 2, 0, 0, 0);
@@ -139,7 +160,7 @@ class RestMarkerControllerTest {
     }
 
     @Test
-    void testUpdateMarker() throws Exception {
+    void testMakeReservation() throws Exception {
         ReservationRequest reservationRequest = new ReservationRequest();
         reservationRequest.setId(1L);
         reservationRequest.setPlateNumber("H4595BH");
@@ -159,4 +180,40 @@ class RestMarkerControllerTest {
                 .makeReservation(reservationRequest);
     }
 
+    @Test
+    void testUpdateReservation() throws Exception {
+        UpdateRequest updateRequest = new UpdateRequest();
+        updateRequest.setId(1L);
+        updateRequest.setAddress("Test Update Address");
+        updateRequest.setDetails("Test Update Details");
+        updateRequest.setPrice(12.34);
+
+        doNothing().when(markerService).updateMarker(updateRequest);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/update")
+                        .contentType(APPLICATION_JSON)
+                        .content("{\"id\":1," +
+                                "\"address\":\"Test Update Address\"," +
+                                "\"details\":\"Test Update Details\"," +
+                                "\"price\":12.34}")
+                        .accept(APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        verify(markerService, times(1)).updateMarker(updateRequest);
+        verifyNoMoreInteractions(markerService);
+    }
+
+    @Test
+    void testDeleteMarker() throws Exception {
+        Long markerId = 1L;
+
+        doNothing().when(markerService).deleteMarkerById(markerId);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/{id}", markerId)
+                        .accept(APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        verify(markerService, times(1)).deleteMarkerById(markerId);
+        verifyNoMoreInteractions(markerService);
+    }
 }

@@ -4,7 +4,7 @@ import com.parkfinder.entity.Marker;
 import com.parkfinder.entity.Reservation;
 import com.parkfinder.entity.User;
 import com.parkfinder.model.ConfirmReservationRequest;
-import com.parkfinder.service.MarkerService;
+import com.parkfinder.service.ExtendedMarkerService;
 import com.parkfinder.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ class ConfirmReservationControllerTest {
     @Mock
     private UserService userService;
     @Mock
-    private MarkerService markerService;
+    private ExtendedMarkerService markerService;
     @Mock
     private Model model;
     @InjectMocks
@@ -114,5 +114,12 @@ class ConfirmReservationControllerTest {
         assertEquals("confirm-reservation", result);
         Mockito.verify(userService).getUserByEmail("test@example.com");
         Mockito.verify(model, Mockito.never()).addAttribute("user", null);
+    }
+
+    @Test
+    void testSuccessfulReservationPage() {
+        Model model = Mockito.mock(Model.class);
+        String successPage = confirmReservationController.successfulReservationPage(model);
+        assertEquals("successful-reservation", successPage);
     }
 }

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DirectionsControllerTest {
@@ -22,35 +24,31 @@ class DirectionsControllerTest {
     @Mock
     private UserService userService;
 
+    @Mock
+    private Model model;
+
     @InjectMocks
-    private DirectionsController directionsController;
+    private DirectionsController controller;
 
     @Test
     void testGetDirections() {
-        // Create a mock Authentication object and set it on the SecurityContextHolder
-        Authentication authentication = Mockito.mock(Authentication.class);
-        Mockito.when(authentication.getName()).thenReturn("user@example.com");
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        // Create a mock User object to be returned by the UserService
+        // Arrange
+        String email = "test@example.com";
         User user = new User();
-        user.setEmail("user@example.com");
         user.setUsername("Test User");
-        Mockito.when(userService.getUserByEmail("user@example.com")).thenReturn(Optional.of(user));
+        Optional<User> optionalUser = Optional.of(user);
 
-        // Create a mock Model object
-        Model model = Mockito.mock(Model.class);
+        when(userService.getUserByEmail(email)).thenReturn(optionalUser);
 
-        // Call the getDirections() method on the DirectionsController
-        String result = directionsController.getDirections(model);
+        Authentication auth = new TestingAuthenticationToken(email, "password");
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
-        // Verify that the correct view name was returned
+        // Act
+        String result = controller.getDirections(model);
+
+        // Assert
+        verify(userService).getUserByEmail(email);
+        verify(model).addAttribute("user", user);
         assertEquals("directions", result);
-
-        // Verify that the UserService was called with the correct email address
-        Mockito.verify(userService).getUserByEmail("user@example.com");
-
-        // Verify that the User object was added to the Model with the correct name
-        Mockito.verify(model).addAttribute("user", user);
     }
 }

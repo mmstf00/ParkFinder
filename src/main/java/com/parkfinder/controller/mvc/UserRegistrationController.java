@@ -1,7 +1,7 @@
 package com.parkfinder.controller.mvc;
 
 import com.parkfinder.model.dto.UserDTO;
-import com.parkfinder.service.UserService;
+import com.parkfinder.service.ExtendedUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequiredArgsConstructor
 public class UserRegistrationController {
-    private final UserService userService;
+    private final ExtendedUserService userService;
 
     private static final String REGISTRATION_FORM = "registration-form";
     private static final String REGISTER_SUCCESS = "register-success-page";

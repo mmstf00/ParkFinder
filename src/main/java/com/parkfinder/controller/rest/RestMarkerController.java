@@ -3,7 +3,7 @@ package com.parkfinder.controller.rest;
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.ReservationRequest;
 import com.parkfinder.model.UpdateRequest;
-import com.parkfinder.service.MarkerService;
+import com.parkfinder.service.ExtendedMarkerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RestMarkerController {
 
-    private final MarkerService markerService;
+    private final ExtendedMarkerService markerService;
 
     @GetMapping(produces = "application/json")
     public ResponseEntity<List<Marker>> getAllMarkers() {

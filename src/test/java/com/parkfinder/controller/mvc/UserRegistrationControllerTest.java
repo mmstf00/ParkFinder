@@ -1,7 +1,7 @@
 package com.parkfinder.controller.mvc;
 
 import com.parkfinder.model.dto.UserDTO;
-import com.parkfinder.service.UserService;
+import com.parkfinder.service.ExtendedUserService;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ class UserRegistrationControllerTest {
     @InjectMocks
     private UserRegistrationController userRegistrationController;
     @Mock
-    private UserService userService;
+    private ExtendedUserService userService;
     @Mock
     private Validator validator;
     private BindingResult bindingResult;

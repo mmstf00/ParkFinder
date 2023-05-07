@@ -2,10 +2,11 @@ package com.parkfinder.repository;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.entity.Reservation;
-import com.parkfinder.service.MarkerService;
+import com.parkfinder.service.ExtendedMarkerService;
+import com.parkfinder.service.impl.MarkerServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -22,9 +23,14 @@ import static org.mockito.Mockito.when;
 class MarkerRepositoryTest {
     @Mock
     private MarkerRepository markerRepository;
+    @Mock
+    private ReservationRepository reservationRepository;
+    private ExtendedMarkerService markerService;
 
-    @InjectMocks
-    private MarkerService markerService;
+    @BeforeEach
+    void setup() {
+        markerService = new MarkerServiceImpl(markerRepository, reservationRepository);
+    }
 
     @Test
     void testFindByLatitudeAndLongitude() {

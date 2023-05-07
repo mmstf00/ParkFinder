@@ -2,7 +2,7 @@ package com.parkfinder.controller.mvc;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.dto.MarkerDTO;
-import com.parkfinder.service.MarkerService;
+import com.parkfinder.service.ExtendedMarkerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 class MarkerConfigurationControllerTest {
 
     @Mock
-    private MarkerService markerService;
+    private ExtendedMarkerService markerService;
     @Mock
     private Model model;
     @InjectMocks

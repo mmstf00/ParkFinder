@@ -2,8 +2,9 @@ package com.parkfinder.controller.mvc;
 
 import com.parkfinder.entity.Marker;
 import com.parkfinder.model.dto.MarkerDTO;
-import com.parkfinder.service.MarkerService;
+import com.parkfinder.service.ExtendedMarkerService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,14 +14,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/configureMarkers")
+@RequiredArgsConstructor
 public class MarkerConfigurationController {
 
-    private final MarkerService markerService;
+    private final ExtendedMarkerService markerService;
     private static final String MARKER_CONFIGURATION_PAGE = "markerConfigurationPage";
-
-    public MarkerConfigurationController(MarkerService markerService) {
-        this.markerService = markerService;
-    }
 
     @PostMapping
     public String addMarker(Model model, @Valid @ModelAttribute("marker") MarkerDTO markerDTO, BindingResult result) {

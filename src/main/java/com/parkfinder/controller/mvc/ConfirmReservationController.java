@@ -3,7 +3,7 @@ package com.parkfinder.controller.mvc;
 import com.parkfinder.entity.Marker;
 import com.parkfinder.entity.User;
 import com.parkfinder.model.ConfirmReservationRequest;
-import com.parkfinder.service.MarkerService;
+import com.parkfinder.service.ExtendedMarkerService;
 import com.parkfinder.service.UserService;
 import com.parkfinder.util.DateTimeUtil;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import java.util.Optional;
 public class ConfirmReservationController {
 
     private final UserService userService;
-    private final MarkerService markerService;
+    private final ExtendedMarkerService markerService;
     private Marker currentParking;
 
     @GetMapping

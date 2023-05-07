@@ -1,7 +1,7 @@
 package com.parkfinder.security;
 
 import com.parkfinder.repository.UserRepository;
-import com.parkfinder.service.CustomUserDetailsService;
+import com.parkfinder.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,7 +69,7 @@ public class AppSecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService(userRepository);
+        return new UserDetailsServiceImpl(userRepository);
     }
 
     @Bean

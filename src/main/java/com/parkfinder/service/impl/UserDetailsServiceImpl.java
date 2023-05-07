@@ -1,4 +1,4 @@
-package com.parkfinder.service;
+package com.parkfinder.service.impl;
 
 import com.parkfinder.entity.User;
 import com.parkfinder.model.CustomUserDetails;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CustomUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository repository;
 
