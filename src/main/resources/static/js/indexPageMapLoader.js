@@ -480,25 +480,28 @@ function setSearchLogic(map) {
 
         const place = autocomplete.getPlace();
 
-        if (!place.geometry || !place.geometry.location) {
-            /* User entered the name of a Place that was not suggested and
-             pressed the Enter key, or the Place Details request failed. */
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
+        if (place) {
+            if (!place.geometry || !place.geometry.location) {
+                /* User entered the name of a Place that was not suggested and if (place.geometry.viewport) {
+                 pressed the Enter key, or the Place Details request failed. */
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+
+            localStorage.setItem("lat", place.geometry.location.lat());
+            localStorage.setItem("lng", place.geometry.location.lng());
+
+            // If the place has a geometry, then present it on a map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(16);
+            }
+
+            marker.setPosition(place.geometry.location);
         }
 
-        localStorage.setItem("lat", place.geometry.location.lat());
-        localStorage.setItem("lng", place.geometry.location.lng());
-
-        // If the place has a geometry, then present it on a map.
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-        } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(16);
-        }
-
-        marker.setPosition(place.geometry.location);
         marker.setVisible(true);
     });
 
