@@ -2,15 +2,16 @@ package com.parkfinder.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode
 public class Reservation {
     @Id
     @GeneratedValue
@@ -23,20 +24,4 @@ public class Reservation {
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     private Marker marker;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Reservation that = (Reservation) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(dateFrom, that.dateFrom) &&
-                Objects.equals(dateTo, that.dateTo) &&
-                Objects.equals(marker, that.marker);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, dateFrom, dateTo, marker);
-    }
 }
