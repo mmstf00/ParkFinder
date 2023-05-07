@@ -8,10 +8,8 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
-  datasource:
-    url: jdbc:postgresql://localhost:5432/parkfinder
-    username: postgres
-    password: 1234
+  profiles:
+    active: dev
   jpa:
     hibernate:
       ddl-auto: update
