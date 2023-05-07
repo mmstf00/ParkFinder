@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -57,7 +58,7 @@ class ConfirmReservationControllerTest {
         marker.setId(123L);
         marker.setAddress("123 Main St");
         marker.setPlaceId("abc123");
-        marker.setPriceTag(5.0);
+        marker.setPriceTag(BigDecimal.valueOf(5.0));
         marker.setReservations(reservations);
         marker.setLatitude(38.8977);
         marker.setLongitude(77.0365);

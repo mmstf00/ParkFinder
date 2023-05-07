@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -57,7 +58,7 @@ class RestMarkerControllerTest {
         MarkerDTO markerDTO = new MarkerDTO();
         markerDTO.setAddress("San Francisco");
         markerDTO.setPlaceId("abc123");
-        markerDTO.setPriceTag(5.0);
+        markerDTO.setPriceTag(BigDecimal.valueOf(5.0));
         markerDTO.setLatitude(37.7749);
         markerDTO.setLongitude(-122.4194);
 
@@ -67,7 +68,7 @@ class RestMarkerControllerTest {
         MarkerDTO markerDTO1 = new MarkerDTO();
         markerDTO1.setAddress("New York");
         markerDTO1.setPlaceId("abc123");
-        markerDTO1.setPriceTag(5.0);
+        markerDTO1.setPriceTag(BigDecimal.valueOf(5.0));
         markerDTO1.setLatitude(40.7128);
         markerDTO1.setLongitude(-74.0060);
 
@@ -186,7 +187,7 @@ class RestMarkerControllerTest {
         updateRequest.setId(1L);
         updateRequest.setAddress("Test Update Address");
         updateRequest.setDetails("Test Update Details");
-        updateRequest.setPrice(12.34);
+        updateRequest.setPrice(BigDecimal.valueOf(12.34));
 
         doNothing().when(markerService).updateMarker(updateRequest);
 

@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -55,7 +56,7 @@ class MarkerServiceTest {
         updateRequest.setId(1L);
         updateRequest.setAddress("Test Update Address");
         updateRequest.setDetails("Test Update Details");
-        updateRequest.setPrice(12.34);
+        updateRequest.setPrice(BigDecimal.valueOf(12.34));
 
         markerService = new MarkerServiceImpl(markerRepository, reservationRepository);
 
@@ -64,7 +65,7 @@ class MarkerServiceTest {
         markerDTO = new MarkerDTO();
         markerDTO.setAddress("123 Main St");
         markerDTO.setPlaceId("abc123");
-        markerDTO.setPriceTag(5.0);
+        markerDTO.setPriceTag(BigDecimal.valueOf(5.0));
         markerDTO.setLatitude(38.8977);
         markerDTO.setLongitude(77.0365);
 

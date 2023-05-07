@@ -1,9 +1,12 @@
 package com.parkfinder.model.dto;
 
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -15,7 +18,8 @@ public class MarkerDTO {
     private String address;
     private String placeId;
     @DecimalMin(value = "0.1", message = "Price must be greater than 0")
-    private double priceTag;
+    @NotNull(message = "Price cannot be empty")
+    private BigDecimal priceTag;
     private ReservationDTO reservationDTO;
     private double latitude;
     private double longitude;
