@@ -58,7 +58,7 @@ function loadParkListItems(endpoint) {
         .then(response => response.json())
         .then(data => {
             loadAllParkings(data);
-        });
+        }).catch(error => console.error(error));
 }
 
 function loadAllParkings(data) {
@@ -360,7 +360,6 @@ function updateMarker(id) {
     marker.then(function (result) {
         // Filling the form with current data, that can be updated
         result.json().then(function (data) {
-            console.log(data)
             let address = document.getElementById("address-input");
             address.value = data.address;
 
@@ -375,7 +374,7 @@ function updateMarker(id) {
                 location.reload();
             })
         });
-    });
+    }).catch(error => console.error(error));
 }
 
 function updateMarkerData(id, address, details, price) {

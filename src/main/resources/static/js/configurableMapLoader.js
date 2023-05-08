@@ -51,7 +51,7 @@ function setFormData(mapsMouseEvent) {
     getAddressData(lat, lng).then(data => {
         document.getElementById('address-input').value = data.results[0].formatted_address;
         document.getElementById("place-id").value = data.results[0].place_id;
-    });
+    }).catch(error => console.error(error));
 
     // These values are setting hidden, they are not needed for the user.
     document.getElementById("lat-input").value = lat;

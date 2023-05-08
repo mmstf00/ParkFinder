@@ -24,7 +24,7 @@
 
     function validate(input) {
         if ($(input).attr('type') === 'email' || $(input).attr('name') === 'email') {
-            if ($(input).val().trim().match(/^[\w.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z]{1,5}|[0-9]{1,3})?$/) == null) {
+            if ($(input).val().trim().match(/^[\w.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z]{1,5}|\d{1,3})?$/) == null) {
                 return false;
             }
         } else {
