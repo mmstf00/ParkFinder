@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Optional;
+
+import static com.parkfinder.util.ReservationUtil.calculateFinalReservationPrice;
 
 @Controller
 @RequestMapping("/confirmation")
@@ -40,13 +43,10 @@ public class ConfirmReservationController {
         model.addAttribute("parking", currentParking);
 
         Duration duration = DateTimeUtil.getParkingDurationFromRequest(request);
-        if (duration.toHours() == 0) {
-            model.addAttribute("duration", duration.toMinutes());
-            model.addAttribute("durationText", "minutes");
-        } else {
-            model.addAttribute("duration", duration.toHours());
-            model.addAttribute("durationText", "hours");
-        }
+        model.addAttribute("duration", DateTimeUtil.formatDuration(duration));
+
+        BigDecimal finalPrice = calculateFinalReservationPrice(currentParking.getPriceTag(), duration);
+        model.addAttribute("finalPrice", finalPrice);
 
         return "confirm-reservation";
     }

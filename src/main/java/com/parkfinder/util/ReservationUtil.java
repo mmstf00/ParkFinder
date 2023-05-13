@@ -3,6 +3,9 @@ package com.parkfinder.util;
 import com.parkfinder.entity.Reservation;
 import com.parkfinder.model.ReservationRequest;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -24,6 +27,12 @@ public class ReservationUtil {
         reservation.setDateFrom(LocalDateTime.of(dateFrom, timeFrom));
         reservation.setDateTo(LocalDateTime.of(dateTo, timeTo));
         return reservation;
+    }
+
+    public static BigDecimal calculateFinalReservationPrice(BigDecimal hourlyPrice, Duration duration) {
+        BigDecimal minutes = new BigDecimal(duration.toMinutes());
+        BigDecimal hours = minutes.divide(new BigDecimal(60), 2, RoundingMode.HALF_UP);
+        return hourlyPrice.multiply(hours);
     }
 
 }

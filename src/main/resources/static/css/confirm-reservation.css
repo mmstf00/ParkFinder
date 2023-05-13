@@ -207,6 +207,10 @@ img, svg {
     border-radius: 8px;
 }
 
+.c-height {
+    height: 174px;
+}
+
 .p-monthly-checkout .c-monthly-checkout-ev,
 .p-monthly-checkout .c-monthly-checkout-sidebar-mobile,
 .p-monthly-checkout .c-monthly-payments, .p-monthly-checkout .c-monthly-personal-details,
@@ -1102,6 +1106,7 @@ button, input, optgroup, select, textarea {
 .c-monthly-checkout-sidebar__panel {
     box-shadow: 0 4px 8px rgb(231 233 239 / 40%), 0 33px 41px rgb(231 233 239 / 70%);
     margin: 0 auto;
+    height: 480px;
 }
 
 .c-monthly-checkout-sidebar__content {

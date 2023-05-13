@@ -9,10 +9,17 @@ let dateFromPicker = flatpickr("#from-date-picker", {
     altFormat: "M d at H:i",
     dateFormat: "Y-m-d H:i:S",
     onChange: function (selectedDates, dateStr, instance) {
-        let newTime = new Date(selectedDates[0].getTime() + 1800000);
-        let minTime = new Date(selectedDates[0].getTime() + 300000);
-        dateToPicker.setDate(newTime);
-        dateToPicker.set("minDate", minTime);
+        // Set the minimum date of the dateToPicker to the selected date of the dateFromPicker
+        dateToPicker.set("minDate", selectedDates[0]);
+
+        // TODO: Improve the validation if picking time less than the 1st picker
+        // TODO: There should not be reservations with 0 minutes.
+
+        // If the selected date of the dateToPicker is before the selected date of the dateFromPicker,
+        // set the value of the dateToPicker to the selected date of the dateFromPicker
+        if (dateToPicker.selectedDates[0] < selectedDates[0]) {
+            dateToPicker.setDate(selectedDates[0]);
+        }
     }
 });
 
