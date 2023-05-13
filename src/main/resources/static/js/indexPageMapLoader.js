@@ -157,7 +157,7 @@ function loadDetailsForParking(markerData) {
         <div class="standout-details">
             <div class="standout-details-element">
                 <div id="standout-duration">
-                    4d 19h
+                    ${getStandoutDuration()}
                 </div>
                 <div class="total-duration"> Total duration</div>
             </div>
@@ -234,6 +234,21 @@ function loadDetailsForParking(markerData) {
         </div>
     `;
     return parkingSpaceInformation;
+}
+
+
+function getStandoutDuration() {
+    let parkingFrom = new Date(document.getElementById("from-date-picker").value);
+    let parkingUntil = new Date(document.getElementById("to-date-picker").value);
+
+    let duration = parkingUntil.getTime() - parkingFrom.getTime(); // difference in milliseconds
+
+    let days = Math.floor(duration / (24 * 60 * 60 * 1000)); // convert milliseconds to days
+    let hours = Math.floor((duration % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)); // convert remaining milliseconds to hours
+    let minutes = Math.floor((duration % (60 * 60 * 1000)) / (60 * 1000)); // convert remaining milliseconds to minutes
+
+    let durationString = `${days > 0 ? days + 'd ' : ''}${hours > 0 ? hours + 'h ' : ''}${minutes}m`;
+    return durationString.trim();
 }
 
 // Redirects the user to directions page with selected park location.
