@@ -118,6 +118,18 @@ function loadParking(markerData) {
     let parkingSpace = document.createElement('div');
     parkingSpace.classList.add('parking-space-class');
     parkingSpace.id = 'parking-space';
+
+    // Create destination time span element
+    calculateTravelTime(markerData.placeId, travelTimeInMinutes => {
+        if (travelTimeInMinutes !== null) {
+            // Update the span element's text content with the travel time
+            const distanceSpan = parkingSpace.querySelector('.distance-wrapper span');
+            distanceSpan.textContent = `${travelTimeInMinutes} mins`;
+        } else {
+            console.log('Unable to calculate travel time.');
+        }
+    });
+
     parkingSpace.innerHTML = `
         <div class="parking-details" id="${markerData.id}">
           <div class="parking-address">${markerData.address}</div>
@@ -132,7 +144,7 @@ function loadParking(markerData) {
             <div id="parking-distance">
               <div class="distance-wrapper">
                 <img alt="walk-icon" src="/images/walk-icon.png" height="20" width="20"/>
-                <span>13 mins</span>
+                <span></span>
               </div>
               <div class="to-destination">to destination</div>
             </div>
@@ -146,6 +158,18 @@ function loadDetailsForParking(markerData) {
     // Create the parking details HTML element
     let parkingSpaceInformation = document.createElement('div');
     parkingSpaceInformation.classList.add('detailed-park-information');
+
+    // Create destination time span element
+    calculateTravelTime(markerData.placeId, travelTimeInMinutes => {
+        if (travelTimeInMinutes !== null) {
+            // Update the span element's text content with the travel time
+            const distanceSpan = parkingSpaceInformation.querySelector('#standout-to-destination span');
+            distanceSpan.textContent = `${travelTimeInMinutes} mins`;
+        } else {
+            console.log('Unable to calculate travel time.');
+        }
+    });
+
     parkingSpaceInformation.innerHTML = `
         <div id="close-button" class="parking-details-close"></div>
         <div class="location-details">
@@ -170,7 +194,7 @@ function loadDetailsForParking(markerData) {
             <div class="standout-details-element">
                 <div id="standout-to-destination">
                     <img alt="walk-icon" src="/images/walk-icon.png" height="20" width="20"/>
-                    <span>13 mins</span>
+                    <span></span>
                 </div>
                 <div class="to-destination">to destination</div>
             </div>
@@ -249,6 +273,41 @@ function getStandoutDuration() {
 
     let durationString = `${days > 0 ? days + 'd ' : ''}${hours > 0 ? hours + 'h ' : ''}${minutes}m`;
     return durationString.trim();
+}
+
+function calculateTravelTime(destinationPlaceId, callback) {
+    navigator.geolocation.getCurrentPosition(position => {
+        const currentLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        const placesService = new google.maps.places.PlacesService(document.createElement('div'));
+        placesService.getDetails({placeId: destinationPlaceId}, (place, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                const destinationLatLng = place.geometry.location;
+
+                const directionsService = new google.maps.DirectionsService();
+                directionsService.route(
+                    {
+                        origin: currentLatLng,
+                        destination: destinationLatLng,
+                        travelMode: google.maps.TravelMode.DRIVING,
+                    },
+                    (result, status) => {
+                        if (status === google.maps.DirectionsStatus.OK) {
+                            const travelTimeInSeconds = result.routes[0].legs[0].duration.value;
+                            const travelTimeInMinutes = Math.round(travelTimeInSeconds / 60);
+                            callback(travelTimeInMinutes);
+                        } else {
+                            callback(null);
+                        }
+                    }
+                );
+            } else {
+                callback(null);
+            }
+        });
+    }, () => {
+        callback(null);
+    });
 }
 
 // Redirects the user to directions page with selected park location.
