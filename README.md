@@ -1,13 +1,17 @@
-# ParkFinder
+# ParkFinder Design Images
  
-## Demo Design Images
-![1](https://user-images.githubusercontent.com/65444856/214705946-31f0ebce-b21a-482a-a884-5dae95c635ef.png)
-## Selecting Date
-![2](https://user-images.githubusercontent.com/65444856/214706234-4ef3ac4d-b678-4b83-ae3c-6ea96cd05afe.png)
-## Parking Configuration Page
-![3](https://user-images.githubusercontent.com/65444856/213022335-a9c7655e-2b01-48cd-9cc7-b4580f976960.png)
-## Mobile Design
-![4](https://user-images.githubusercontent.com/65444856/212482310-f57035a2-12df-4709-bb4d-336b174dbe59.png)
-## Making reservation
-![list](https://user-images.githubusercontent.com/65444856/214706610-798ec6fc-ad24-4801-b3b2-082e03fc2495.png)
-![menu](https://user-images.githubusercontent.com/65444856/215202484-183e43c6-b0d6-460b-8d76-80080d931b7d.png)
+## Home page
+![home](https://github.com/mmstf00/ParkFinder/assets/65444856/ec7c53e7-085a-4db9-9654-e3c03d10dbc7)
+
+## Selecting Dates
+![Screenshot_1](https://github.com/mmstf00/ParkFinder/assets/65444856/aab09e96-aeae-412d-b7ad-12c3805ead7a)
+
+## Admin Panel
+![Screenshot_1](https://github.com/mmstf00/ParkFinder/assets/65444856/444159b3-e5ed-4d55-bfee-3d2dac866ff3)
+
+## Confirm Resrvation
+![confirmation](https://github.com/mmstf00/ParkFinder/assets/65444856/2a20dc3d-bac4-4311-b8f6-1cf540b42172)
+![confirm-1](https://github.com/mmstf00/ParkFinder/assets/65444856/6b26b3ce-f3fb-438e-bd67-03b5bbdccde7)
+
+## List of all reservations
+![list](https://github.com/mmstf00/ParkFinder/assets/65444856/c8fc3229-4552-433c-be53-33de1c538a3b)
