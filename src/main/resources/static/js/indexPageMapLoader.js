@@ -183,7 +183,7 @@ function loadDetailsForParking(markerData) {
         <div class="standout-details">
             <div class="standout-details-element">
                 <div id="standout-duration">
-                    ${getStandoutDuration()}
+                    ${getStandoutDurationForIndexPage()}
                 </div>
                 <div class="total-duration"> Total duration</div>
             </div>
@@ -262,6 +262,12 @@ function loadDetailsForParking(markerData) {
     return parkingSpaceInformation;
 }
 
+function getStandoutDurationForIndexPage() {
+    if (window.location.pathname.replace(/\/$/, '') === '/configureMarkers') {
+        return "";
+    }
+    return getStandoutDuration();
+}
 
 function getStandoutDuration() {
     let parkingFrom = new Date(document.getElementById("from-date-picker").value);
