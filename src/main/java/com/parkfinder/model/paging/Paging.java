@@ -1,7 +1,6 @@
 package com.parkfinder.model.paging;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,12 +10,11 @@ import java.util.List;
 
 @Setter
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Paging {
 
-    private static final int PAGINATION_STEP = 3;
+    public static final int PAGINATION_STEP = 3;
 
     private boolean nextEnabled;
     private boolean prevEnabled;

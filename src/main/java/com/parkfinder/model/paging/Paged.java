@@ -1,12 +1,10 @@
 package com.parkfinder.model.paging;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
+@Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Paged<T> {
 
     private Page<T> page;
