@@ -611,7 +611,7 @@
                                 class="bt bt--primary bt--large c-monthly-checkout-button__button"
                                 type="submit"
                                 disabled>
-                            <span th:text="${#numbers.formatCurrency(parking.priceTag + 0.20).replace('¤','$')}"></span>
+                            <span th:text="${#numbers.formatCurrency(finalPrice + 0.20).replace('¤','$')}"></span>
                             <span>- Pay now and reserve</span>
                         </button>
                     </div>
