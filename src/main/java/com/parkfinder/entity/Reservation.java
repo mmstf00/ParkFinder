@@ -1,11 +1,18 @@
 package com.parkfinder.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -21,7 +28,12 @@ public class Reservation {
     @Column(columnDefinition = "TIMESTAMP(0)")
     private LocalDateTime dateTo;
     private String plateNumber;
-    @ManyToOne(cascade = CascadeType.ALL)
+    private String totalDuration;
+    private BigDecimal totalCost;
+    @JsonIgnore
+    @ManyToOne
+    private User customer;
     @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
     private Marker marker;
 }

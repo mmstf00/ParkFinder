@@ -57,6 +57,11 @@ public class AppSecurityConfig {
             "/swagger-ui/**",
     };
 
+    private static final String[] ADMIN_ONLY_ACCESS = {
+            "/configureMarkers/**",
+            "/reservation/all"
+    };
+
     @Bean
     public CsrfTokenRepository csrfTokenRepository() {
         return CookieCsrfTokenRepository.withHttpOnlyFalse();
@@ -89,7 +94,7 @@ public class AppSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.cors().and().csrf().disable() // Disabling CSRF fixes 403 error
-                .authorizeHttpRequests().requestMatchers("/configureMarkers/**").hasAuthority("ADMIN")
+                .authorizeHttpRequests().requestMatchers(ADMIN_ONLY_ACCESS).hasAuthority("ADMIN")
                 .and().authorizeHttpRequests().requestMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated()
                 .and().headers().cacheControl().disable() // Potential fix for MIME, above it's fixed already.
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/", true).usernameParameter("email")

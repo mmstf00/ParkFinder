@@ -42,7 +42,17 @@
                                     <svg class="bi d-block mx-auto mb-1" width="1" height="1">
                                         <use xlink:href="#grid"></use>
                                     </svg>
-                                    Admin Page
+                                    Admin Panel
+                                </a>
+                            </div>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <div sec:authorize="hasAuthority('ADMIN')">
+                                <a href="/reservation/all" class="nav-link text-white">
+                                    <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                        <use xlink:href="#grid"></use>
+                                    </svg>
+                                    List of Reservations
                                 </a>
                             </div>
                         </li>

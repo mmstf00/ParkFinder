@@ -35,6 +35,16 @@
                             </a>
                         </li>
                         <li>
+                            <div>
+                                <a href="/reservation/all" class="nav-link text-white">
+                                    <svg class="bi d-block mx-auto mb-1" width="1" height="1">
+                                        <use xlink:href="#grid"></use>
+                                    </svg>
+                                    List of Reservations
+                                </a>
+                            </div>
+                        </li>
+                        <li>
                             <a href="/logout" class="nav-link text-white">
                                 <svg class="bi d-block mx-auto mb-1" width="1" height="1">
                                     <use xlink:href="#grid"></use>
@@ -80,7 +90,8 @@
                        th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></p>
                 </div>
 
-                <button type="submit" id="add-parking-button" class="btn btn-success btn-block mb-4">
+                <button type="submit" id="add-parking-button"
+                        class="btn btn-success btn-block mb-4">
                     Add Park Location
                 </button>
 

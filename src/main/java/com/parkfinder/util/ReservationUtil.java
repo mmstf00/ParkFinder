@@ -24,6 +24,9 @@ public class ReservationUtil {
 
         Reservation reservation = new Reservation();
         reservation.setPlateNumber(reservationRequest.getPlateNumber());
+        reservation.setTotalDuration(reservationRequest.getTotalDuration());
+        reservation.setTotalCost(reservationRequest.getTotalCost());
+        reservation.setCustomer(reservationRequest.getCustomer());
         reservation.setDateFrom(LocalDateTime.of(dateFrom, timeFrom));
         reservation.setDateTo(LocalDateTime.of(dateTo, timeTo));
         return reservation;

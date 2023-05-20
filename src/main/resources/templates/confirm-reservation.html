@@ -202,7 +202,7 @@
                                     </span>
                                     <div data-cy="monthly-checkout-core-info-duration"
                                          class="c-typography c-typography--primary c-typography--bold c-typography--color-primary c-typography-pkUSF c-typography--primary-yh5cC c-typography--bold-H4gYa c-typography--color-primary-NHSju">
-                                        <span th:text="${duration}"></span>
+                                        <span id="totalDuration" th:text="${duration}"></span>
                                     </div>
                                 </div>
                             </div>
@@ -712,6 +712,7 @@
                                             Final price
                                         </span>
                                         <span th:text="${#numbers.formatCurrency(finalPrice + 0.20).replace('¤','$')}"
+                                              id="final-price"
                                               class="c-monthly-checkout-sidebar-price__price c-monthly-checkout-sidebar-price__price--bold c-monthly-checkout-sidebar-price__price--large">
                                         </span>
                                     </div>
@@ -725,5 +726,9 @@
     </div>
 </div>
 </body>
+<script th:inline="javascript">
+    // Getting the user model attribute
+    let customer =/*[[${user}]]*/ null;
+</script>
 <script type="text/javascript" th:src="@{/js/makeReservation.js}"></script>
 </html>

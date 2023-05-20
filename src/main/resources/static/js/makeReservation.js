@@ -11,6 +11,11 @@ let vehiclePlateSpan = document.getElementById("vehicle-plate-span");
 let paymentContainerBeforeVehicle = document.getElementById("payment-container-before-vehicle");
 let paymentContainerAfterVehicle = document.getElementById("payment-container-after-vehicle");
 
+let totalDuration = document.getElementById("totalDuration").innerText;
+
+let finalPrice = document.getElementById("final-price").innerText;
+let totalCost = parseFloat(finalPrice.replace("$", ""));
+
 addVehicleButton.addEventListener("click", function () {
     if (vehiclePlateInput.value !== "") {
         updateAddVehicleContainer();
@@ -88,6 +93,9 @@ function makeReservation(parkingId, plateNumber, parkingDateFrom, parkingTimeFro
         }, body: JSON.stringify({
             id: parkingId,
             plateNumber: plateNumber,
+            totalDuration: totalDuration,
+            totalCost: totalCost,
+            customer: customer,
             dateFrom: parkingDateFrom,
             timeFrom: parkingTimeFrom,
             dateTo: parkingDateTo,
