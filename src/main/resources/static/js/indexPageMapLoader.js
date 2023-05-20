@@ -121,12 +121,13 @@ function loadParking(markerData) {
 
     // Create destination time span element
     calculateTravelTime(markerData.placeId, travelTimeInMinutes => {
+        const distanceSpan = parkingSpace.querySelector('.distance-wrapper span');
         if (travelTimeInMinutes !== null) {
             // Update the span element's text content with the travel time
-            const distanceSpan = parkingSpace.querySelector('.distance-wrapper span');
             distanceSpan.textContent = `${travelTimeInMinutes} mins`;
         } else {
             console.log('Unable to calculate travel time.');
+            distanceSpan.textContent = `${0} mins`;
         }
     });
 
@@ -161,12 +162,13 @@ function loadDetailsForParking(markerData) {
 
     // Create destination time span element
     calculateTravelTime(markerData.placeId, travelTimeInMinutes => {
+        const distanceSpan = parkingSpaceInformation.querySelector('#standout-to-destination span');
         if (travelTimeInMinutes !== null) {
             // Update the span element's text content with the travel time
-            const distanceSpan = parkingSpaceInformation.querySelector('#standout-to-destination span');
             distanceSpan.textContent = `${travelTimeInMinutes} mins`;
         } else {
             console.log('Unable to calculate travel time.');
+            distanceSpan.textContent = `${0} mins`;
         }
     });
 

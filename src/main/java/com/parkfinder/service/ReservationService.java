@@ -1,9 +1,8 @@
 package com.parkfinder.service;
 
 import com.parkfinder.entity.Reservation;
-
-import java.util.List;
+import com.parkfinder.model.paging.Paged;
 
 public interface ReservationService {
-    List<Reservation> getAllReservations();
+    Paged<Reservation> getReservations(int pageNumber, int size);
 }
