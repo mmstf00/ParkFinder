@@ -14,4 +14,4 @@
 ![confirm-1](https://github.com/mmstf00/ParkFinder/assets/65444856/6b26b3ce-f3fb-438e-bd67-03b5bbdccde7)
 
 ## List of all reservations
-![list](https://github.com/mmstf00/ParkFinder/assets/65444856/c8fc3229-4552-433c-be53-33de1c538a3b)
+![Screenshot_1](https://github.com/mmstf00/ParkFinder/assets/65444856/6764df02-ba70-46a1-94a1-c9d00845f2a6)
