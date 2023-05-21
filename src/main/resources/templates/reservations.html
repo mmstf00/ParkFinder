@@ -74,63 +74,72 @@
 </header>
 
 <body>
-<div class="reservations-container">
-    <div class="row">
-        <div class="col-lg-10 mt-5 mb-5">
-            <table id="example" class="table table-bordered" style="width: 100%">
-                <thead>
-                <tr>
-                    <th>Customer name</th>
-                    <th>Plate Number</th>
-                    <th>Total Cost</th>
-                    <th>Date From</th>
-                    <th>Date To</th>
-                    <th>Total Duration</th>
-                    <th>Parking Address</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="reservation : ${reservations.page.content}">
-                    <td th:text="${reservation.customer != null ? reservation.customer.getUsername() : 'Guest'}"></td>
-                    <td th:text="${reservation.plateNumber.toUpperCase()}"></td>
-                    <td th:text="${#numbers.formatCurrency(reservation.totalCost).replace('¤','$')}"></td>
-                    <td th:text="${#temporals.format(reservation.dateFrom, 'dd MMM yyyy HH:mm')}"></td>
-                    <td th:text="${#temporals.format(reservation.dateTo, 'dd MMM yyyy HH:mm')}"></td>
-                    <td th:text="${reservation.totalDuration}"></td>
-                    <td th:text="${reservation.marker.address}"></td>
-                </tr>
-                </tbody>
-            </table>
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <table>
+                    <thead>
+                    <tr class="table100-head">
+                        <th class="column1">Customer name</th>
+                        <th class="column2">Plate Number</th>
+                        <th class="column3">Total Cost</th>
+                        <th class="column4">Date From</th>
+                        <th class="column5">Date To</th>
+                        <th class="column6">Total Duration</th>
+                        <th class="column7">Parking Address</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="reservation : ${reservations.page.content}">
+                        <td class="column1"
+                            th:text="${reservation.customer != null ? reservation.customer.getUsername() : 'Guest'}"></td>
+                        <td class="column2" th:text="${reservation.plateNumber.toUpperCase()}"></td>
+                        <td class="column3"
+                            th:text="${#numbers.formatCurrency(reservation.totalCost).replace('¤','$')}"></td>
+                        <td class="column4"
+                            th:text="${#temporals.format(reservation.dateFrom, 'dd MMM yyyy HH:mm')}"></td>
+                        <td class="column5"
+                            th:text="${#temporals.format(reservation.dateTo, 'dd MMM yyyy HH:mm')}"></td>
+                        <td class="column6" th:text="${reservation.totalDuration}"></td>
+                        <td class="column7" th:text="${reservation.marker.address}"></td>
+                    </tr>
+                    </tbody>
+                </table>
 
-            <nav aria-label="Page navigation" class="paging">
-                <ul class="pagination custom-pagination"
-                    th:if="${reservations.page.totalPages > 0}">
-                    <li class="page-item"
-                        th:classappend="${!reservations.paging.isPrevEnabled() ? 'disabled' : ''}">
-                        <a class="page-link"
-                           th:href="@{/reservation/all(pageNumber=${reservations.paging.pageNumber - 1})}"
-                           tabindex="-1">Previous</a>
-                    </li>
-                    <th:block th:each="item : ${reservations.paging.getItems()}">
+                <br>
+
+                <nav aria-label="Page navigation" class="paging">
+                    <ul class="custom-pagination"
+                        th:if="${reservations.page.totalPages > 0}">
                         <li class="page-item"
-                            th:classappend="${item.index == reservations.paging.pageNumber ? 'active' : ''}"
-                            th:if="${item.pageItemType.name() == 'PAGE'}">
+                            th:classappend="${!reservations.paging.isPrevEnabled() ? 'disabled' : ''}">
                             <a class="page-link"
-                               th:href="@{/reservation/all(pageNumber=${item.index})}"
-                               th:text="${item.index}"></a>
+                               th:href="@{/reservation/all(pageNumber=${reservations.paging.pageNumber - 1})}"
+                               tabindex="-1">Previous</a>
                         </li>
-                        <li class="page-item disabled"
-                            th:if="${item.pageItemType.name() == 'DOTS'}">
-                            <a class="page-link" href="#">...</a>
+                        <th:block th:each="item : ${reservations.paging.getItems()}">
+                            <li class="page-item"
+                                th:classappend="${item.index == reservations.paging.pageNumber ? 'active' : ''}"
+                                th:if="${item.pageItemType.name() == 'PAGE'}">
+                                <a class="page-link"
+                                   th:href="@{/reservation/all(pageNumber=${item.index})}"
+                                   th:text="${item.index}">
+                                </a>
+                            </li>
+                            <li class="page-item disabled"
+                                th:if="${item.pageItemType.name() == 'DOTS'}">
+                                <a class="page-link" href="#">...</a>
+                            </li>
+                        </th:block>
+                        <li class="page-item"
+                            th:classappend="${!reservations.paging.isNextEnabled() ? 'disabled' : ''}">
+                            <a class="page-link"
+                               th:href="@{/reservation/all(pageNumber=${reservations.paging.pageNumber + 1})}">Next</a>
                         </li>
-                    </th:block>
-                    <li class="page-item"
-                        th:classappend="${!reservations.paging.isNextEnabled() ? 'disabled' : ''}">
-                        <a class="page-link"
-                           th:href="@{/reservation/all(pageNumber=${reservations.paging.pageNumber + 1})}">Next</a>
-                    </li>
-                </ul>
-            </nav>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
