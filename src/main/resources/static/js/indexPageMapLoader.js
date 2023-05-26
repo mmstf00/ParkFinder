@@ -1,3 +1,5 @@
+const isAdminPage = window.location.pathname.replace(/\/$/, '') === '/configureMarkers';
+
 function initMap() {
 
     // Dummy center if current location is not enabled.
@@ -263,7 +265,7 @@ function loadDetailsForParking(markerData) {
 }
 
 function getStandoutDurationForIndexPage() {
-    if (window.location.pathname.replace(/\/$/, '') === '/configureMarkers') {
+    if (isAdminPage) {
         return "";
     }
     return getStandoutDuration();
@@ -328,8 +330,13 @@ function redirectToDirectionsPage(placeId) {
 (function setUserCurrentLocationToLocalstorage() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            localStorage.setItem("lat", position.coords.latitude.toString());
-            localStorage.setItem("lng", position.coords.longitude.toString());
+            // Default search place is the current location
+            localStorage.setItem("searchLat", position.coords.latitude.toString());
+            localStorage.setItem("searchLng", position.coords.longitude.toString());
+
+            // Setting current location of the user to use it to show directions
+            localStorage.setItem("currentLocationLat", position.coords.latitude.toString());
+            localStorage.setItem("currentLocationLng", position.coords.longitude.toString());
         });
     }
 })()
@@ -353,6 +360,11 @@ function populateMarkersFromEndpointIntoMap(map, endpoint) {
         .then(response => response.json())
         .then(markers => {
             let filteredData = filterMarkersWithinRadius(markers);
+
+            if (isAdminPage) {
+                filteredData = markers;
+            }
+
             if (filteredData) {
                 for (let marker of filteredData) {
                     addMarker(marker, map);
@@ -377,9 +389,9 @@ function addMarker(marker, map) {
         map.panTo(advancedMarker.position);
         map.setZoom(14);
 
-        // If the endpoint is configureMarkers then show Update/Delete window,
-        // otherwise open details of parking
-        if (window.location.pathname.replace(/\/$/, '') === '/configureMarkers') {
+        // If it's the Admin page then show Update/Delete window,
+        // otherwise open details of corresponding parking
+        if (isAdminPage) {
             openInfoWindow(map, advancedMarker);
         } else {
             addOpenParkDetailsFunctionality(advancedMarker);
@@ -502,8 +514,8 @@ function addOpenParkDetailsFunctionality(advancedMarker) {
 
 function filterMarkersWithinRadius(data) {
     let radius = 10; // It will render only markers in 10km range.
-    let centerLat = parseFloat(localStorage.getItem("lat"));
-    let centerLng = parseFloat(localStorage.getItem("lng"));
+    let centerLat = parseFloat(localStorage.getItem("searchLat"));
+    let centerLng = parseFloat(localStorage.getItem("searchLng"));
     let filteredMarkers = [];
     data.forEach(marker => {
         const distance = getDistanceFromLatLngInKm(centerLat, centerLng, marker.latitude, marker.longitude);
@@ -569,8 +581,8 @@ function setSearchLogic(map) {
                 return;
             }
 
-            localStorage.setItem("lat", place.geometry.location.lat());
-            localStorage.setItem("lng", place.geometry.location.lng());
+            localStorage.setItem("searchLat", place.geometry.location.lat());
+            localStorage.setItem("searchLng", place.geometry.location.lng());
 
             // If the place has a geometry, then present it on a map.
             if (place.geometry.viewport) {
@@ -596,15 +608,15 @@ function setSearchLogic(map) {
             window.alert("No details available for input: '" + searchedPlace.name + "'");
             return;
         }
-        localStorage.setItem("lat", searchedPlace.geometry.location.lat());
-        localStorage.setItem("lng", searchedPlace.geometry.location.lng());
+        localStorage.setItem("searchLat", searchedPlace.geometry.location.lat());
+        localStorage.setItem("searchLng", searchedPlace.geometry.location.lng());
     });
 }
 
 // Set default value, which is current location of the user
 function setDefaultSearchPlace() {
-    let lat = parseFloat(localStorage.getItem("lat"));
-    let lng = parseFloat(localStorage.getItem("lng"));
+    let lat = parseFloat(localStorage.getItem("searchLat"));
+    let lng = parseFloat(localStorage.getItem("searchLng"));
 
     // Define the Google Maps Geocoding API endpoint URL
     const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCTtV6EOMg0cshyQe2h6G_UYUUOlx8Kc5g`;

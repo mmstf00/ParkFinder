@@ -301,8 +301,8 @@
 <script type="text/javascript" th:src="@{/js/directionsService.js}"></script>
 <script>
     let placeId = new URL(window.location.href).searchParams.get("placeId");
-    let userCurrentLocationLat = parseFloat(localStorage.getItem("lat"));
-    let userCurrentLocationLng = parseFloat(localStorage.getItem("lng"));
+    let userCurrentLocationLat = parseFloat(localStorage.getItem("currentLocationLat"));
+    let userCurrentLocationLng = parseFloat(localStorage.getItem("currentLocationLng"));
     const CONFIGURATION = {
         "defaultTravelMode": "DRIVING",
         "distanceMeasurementType": "IMPERIAL",
