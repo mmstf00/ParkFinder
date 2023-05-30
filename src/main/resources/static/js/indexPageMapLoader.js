@@ -161,6 +161,7 @@ function loadDetailsForParking(markerData) {
     // Create the parking details HTML element
     let parkingSpaceInformation = document.createElement('div');
     parkingSpaceInformation.classList.add('detailed-park-information');
+    parkingSpaceInformation.id = markerData.id + "-detail";
 
     // Create destination time span element
     calculateTravelTime(markerData.placeId, travelTimeInMinutes => {
@@ -503,6 +504,8 @@ function setMarkerPrice(price) {
     return priceTag;
 }
 
+let alreadyOpenedDetails;
+
 // When marker is clicked, opens details to corresponding marker.
 function addOpenParkDetailsFunctionality(advancedMarker) {
     let parksList = document.querySelector('#parks-list');
@@ -511,9 +514,25 @@ function addOpenParkDetailsFunctionality(advancedMarker) {
         let idOfParkListElement = parseInt(parking.children[0].id);
         if (advancedMarker.metadata.id === idOfParkListElement) {
             let parkListElement = document.getElementById(idOfParkListElement.toString());
+
+            // If there is an opened detail it will close it first
+            if (alreadyOpenedDetails && isNotSameDetail(idOfParkListElement)) {
+                let closeButton = alreadyOpenedDetails.childNodes[1];
+                closeButton.click();
+            }
+
+            // Opening details for corresponding list element
             parkListElement.click();
+
+            // Assigning the instance of currently opened detail
+            alreadyOpenedDetails = document.getElementById(`${idOfParkListElement}-detail`);
         }
     }
+}
+
+// Checks if the clicked marker is not the current one
+function isNotSameDetail(idOfParkListElement) {
+    return parseInt(alreadyOpenedDetails.id.replace("-detail", "")) !== idOfParkListElement;
 }
 
 function filterMarkersWithinRadius(data) {
