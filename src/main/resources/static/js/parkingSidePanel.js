@@ -89,22 +89,48 @@ function listenForOpenSubMenu(parkingDetail) {
     let directionsDetails = elements.namedItem("directions-details");
 
     parkingDetail.onclick = e => {
-        if (e.target.id === "information") {
-            informationDetails.style.display = "block";
-            reservationDetails.style.display = "none";
-            directionsDetails.style.display = "none";
-        }
-        if (e.target.id === "reviews") {
-            informationDetails.style.display = "none";
-            reservationDetails.style.display = "block";
-            directionsDetails.style.display = "none";
-        }
-        if (e.target.id === "directions") {
-            informationDetails.style.display = "none";
-            reservationDetails.style.display = "none";
-            directionsDetails.style.display = "block";
-        }
+
+        addParentDivStyle(e);
+        addChildDivStyle(e);
+
+        const targetId = e.target.id;
+        const isInfoParent = hasClassName(e, "info-parent");
+        const isReviewParent = hasClassName(e, "review-parent");
+        const isDirectionsParent = hasClassName(e, "directions-parent");
+
+        // Switching details tabs
+        informationDetails.style.display = (targetId === "information" || isInfoParent) ? "block" : "none";
+        reservationDetails.style.display = (targetId === "reviews" || isReviewParent) ? "block" : "none";
+        directionsDetails.style.display = (targetId === "directions" || isDirectionsParent) ? "block" : "none";
     }
+}
+
+function addParentDivStyle(element) {
+    removeActiveState('.c-tab__item--active');
+
+    if (hasClassName(element, "c-tab__item")) {
+        element.target.classList.add("c-tab__item--active");
+        element.target.childNodes[1].classList.remove("c-typography--h3-rLKwZ")
+        element.target.childNodes[1].classList.add("c-typography--h3-rLKwZ-black");
+    } else {
+        element.target.parentNode.classList.add("c-tab__item--active");
+    }
+}
+
+function addChildDivStyle(element) {
+    removeActiveState('.c-tab__tab-item--active');
+    element.target.classList.add("c-tab__tab-item--active");
+}
+
+function removeActiveState(querySelectorName) {
+    let elements = document.querySelectorAll(querySelectorName);
+    elements.forEach(function (div) {
+        div.classList.remove(querySelectorName.slice(1));
+    });
+}
+
+function hasClassName(element, className) {
+    return element.target.classList.contains(className);
 }
 
 // Redirects the user to reservation page when RESERVE button is pressed.

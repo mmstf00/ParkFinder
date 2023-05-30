@@ -203,23 +203,27 @@ function loadDetailsForParking(markerData) {
                 <div class="to-destination">to destination</div>
             </div>
         </div>
-        <div class="location-information-menu">
-            <div class="info-navigation-element">
-                <div id="information">
-                    Information
+        
+        <div class="c-tab c-tab--even-spacing dashboard-style location-information-menu">
+            <div class="c-tab__item info-parent c-tab__item--active info-navigation-element" role="button">
+                <div class="c-typography--h3-rLKwZ c-tab__tab-item c-tab__tab-item--active" id="information">
+                Information
                 </div>
             </div>
-            <div class="info-navigation-element">
-                <div id="reviews">
-                    Reviews
+            <div class="c-tab__item review-parent info-navigation-element" role="button">
+                <div class="c-typography--h3-rLKwZ c-tab__tab-item"  
+                    id="reviews">
+                Reviews
                 </div>
             </div>
-            <div class="info-navigation-element">
-                <div id="directions">
-                    Directions
+            <div class="c-tab__item directions-parent info-navigation-element" role="button">
+                <div class="c-typography--h3-rLKwZ c-tab__tab-item" 
+                    id="directions"> 
+                Directions
                 </div>
             </div>
         </div>
+        
         <div id="location-information" class="c-location-information">
             <div id="information-details" class="detail-element">
                 <div>
