@@ -90,18 +90,27 @@ function listenForOpenSubMenu(parkingDetail) {
 
     parkingDetail.onclick = e => {
 
-        addParentDivStyle(e);
-        addChildDivStyle(e);
+        if (hasClassName(e, "c-tab__item") || hasClassName(e, "c-tab__tab-item")) {
 
-        const targetId = e.target.id;
-        const isInfoParent = hasClassName(e, "info-parent");
-        const isReviewParent = hasClassName(e, "review-parent");
-        const isDirectionsParent = hasClassName(e, "directions-parent");
+            addParentDivStyle(e);
+            addChildDivStyle(e);
 
-        // Switching details tabs
-        informationDetails.style.display = (targetId === "information" || isInfoParent) ? "block" : "none";
-        reservationDetails.style.display = (targetId === "reviews" || isReviewParent) ? "block" : "none";
-        directionsDetails.style.display = (targetId === "directions" || isDirectionsParent) ? "block" : "none";
+            if (e.target.id === "information" || hasClassName(e, "info-parent")) {
+                informationDetails.style.display = "block";
+                reservationDetails.style.display = "none";
+                directionsDetails.style.display = "none";
+            }
+            if (e.target.id === "reviews" || hasClassName(e, "review-parent")) {
+                informationDetails.style.display = "none";
+                reservationDetails.style.display = "block";
+                directionsDetails.style.display = "none";
+            }
+            if (e.target.id === "directions" || hasClassName(e, "directions-parent")) {
+                informationDetails.style.display = "none";
+                reservationDetails.style.display = "none";
+                directionsDetails.style.display = "block";
+            }
+        }
     }
 }
 
