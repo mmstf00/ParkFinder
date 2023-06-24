@@ -642,7 +642,7 @@ function setDefaultSearchPlace() {
     let lng = parseFloat(localStorage.getItem("searchLng"));
 
     // Define the Google Maps Geocoding API endpoint URL
-    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCTtV6EOMg0cshyQe2h6G_UYUUOlx8Kc5g`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBeS792gy-w5f2j2JRtIQmml5qZe3WmvuY`;
 
     // Send a request to the API endpoint
     fetch(apiUrl)

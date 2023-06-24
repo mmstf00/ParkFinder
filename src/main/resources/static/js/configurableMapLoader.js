@@ -59,7 +59,7 @@ function setFormData(mapsMouseEvent) {
 }
 
 function getAddressData(lat, lng) {
-    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCTtV6EOMg0cshyQe2h6G_UYUUOlx8Kc5g`)
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBeS792gy-w5f2j2JRtIQmml5qZe3WmvuY`)
         .then(response => response.json());
 }
 
