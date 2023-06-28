@@ -20,6 +20,7 @@ public class DtoToEntityConverter {
         marker.setLatitude(markerDTO.getLatitude());
         marker.setLongitude(markerDTO.getLongitude());
         marker.setDetailedInformation(markerDTO.getDetailedInformation());
+        marker.setParkSize(markerDTO.getParkSize());
         return marker;
     }
 
@@ -27,6 +28,7 @@ public class DtoToEntityConverter {
         marker.setAddress(updateRequest.getAddress());
         marker.setDetailedInformation(updateRequest.getDetails());
         marker.setPriceTag(updateRequest.getPrice());
+        marker.setParkSize(updateRequest.getParkSize());
         return marker;
     }
 

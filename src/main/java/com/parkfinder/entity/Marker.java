@@ -29,4 +29,6 @@ public class Marker {
     private double longitude;
     @Column(columnDefinition = "text", length = 490)
     private String detailedInformation;
+    private int parkSize;
+    private int usedLots;
 }

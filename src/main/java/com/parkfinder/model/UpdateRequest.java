@@ -14,4 +14,5 @@ public class UpdateRequest {
     private String address;
     private String details;
     private BigDecimal price;
+    private int parkSize;
 }

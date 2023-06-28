@@ -63,16 +63,21 @@ public class MarkerServiceImpl implements ExtendedMarkerService {
 
         Marker parkingToBeReserved = getMarkerById(reservationRequest.getId());
 
-        if (parkingToBeReserved != null) {
+        if (parkingToBeReserved != null && isAvailableParking(parkingToBeReserved)) {
             List<Reservation> reservations = parkingToBeReserved.getReservations();
             Reservation reservation = ReservationUtil.getReservationFromRequest(reservationRequest);
             reservations.add(reservation);
 
             parkingToBeReserved.setReservations(reservations);
+            parkingToBeReserved.setUsedLots(parkingToBeReserved.getUsedLots() + 1);
 
             reservation.setMarker(parkingToBeReserved);
             reservationRepository.save(reservation);
         }
+    }
+
+    private boolean isAvailableParking(Marker parking) {
+        return parking.getUsedLots() <= parking.getParkSize();
     }
 
     public void deleteMarker(MarkerDTO markerDTO) {
