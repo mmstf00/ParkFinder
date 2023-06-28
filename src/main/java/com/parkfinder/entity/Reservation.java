@@ -36,4 +36,5 @@ public class Reservation {
     @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
     private Marker marker;
+    private boolean isExpired;
 }

@@ -86,6 +86,14 @@
                        th:if="${#fields.hasErrors('priceTag')}" th:errors="*{priceTag}"></p>
                 </div>
 
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="parkSize">Parking Size</label>
+                    <input th:field="*{parkSize}" type="text" id="parkSize"
+                           class="form-control"/>
+                    <p style="color: red"
+                       th:if="${#fields.hasErrors('parkSize')}" th:errors="*{parkSize}"></p>
+                </div>
+
                 <button type="submit" id="add-parking-button"
                         class="btn btn-success btn-block mb-4">
                     Add Park Location

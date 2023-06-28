@@ -468,15 +468,18 @@ function updateMarker(id) {
             let price = document.getElementById("price-input");
             price.value = data.priceTag;
 
+            let parkSize = document.getElementById("parkSize");
+            parkSize.value = data.parkSize;
+
             updateButton.addEventListener('click', () => {
-                updateMarkerData(data.id, address.value, details.value, price.value);
+                updateMarkerData(data.id, address.value, details.value, price.value, parkSize.value);
                 location.reload();
             })
         });
     }).catch(error => console.error(error));
 }
 
-function updateMarkerData(id, address, details, price) {
+function updateMarkerData(id, address, details, price, parkSize) {
     fetch('/api/v1/update', {
         method: 'PUT', headers: {
             'Content-Type': 'application/json'
@@ -485,6 +488,7 @@ function updateMarkerData(id, address, details, price) {
             address: address,
             details: details,
             price: price,
+            parkSize: parkSize,
         })
     }).catch(error => console.error(error));
 }
